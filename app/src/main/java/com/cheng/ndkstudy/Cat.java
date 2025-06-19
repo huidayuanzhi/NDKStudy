@@ -1,0 +1,27 @@
+package com.cheng.ndkstudy;
+
+import androidx.annotation.NonNull;
+
+public class Cat extends Animal {
+
+    public Cat(String name) {
+        super(name);
+        System.out.println("Cat Construct call....");
+    }
+
+    @Override
+    public String getName() {
+        return "My name is " + this.name;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(name + " Cat.run...");
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return super.toString() + " - " + name;
+    }
+}

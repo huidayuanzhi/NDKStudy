@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/sample_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_j2c"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="testJ2C"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_add_str"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="testAddStr"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_sum_array"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="testSumArray"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_obj_from_c"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="testObjFromC"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_call_static_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="testCallJavaStaticMethod"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_call_instance_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="testCallJavaInstanceMethod"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_access_instance_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="testAccessInstanceField"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_access_static_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="testAccessStaticField"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_call_super_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="testCallSuperInstanceMethod"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_return_object"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="testReturnObject"
+        android:onClick="onClick"/>
+
+</LinearLayout>
