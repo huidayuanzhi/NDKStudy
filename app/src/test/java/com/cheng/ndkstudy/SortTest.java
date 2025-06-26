@@ -34,4 +34,14 @@ public class SortTest {
         Logger.log(sortedNums);
     }
 
+    @Test
+    public void testShellSort() {
+        int[] nums = { 9,3,4,2,1,5,8,6,7 };
+        Logger.log("shellSort before");
+        Logger.log(nums);
+        Logger.log("shellSort after");
+        int[] sortedNums = SortDemo.shellSort(nums);
+        Logger.log(sortedNums);
+    }
+
 }

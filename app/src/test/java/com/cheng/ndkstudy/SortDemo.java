@@ -57,4 +57,26 @@ public class SortDemo {
         return nums;
     }
 
+    /**
+     * 希尔排序
+     */
+    public static int[] shellSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        int len = nums.length;
+        int gap = len >> 1;
+        while (gap > 0) {
+            for (int i = gap; i < len; i++) {
+                int temp = nums[i];
+                int index = i - gap;
+                while (index >= 0 && temp < nums[index]) {
+                    nums[index + gap] = nums[index];
+                    index -= gap;
+                }
+                nums[index + gap] = temp;
+            }
+            gap /= 2;
+        }
+        return nums;
+    }
+
 }
