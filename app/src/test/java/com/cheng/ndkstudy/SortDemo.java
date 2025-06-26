@@ -40,4 +40,21 @@ public class SortDemo {
         return nums;
     }
 
+    /**
+     * 插入排序
+     */
+    public static int[] insertSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        for (int i = 0; i < nums.length - 1; i++) {
+            int curr = nums[i + 1];
+            int index = i;
+            while (index >= 0 && curr < nums[index]) {
+                nums[index + 1] = nums[index];
+                index--;
+            }
+            nums[index + 1] = curr;
+        }
+        return nums;
+    }
+
 }

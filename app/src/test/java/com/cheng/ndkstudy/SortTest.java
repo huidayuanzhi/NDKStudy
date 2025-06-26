@@ -24,4 +24,14 @@ public class SortTest {
         Logger.log(sortedNums);
     }
 
+    @Test
+    public void testInsertSort() {
+        int[] nums = { 9,3,4,2,1,5,8,6,7 };
+        Logger.log("insertSort before");
+        Logger.log(nums);
+        Logger.log("insertSort after");
+        int[] sortedNums = SortDemo.insertSort(nums);
+        Logger.log(sortedNums);
+    }
+
 }
