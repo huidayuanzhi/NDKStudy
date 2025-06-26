@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val l: Long = 100
         val f = 1000.00f
         val z = true
-        val array: IntArray? = null
+        val array: IntArray = intArrayOf(10, 20, 30, 40, 50, 60)
         val mMyJavaClass: MyJavaClass? = null
         val obj: Any? = null
         val str: String? = null

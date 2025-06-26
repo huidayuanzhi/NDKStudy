@@ -7,11 +7,27 @@
 // log标签
 #define  TAG    "=====JNI====="
 // 定义info信息
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, TAG, __VA_ARGS__)
 // 定义debug信息
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, TAG, __VA_ARGS__)
 // 定义error信息
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__)
+
+/**
+ * 字段签名
+ *   —— 是一个字符串，用于表示字段的类型
+ * 常见字段签名示例：
+ * Z：boolean 类型
+ * B：byte 类型
+ * C：char 类型
+ * S：short 类型
+ * I：int 类型
+ * J：long 类型
+ * F：float 类型
+ * D：double 类型
+ * [<type>：数组类型，例如[I表示int数组
+ * L<fully-qualified-classname>;：引用类型，例如Ljava/lang/String;表示String类型
+ */
 
 #ifdef __cplusplus
 extern "C"
@@ -19,10 +35,6 @@ extern "C"
 #endif
 
 /*
- * Class:     com_example_testndkeclipse_JniClient
- * Method:    AddStr
- * Signature: (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
- *
  * 实现字符串的拼接
  */
 JNIEXPORT jstring JNICALL Java_com_cheng_ndkstudy_JniClient_AddStr(
@@ -105,11 +117,6 @@ JNIEXPORT jstring JNICALL Java_com_cheng_ndkstudy_JniClient_AddStr(
     return result; //需要转换为中间层jstring返回
 }
 
-/*
- * Class:     com_example_testndkeclipse_JniClient
- * Method:    TestDataTypeJ2C
- * Signature: (SIJFDCZBLjava/lang/String;Ljava/lang/Object;Lcom/cheng/ndkstudy/MyJavaClass;)V
- */
 JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_TestDataTypeJ2C(
         JNIEnv *env, jclass mJclass, jshort mJshort, jint mJint, jlong mJlong,
         jfloat mJfloat, jdouble mJdouble, jchar mJchar, jboolean mJboolean,
@@ -126,7 +133,13 @@ JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_TestDataTypeJ2C(
     LOGI("mJchar==>%c\n", mJchar);
     LOGI("mJboolean==>%d\n", mJboolean);
     LOGI("mJbyte==>%d\n", mJbyte);
-    printf("test");
+    jint *c_arr = (*env)->GetIntArrayElements(env, mJintArray, NULL);
+    jsize length = (*env)->GetArrayLength(env, mJintArray);
+    for (int i = 0; i < length; ++i) {
+        LOGI("mJintArray %d -> %d", i, c_arr[i]);
+    }
+    (*env)->ReleaseIntArrayElements(env, mJintArray, c_arr, 0);
+    printf("\n");
 //基本数据类型
 //jclass mJclass, jshort mJshort, jint mJint, jlong mJlong, jfloat mJfloat,
 //jdouble mJdouble, jchar mJchar, jboolean mJboolean, jbyte mJbyte
@@ -137,19 +150,15 @@ JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_TestDataTypeJ2C(
 }
 
 /*
- * Class:     com_example_testndkeclipse_JniClient
- * Method:    sumArray
- * Signature: ([I)[I
- *
  * 实现数组求和
  */
 JNIEXPORT jintArray JNICALL Java_com_cheng_ndkstudy_JniClient_sumArray(
         JNIEnv *env, jclass mJclass, jintArray mjintArray) {
 
     jint cSum, cLen = 0;
-    //1.获取数组长度
+    // 1.获取数组长度
     cLen = (*env)->GetArrayLength(env, mjintArray);
-    //2.根据数组长度和数组元素的数据类型申请存放java数组元素的缓冲区
+    // 2.根据数组长度和数组元素的数据类型申请存放java数组元素的缓冲区
 
     //讲jarray转换为c可操作的数组
 //	jint* cPArray = (jint*) malloc(sizeof(jint) * cLen);
@@ -194,10 +203,6 @@ JNIEXPORT jintArray JNICALL Java_com_cheng_ndkstudy_JniClient_sumArray(
 }
 
 /*
- * Class:     com_example_testndkeclipse_JniClient
- * Method:    getArrayObjectFromC
- * Signature: (I)[[I
- *
  * C返回一个二维数组对象给java
  */
 JNIEXPORT jobjectArray JNICALL Java_com_cheng_ndkstudy_JniClient_getArrayObjectFromC(
@@ -214,7 +219,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_cheng_ndkstudy_JniClient_getArrayObjectF
     if (jObjectArrayResult == NULL) {
         return NULL;
     }
-    //为数组元素赋值
+    // 为数组元素赋值
     jint i;
     for (i = 0; i < mJlen; i++) {
         jintArray mJintArray; //创建一个一维数组
@@ -228,10 +233,10 @@ JNIEXPORT jobjectArray JNICALL Java_com_cheng_ndkstudy_JniClient_getArrayObjectF
         for (j = 0; j < mJlen; j++) {
             mBuff[j] = i + j;
         }
-        //数组转换
+        // 数组转换
         (*env)->SetIntArrayRegion(env, mJintArray, 0, mJlen,
                                   mBuff); //JNIEnv*, jintArray,jsize, jsize, const jint*
-        //设置数组对象
+        // 设置数组对象
         (*env)->SetObjectArrayElement(env, jObjectArrayResult, i,
                                       mJintArray); //JNIEnv*, jobjectArray, jsize, jobject
         (*env)->DeleteLocalRef(env, mJintArray); //JNIEnv*, jobject
@@ -241,10 +246,6 @@ JNIEXPORT jobjectArray JNICALL Java_com_cheng_ndkstudy_JniClient_getArrayObjectF
 }
 
 /*
- * Class:     com_example_testndkeclipse_JniClient
- * Method:    callJavaStaticMethod
- * Signature: ()V
- *
  * 此中调用java层的静态方法
  */
 JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_callJavaStaticMethod(
@@ -267,7 +268,7 @@ JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_callJavaStaticMethod(
         printf("=====>>>can not foud callStaticMethod");
         return;
     }
-    //3、调用clazz类的callStaticMethod静态方法
+    // 3、调用clazz类的callStaticMethod静态方法
     mJstring = (*env)->NewStringUTF(env, "==I am from C==");
     (*env)->CallStaticVoidMethod(env, mJclass, mJStaticmethodID, mJstring,
                                  200); //JNIEnv*, jclass, jmethodID, ...
@@ -279,10 +280,6 @@ JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_callJavaStaticMethod(
 }
 
 /*
- * Class:     com_example_testndkeclipse_JniClient
- * Method:    callJavaInstaceMethod
- * Signature: ()V
- *
  * 此中调用java层的对象方法
  */
 JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_callJavaInstaceMethod(
@@ -331,10 +328,6 @@ JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_callJavaInstaceMethod(
 }
 
 /*
- * Class:     com_example_testndkeclipse_JniClient
- * Method:    accessInstanceField
- * Signature: (Lcom/cheng/ndkstudy/ClassField;)V
- *
  * 访问java中的实例属性
  */
 JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_accessInstanceField(
@@ -383,10 +376,6 @@ JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_accessInstanceField(
 }
 
 /*
- * Class:     com_example_testndkeclipse_JniClient
- * Method:    accessStaticField
- * Signature: ()V
- *
  * 访问java的静态属性
  */
 JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_accessStaticField(
@@ -395,12 +384,12 @@ JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_accessStaticField(
     jfieldID fid;
     jint num;
 
-    //1.获取ClassField类的Class引用
+    // 1.获取ClassField类的Class引用
     clazz = (*env)->FindClass(env, "com/cheng/ndkstudy/ClassField");
     if (clazz == NULL) { // 错误处理
         return;
     }
-    //2.获取ClassField类静态变量num的属性ID
+    // 2.获取ClassField类静态变量num的属性ID
     fid = (*env)->GetStaticFieldID(env, clazz, "num", "I");
     if (fid == NULL) {
         return;
@@ -418,11 +407,6 @@ JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_accessStaticField(
 
 }
 
-/*
- * Class:     com_example_testndkeclipse_JniClient
- * Method:    callSuperInstanceMethod
- * Signature: ()V
- */
 JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_callSuperInstanceMethod(
         JNIEnv *env, jclass cls) {
     LOGI("Java_com_cheng_ndkstudy_JniClient_callSuperInstanceMethod");//可写任意参数
@@ -501,7 +485,9 @@ JNIEXPORT void JNICALL Java_com_cheng_ndkstudy_JniClient_callSuperInstanceMethod
 //	(*env)->DeleteLocalRef(env, obj_cat);
 }
 
-// 实现本地方法
+/*
+ * C返回一个对象给java
+ */
 JNIEXPORT jobject JNICALL
 Java_com_cheng_ndkstudy_JniClient_getObjectFromC(JNIEnv *env, jobject obj, jstring jstr) {
 
