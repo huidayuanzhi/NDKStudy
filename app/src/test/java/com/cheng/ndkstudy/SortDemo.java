@@ -128,4 +128,40 @@ public class SortDemo {
         return result;
     }
 
+    /**
+     * 快速排序
+     * 每一轮排序将一个元素放到正确位置—— > 左侧 && < 右侧
+     * 最佳情况：T(n) = O(nlogn)
+     * 最差情况：T(n) = O(n2)
+     * 平均情况：T(n) = O(nlogn)
+     */
+    public static int[] quickSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        quickSort(nums, 0, nums.length - 1);
+        return nums;
+    }
+
+    private static void quickSort(int[] nums, int left, int right) {
+        if (left >= right) return;
+        int privotpos = partition(nums, left, right);
+        quickSort(nums, left, privotpos - 1);
+        quickSort(nums, privotpos + 1, right);
+    }
+
+    private static int partition(int[] nums, int left, int right) {
+        int privot = nums[left];
+        while (left < right) {
+            while (left < right && nums[right] >= privot) {
+                right--;
+            }
+            nums[left] = nums[right];
+            while (left < right && nums[left] <= privot) {
+                left++;
+            }
+            nums[right] = nums[left];
+        }
+        nums[left] = privot;
+        return left;
+    }
+
 }

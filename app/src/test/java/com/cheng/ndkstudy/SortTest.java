@@ -54,4 +54,14 @@ public class SortTest {
         Logger.log(sortedNums);
     }
 
+    @Test
+    public void testQuickSort() {
+        int[] nums = { 9,3,4,2,1,5,8,6,7 };
+        Logger.log("quickSort before");
+        Logger.log(nums);
+        Logger.log("quickSort after");
+        int[] sortedNums = SortDemo.quickSort(nums);
+        Logger.log(sortedNums);
+    }
+
 }
