@@ -1,5 +1,7 @@
 package com.cheng.ndkstudy;
 
+import java.util.Arrays;
+
 public class SortDemo {
 
     /**
@@ -93,6 +95,37 @@ public class SortDemo {
             gap /= 2;
         }
         return nums;
+    }
+
+    /**
+     * 归并排序
+     * 将两个顺序序列合并成一个顺序序列
+     * 最佳情况：T(n) = O(n)
+     * 最差情况：T(n) = O(nlogn)
+     * 平均情况：T(n) = O(nlogn)
+     */
+    public static int[] mergeSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        int mid = nums.length >> 1;
+        int[] left = Arrays.copyOfRange(nums, 0, mid);
+        int[] right = Arrays.copyOfRange(nums, mid, nums.length);
+        return merge(mergeSort(left), mergeSort(right));
+    }
+
+    private static int[] merge(int[] left, int[] right) {
+        int[] result = new int[left.length + right.length];
+        for (int index = 0, i = 0, j = 0; index < result.length; index++) {
+            if (i >= left.length) {
+                result[index] = right[j++];
+            } else if (j >= right.length) {
+                result[index] = left[i++];
+            } else if (left[i] < right[j]) {
+                result[index] = left[i++];
+            } else {
+                result[index] = right[j++];
+            }
+        }
+        return result;
     }
 
 }

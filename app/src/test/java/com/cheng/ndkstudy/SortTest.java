@@ -44,4 +44,14 @@ public class SortTest {
         Logger.log(sortedNums);
     }
 
+    @Test
+    public void testMergeSort() {
+        int[] nums = { 9,3,4,2,1,5,8,6,7 };
+        Logger.log("mergeSort before");
+        Logger.log(nums);
+        Logger.log("mergeSort after");
+        int[] sortedNums = SortDemo.mergeSort(nums);
+        Logger.log(sortedNums);
+    }
+
 }
