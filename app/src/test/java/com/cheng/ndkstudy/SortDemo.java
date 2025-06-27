@@ -4,6 +4,10 @@ public class SortDemo {
 
     /**
      * 冒泡排序
+     * 每一轮排序大的往上(后)冒泡
+     * 最佳情况：T(n) = O(n)
+     * 最差情况：T(n) = O(n2)
+     * 平均情况：T(n) = O(n2)
      */
     public static int[] bubbleSort(int[] nums) {
         if (nums == null || nums.length <= 1) return nums;
@@ -21,6 +25,10 @@ public class SortDemo {
 
     /**
      * 选择排序
+     * 每一轮排序小的往下(前)沉
+     * 最佳情况：T(n) = O(n2)
+     * 最差情况：T(n) = O(n2)
+     * 平均情况：T(n) = O(n2)
      */
     public static int[] selectionSort(int[] nums) {
         if (nums == null || nums.length <= 1) return nums;
@@ -42,6 +50,10 @@ public class SortDemo {
 
     /**
      * 插入排序
+     * 每一轮排序将第n个数插到前面已经排好的序列中
+     * 最佳情况：T(n) = O(n)
+     * 最坏情况：T(n) = O(n2)
+     * 平均情况：T(n) = O(n2)
      */
     public static int[] insertSort(int[] nums) {
         if (nums == null || nums.length <= 1) return nums;
@@ -59,6 +71,10 @@ public class SortDemo {
 
     /**
      * 希尔排序
+     * 把记录按下标的一定增量分组，对每组使用直接插入排序算法排序
+     * 最佳情况：T(n) = O(nlog2n)
+     * 最坏情况：T(n) = O(nlog2n)
+     * 平均情况：T(n) = O(nlog2n)
      */
     public static int[] shellSort(int[] nums) {
         if (nums == null || nums.length <= 1) return nums;
