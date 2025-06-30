@@ -64,4 +64,14 @@ public class SortTest {
         Logger.log(sortedNums);
     }
 
+    @Test
+    public void testCountSort() {
+        int[] nums = { 9,3,4,2,1,5,8,6,7 };
+        Logger.log("countSort before");
+        Logger.log(nums);
+        Logger.log("countSort after");
+        int[] sortedNums = SortDemo.countSort(nums);
+        Logger.log(sortedNums);
+    }
+
 }

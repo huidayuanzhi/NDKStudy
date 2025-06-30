@@ -164,4 +164,43 @@ public class SortDemo {
         return left;
     }
 
+    /**
+     * TODO 堆排序
+     */
+
+    /**
+     * 计数排序
+     * 将输入的数据值转化为键存储在额外开辟的数组空间中
+     * 最佳情况：T(n) = O(n+k)
+     * 最差情况：T(n) = O(n+k)
+     * 平均情况：T(n) = O(n+k)
+     */
+    public static int[] countSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        int min = nums[0];
+        int max = nums[0];
+        for (int i = 0; i < nums.length; i++) {
+            if (min > nums[i]) {
+                min = nums[i];
+            }
+            if (max < nums[i]) {
+                max = nums[i];
+            }
+        }
+        int bias = -min;
+        int[] bucket = new int[max - min + 1];
+        for (int i = 0; i < nums.length; i++) {
+            bucket[nums[i] + bias] += 1;
+        }
+        int index = 0;
+        for (int i = 0; i < bucket.length; i++) {
+            int count = bucket[i];
+            while (count > 0) {
+                nums[index++] = i - bias;
+                count--;
+            }
+        }
+        return nums;
+    }
+
 }
