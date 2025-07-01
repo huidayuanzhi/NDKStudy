@@ -12,4 +12,15 @@ public class ArrayTest {
         int max = ArrayDemo.findMax(nums);
         Logger.log("findMax - max = " + max);
     }
+
+    @Test
+    public void topKFrequent() {
+        int[] nums = { 1,1,1,2,2,3 };
+        Logger.log("topKFrequent before");
+        Logger.log(nums);
+        int[] result = ArrayDemo.topKFrequent(nums, 2);
+        Logger.log("topKFrequent - result = ");
+        Logger.log(result);
+    }
+
 }
