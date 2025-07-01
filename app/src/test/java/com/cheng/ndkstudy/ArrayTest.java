@@ -41,4 +41,42 @@ public class ArrayTest {
         Logger.log("minSubArrayLen2 - result = " + result);
     }
 
+    @Test
+    public void testContainsNearByDuplicate1() {
+        int[] nums1 = { 1,2,3,1 };
+        Logger.log("containsNearByDuplicate1 before");
+        Logger.log(nums1);
+        boolean result1 = ArrayDemo.containsNearByDuplicate1(nums1, 3);
+        Logger.log("containsNearByDuplicate1 - result = " + result1);
+        int[] nums2 = { 1,0,1,1 };
+        Logger.log("containsNearByDuplicate1 before");
+        Logger.log(nums2);
+        boolean result2 = ArrayDemo.containsNearByDuplicate1(nums2, 1);
+        Logger.log("containsNearByDuplicate1 - result = " + result2);
+        int[] nums3 = { 1,2,3,1,2,3 };
+        Logger.log("containsNearByDuplicate1 before");
+        Logger.log(nums3);
+        boolean result3 = ArrayDemo.containsNearByDuplicate1(nums3, 2);
+        Logger.log("containsNearByDuplicate1 - result = " + result3);
+    }
+
+    @Test
+    public void testContainsNearByDuplicate2() {
+        int[] nums1 = { 1,2,3,1 };
+        Logger.log("containsNearByDuplicate2 before");
+        Logger.log(nums1);
+        boolean result1 = ArrayDemo.containsNearByDuplicate2(nums1, 3);
+        Logger.log("containsNearByDuplicate2 - result = " + result1);
+        int[] nums2 = { 1,0,1,1 };
+        Logger.log("containsNearByDuplicate2 before");
+        Logger.log(nums2);
+        boolean result2 = ArrayDemo.containsNearByDuplicate2(nums2, 1);
+        Logger.log("containsNearByDuplicate2 - result = " + result2);
+        int[] nums3 = { 1,2,3,1,2,3 };
+        Logger.log("containsNearByDuplicate2 before");
+        Logger.log(nums3);
+        boolean result3 = ArrayDemo.containsNearByDuplicate2(nums3, 2);
+        Logger.log("containsNearByDuplicate2 - result = " + result3);
+    }
+
 }

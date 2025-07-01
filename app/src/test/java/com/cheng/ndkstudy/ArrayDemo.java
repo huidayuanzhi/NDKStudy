@@ -2,8 +2,10 @@ package com.cheng.ndkstudy;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 public class ArrayDemo {
 
@@ -111,6 +113,46 @@ public class ArrayDemo {
             end++;
         }
         return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
+
+    /**
+     * 219.存在重复元素 II
+     * 给你一个整数数组nums和一个整数k，判断数组中是否存在两个不同的索引i和j，满足nums[i] == nums[j]
+     * 且abs(i - j) <= k。如果存在，返回true；否则，返回false。
+     * 示例 1：
+     * 输入：nums = [1,2,3,1], k = 3
+     * 输出：true
+     * 示例 2：
+     * 输入：nums = [1,0,1,1], k = 1
+     * 输出：true
+     * 示例 3：
+     * 输入：nums = [1,2,3,1,2,3], k = 2
+     * 输出：false
+     */
+    public static boolean containsNearByDuplicate1(int[] nums, int k) {
+        if (nums == null || nums.length <= 0) return false;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            if (map.containsKey(num) && i - map.get(num) <= k) {
+                return true;
+            }
+            map.put(num, i);
+        }
+        return false;
+    }
+
+    public static boolean containsNearByDuplicate2(int[] nums, int k) {
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (i > k) {
+                set.remove(nums[i - k - 1]);
+            }
+            if (!set.add(nums[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
