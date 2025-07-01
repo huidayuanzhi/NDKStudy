@@ -74,4 +74,15 @@ public class SortTest {
         Logger.log(sortedNums);
     }
 
+    @Test
+    public void testRadixSort() {
+        int[] nums = { 90,30,40,20,150,50,80,60,70 };
+//        int[] nums = { 9,3,4,2,15,5,8,6,7 };
+        Logger.log("radixSort before");
+        Logger.log(nums);
+        Logger.log("radixSort after");
+        int[] sortedNums = SortDemo.radixSort(nums);
+        Logger.log(sortedNums);
+    }
+
 }

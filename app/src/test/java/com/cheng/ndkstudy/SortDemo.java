@@ -203,4 +203,45 @@ public class SortDemo {
         return nums;
     }
 
+    /**
+     * 基数排序
+     * 思路：按个、十、百位依次归类排序
+     */
+    public static int[] radixSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        int min = nums[0];
+        int max = nums[0];
+        for (int num : nums) {
+            min = Math.min(min, num);
+            max = Math.max(max, num);
+        }
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] -= min;
+        }
+        max -= min;
+        int maxLen = (max + "").length();
+        int[][] bucket = new int[nums.length][10];
+        int[] bucketCount = new int[10];
+        for (int i = 0, n = 1; i < maxLen; i++, n *= 10) {
+            for (int num : nums) {
+                int digitVal = num / n % 10;
+                bucket[bucketCount[digitVal]][digitVal] = num;
+                bucketCount[digitVal]++;
+            }
+            int index = 0;
+            for (int j = 0; j < bucketCount.length; j++) {
+                if (bucketCount[j] > 0) {
+                    for (int k = 0; k < bucketCount[j]; k++) {
+                        nums[index] = bucket[k][j];
+                        index++;
+                    }
+                }
+                bucketCount[j] = 0;
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] += min;
+        }
+        return nums;
+    }
 }
