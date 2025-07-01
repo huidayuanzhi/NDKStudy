@@ -67,4 +67,50 @@ public class ArrayDemo {
         return result;
     }
 
+    /**
+     * 209.长度最小的子数组
+     * 给定一个含有n个正整数的数组和一个正整数target。
+     * 找出该数组中满足其和≥target的长度最小的连续子数组[numsl, numsl+1, ..., numsr-1, numsr]，
+     * 并返回其长度。如果不存在符合条件的子数组，返回0。
+     * 输入: s = 7, nums = [2,3,1,2,4,3]
+     * 输出: 2
+     * 解释: 子数组 [4,3] 是该条件下的长度最小的连续子数组。
+     */
+    // 方法一：暴力法
+    public static int minSubArrayLen1(int[] nums, int target) {
+        if (nums == null || nums.length <= 0) return 0;
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            int sum = 0;
+            for (int j = i; j < nums.length; j++) {
+                sum += nums[j];
+                if (sum >= target) {
+                    ans = Math.min(ans, j - i + 1);
+                    break;
+                }
+            }
+        }
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
+
+    // 方法二：滑动窗口
+    public static int minSubArrayLen2(int[] nums, int target) {
+        if (nums == null || nums.length <= 0) return 0;
+        int ans = Integer.MAX_VALUE;
+        int start = 0;
+        int end = 0;
+        int n = nums.length;
+        int sum = 0;
+        while (end < n) {
+            sum += nums[end];
+            while (sum >= target) {
+                ans = Math.min(ans, end - start + 1);
+                sum -= nums[start];
+                start++;
+            }
+            end++;
+        }
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
+
 }
