@@ -99,4 +99,22 @@ public class ArrayTest {
         Logger.log(nums);
     }
 
+    @Test
+    public void testFindLengthOfLCIS1() {
+        int[] nums = { 1,2,3,0,1,0,2,4,6,7 };
+        Logger.log("findLengthOfLCIS1 before");
+        Logger.log(nums);
+        int result = ArrayDemo.findLengthOfLCIS1(nums);
+        Logger.log("findLengthOfLCIS1 result = " + result);
+    }
+
+    @Test
+    public void testFindLengthOfLCIS2() {
+        int[] nums = { 1,2,3,0,1,0,2,4,6,7 };
+        Logger.log("findLengthOfLCIS2 before");
+        Logger.log(nums);
+        int result = ArrayDemo.findLengthOfLCIS2(nums);
+        Logger.log("findLengthOfLCIS2 result = " + result);
+    }
+
 }

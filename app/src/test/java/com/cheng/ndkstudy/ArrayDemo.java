@@ -199,4 +199,41 @@ public class ArrayDemo {
         }
     }
 
+    /**
+     * 674.最长连续递增序列
+     * 给定一个未经排序的整数数组，找到最长且连续递增的子序列，并返回该序列的长度。
+     * 思路：
+     * 使用贪心的策略得到尽可能长的连续递增序列。做法是使用记录当前连续递增序列的开始下标和结束下标，
+     * 遍历数组的过程中每次比较相邻元素，根据相邻元素的大小关系决定是否需要更新连续递增序列的开始下标。
+     */
+    public static int findLengthOfLCIS1(int[] nums) {
+        if (nums == null || nums.length <= 0) return 0;
+        if (nums.length == 1) return 1;
+        int ans = 0;
+        int start = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i > 0 && nums[i] < nums[i - 1]) {
+                start = i;
+            }
+            ans = Math.max(ans, i - start + 1);
+        }
+        return ans;
+    }
+
+    public static int findLengthOfLCIS2(int[] nums) {
+        if (nums == null || nums.length <= 0) return 0;
+        if (nums.length == 1) return 1;
+        int result = 1;
+        int tempResult = 1;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i + 1] > nums[i]) {
+                tempResult++;
+            } else {
+                tempResult = 1;
+            }
+            result = Math.max(result, tempResult);
+        }
+        return result;
+    }
+
 }
