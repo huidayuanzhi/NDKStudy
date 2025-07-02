@@ -79,4 +79,24 @@ public class ArrayTest {
         Logger.log("containsNearByDuplicate2 - result = " + result3);
     }
 
+    @Test
+    public void testMoveZeroes1() {
+        int[] nums = { 0,2,3,0,1,0,2,4,3 };
+        Logger.log("moveZeroes1 before");
+        Logger.log(nums);
+        ArrayDemo.moveZeroes1(nums);
+        Logger.log("moveZeroes1 after");
+        Logger.log(nums);
+    }
+
+    @Test
+    public void testMoveZeroes2() {
+        int[] nums = { 0,2,3,0,1,0,2,4,3 };
+        Logger.log("moveZeroes2 before");
+        Logger.log(nums);
+        ArrayDemo.moveZeroes2(nums);
+        Logger.log("moveZeroes2 after");
+        Logger.log(nums);
+    }
+
 }

@@ -155,4 +155,48 @@ public class ArrayDemo {
         return false;
     }
 
+    /**
+     * 283.移动零
+     * 给定一个数组nums，编写一个函数将所有0移动到数组的末尾，同时保持非零元素的相对顺序。
+     * 请注意，必须在不复制数组的情况下原地对数组进行操作。
+     * 方法一：双指针
+     * 思路及解法
+     * 使用双指针，左指针指向当前已经处理好的序列的尾部，右指针指向待处理序列的头部。
+     * 右指针不断向右移动，每次右指针指向非零数，则将左右指针对应的数交换，同时左指针右移。
+     * 注意到以下性质：
+     * — 左指针左边均为非零数
+     * - 右指针左边直到左指针处均为零
+     */
+    public static void moveZeroes1(int[] nums) {
+        if (nums == null || nums.length <= 1) return;
+        int n = nums.length;
+        int left = 0;
+        int right = 0;
+        while (right < n) {
+            if (nums[right] != 0) {
+                swap(nums,left, right);
+                left++;
+            }
+            right++;
+        }
+    }
+    
+    private static void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+    
+    public static void moveZeroes2(int[] nums) {
+        if (nums == null || nums.length <= 1) return;
+        for (int i = 0, j = 0; i < nums.length; i++) {
+            // 当前元素!=0，就把其交换到左边，等于0的交换到右边
+            if (nums[i] != 0) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j++] = temp;
+            }
+        }
+    }
+
 }
