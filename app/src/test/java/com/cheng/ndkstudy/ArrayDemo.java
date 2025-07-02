@@ -292,4 +292,27 @@ public class ArrayDemo {
         return maxArea;
     }
 
+    /**
+     * 26.删除有序数组中的重复项【快慢指针】
+     * 给你一个升序排列的数组nums，请你原地删除重复出现的元素，使每个元素只出现一次，返回删除后数组
+     * 的新长度。元素的相对顺序应该保持一致。
+     * 示例 2：
+     * 输入：nums = [0,0,1,1,1,2,2,3,3,4]
+     * 输出：5, nums = [0,1,2,3,4]
+     */
+    public static int removeDuplicates(int[] nums) {
+        if (nums == null || nums.length <= 0) return 0;
+        if (nums.length == 1) return 1;
+        int slow = 1;
+        int fast = 1;
+        while (fast < nums.length) {
+            if (nums[fast] != nums[fast - 1]) {
+                nums[slow] = nums[fast];
+                slow++;
+            }
+            fast++;
+        }
+        return slow;
+    }
+
 }

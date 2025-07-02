@@ -135,4 +135,14 @@ public class ArrayTest {
         Logger.log("maxArea result = " + result);
     }
 
+    @Test
+    public void testRemoveDuplicates() {
+        int[] nums = { 0,0,1,1,1,2,2,3,3,4 };
+        Logger.log("removeDuplicates before");
+        Logger.log(nums);
+        int result = ArrayDemo.removeDuplicates(nums);
+        Logger.log("removeDuplicates result = " + result);
+        Logger.log(nums);
+    }
+
 }
