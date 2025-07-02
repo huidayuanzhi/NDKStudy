@@ -236,4 +236,36 @@ public class ArrayDemo {
         return result;
     }
 
+    /**
+     * 128.最长连续序列
+     * 给定一个未排序的整数数组nums，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
+     * 示例 1：
+     * 输入：nums = [100,4,200,1,3,2]
+     * 输出：4
+     * 解释：最长数字连续序列是 [1, 2, 3, 4]。它的长度为 4。
+     */
+    public static int longestConsecutive(int[] nums) {
+        if (nums == null || nums.length <= 0) return 0;
+        if (nums.length == 1) return 1;
+        Set<Integer> numSet = new HashSet<>();
+        for (int num : nums) {
+            numSet.add(num);
+        }
+        int longestStreak = 0;
+        for (int num : numSet) {
+            // 当前数num如果存在前驱数，就应该以该前驱数的前驱数为起点，所以直接跳过
+            if (!numSet.contains(num - 1)) {
+                int currNum = num;
+                int currStreak = 1;
+                // 当前数num有后继则继续往后找
+                while (numSet.contains(currNum + 1)) {
+                    currNum += 1;
+                    currStreak += 1;
+                }
+                longestStreak = Math.max(longestStreak, currStreak);
+            }
+        }
+        return longestStreak;
+    }
+
 }

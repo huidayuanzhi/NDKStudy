@@ -117,4 +117,13 @@ public class ArrayTest {
         Logger.log("findLengthOfLCIS2 result = " + result);
     }
 
+    @Test
+    public void testLongestConsecutive() {
+        int[] nums = { 100,4,200,1,3,2 };
+        Logger.log("longestConsecutive before");
+        Logger.log(nums);
+        int result = ArrayDemo.longestConsecutive(nums);
+        Logger.log("longestConsecutive result = " + result);
+    }
+
 }
