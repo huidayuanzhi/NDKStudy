@@ -126,4 +126,13 @@ public class ArrayTest {
         Logger.log("longestConsecutive result = " + result);
     }
 
+    @Test
+    public void testMaxArea() {
+        int[] nums = { 1,8,6,2,5,4,8,3,7 };
+        Logger.log("maxArea before");
+        Logger.log(nums);
+        int result = ArrayDemo.maxArea(nums);
+        Logger.log("maxArea result = " + result);
+    }
+
 }
