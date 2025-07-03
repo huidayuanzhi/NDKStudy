@@ -203,4 +203,24 @@ public class ArrayTest {
         Logger.log(nums);
     }
 
+    @Test
+    public void testTwoSum1() {
+        int[] nums = { 2,7,11,15 };
+        Logger.log("twoSum1 before");
+        Logger.log(nums);
+        int[] result = ArrayDemo.twoSum1(nums, 9);
+        Logger.log("twoSum1 result");
+        Logger.log(result);
+    }
+
+    @Test
+    public void testTwoSum2() {
+        int[] nums = { 2,7,11,15 };
+        Logger.log("twoSum2 before");
+        Logger.log(nums);
+        int[] result = ArrayDemo.twoSum2(nums, 9);
+        Logger.log("twoSum2 result");
+        Logger.log(result);
+    }
+
 }

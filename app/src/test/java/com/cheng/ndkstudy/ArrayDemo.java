@@ -428,4 +428,40 @@ public class ArrayDemo {
         return ans;
     }
 
+    /**
+     * 1.两数之和
+     * 给定一个整数数组nums和一个整数目标值target，请你在该数组中找出和为目标值target的那两个整数，
+     * 并返回它们的数组下标。
+     * 示例 1：
+     * 输入：nums = [2,7,11,15], target = 9
+     * 输出：[0,1]
+     * 解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1]
+     */
+    // 暴力枚举
+    public static int[] twoSum1(int[] nums, int target) {
+        if (nums == null || nums.length <= 0) return new int[0];
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[0];
+    }
+
+    // 哈希表
+    public static int[] twoSum2(int[] nums, int target) {
+        if (nums == null || nums.length <= 0) return new int[0];
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int other = target - nums[i];
+            if (map.containsKey(other)) {
+                return new int[] {map.get(other), i};
+            }
+            map.put(nums[i], i);
+        }
+        return new int[0];
+    }
+
 }
