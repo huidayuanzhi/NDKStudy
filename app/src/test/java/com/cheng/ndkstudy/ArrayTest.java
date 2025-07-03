@@ -2,6 +2,8 @@ package com.cheng.ndkstudy;
 
 import org.junit.Test;
 
+import java.util.List;
+
 public class ArrayTest {
     
     @Test
@@ -241,6 +243,18 @@ public class ArrayTest {
         int[] result = ArrayDemo.twoSumII2(nums, 9);
         Logger.log("twoSumII2 result");
         Logger.log(result);
+    }
+
+    @Test
+    public void testThreeSum() {
+        int[] nums = { -1,0,1,2,-1,-4 };
+        Logger.log("threeSum before");
+        Logger.log(nums);
+        List<List<Integer>> result = ArrayDemo.threeSum(nums);
+        Logger.log("threeSum result");
+        for (List<Integer> list : result) {
+            Logger.log(list);
+        }
     }
 
 }

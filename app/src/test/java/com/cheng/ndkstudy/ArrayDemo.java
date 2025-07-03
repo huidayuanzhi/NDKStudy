@@ -1,8 +1,11 @@
 package com.cheng.ndkstudy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
@@ -504,6 +507,53 @@ public class ArrayDemo {
             }
         }
         return new int[]{-1, -1};
+    }
+
+    /**
+     * 15.三数之和
+     * 给你一个包含n个整数的数组nums，判断nums中是否存在三个元素a，b，c，使得a + b + c = 0？
+     * 请你找出所有和为0且不重复的三元组。
+     * 排序 + 双指针
+     * 输入：nums = [-1,0,1,2,-1,-4]
+     * 输出：[[-1,-1,2],[-1,0,1]]
+     * 解释：
+     * nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。
+     * nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。
+     * nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
+     * 不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。
+     * 注意，输出的顺序和三元组的顺序并不重要。
+     */
+    public static List<List<Integer>> threeSum(int[] nums) {
+        if (nums == null || nums.length < 3) return null;
+        Arrays.sort(nums);
+        int n = nums.length;
+        List<List<Integer>> result = new ArrayList<>();
+        for (int first = 0; first < n; first++) {
+            if (first > 0 && nums[first] == nums[first - 1]) {
+                continue;
+            }
+            int third = n - 1;
+            int target = -nums[first];
+            for (int second = first + 1; second < n; second++) {
+                if (second > first + 1 && nums[second] == nums[second - 1]) {
+                    continue;
+                }
+                while (second < third && nums[second] + nums[third] > target) {
+                    third--;
+                }
+                if (second == third) {
+                    break;
+                }
+                if (nums[first] + nums[second] + nums[third] == 0) {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[first]);
+                    list.add(nums[second]);
+                    list.add(nums[third]);
+                    result.add(list);
+                }
+            }
+        }
+        return result;
     }
 
 }

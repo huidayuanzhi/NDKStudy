@@ -8,6 +8,11 @@ object Logger {
     }
 
     @JvmStatic
+    fun <T> log(list: List<T>) {
+        println(list.joinToString(","))
+    }
+
+    @JvmStatic
     fun log(msg: String) {
         println(msg)
     }
