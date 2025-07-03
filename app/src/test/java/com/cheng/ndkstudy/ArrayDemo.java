@@ -362,5 +362,70 @@ public class ArrayDemo {
         return count;
     }
 
+    /**
+     * 974.和可被K整除的子数组
+     * 给定一个整数数组nums和一个整数k，返回其中元素之和可被k整除的（连续、非空）子数组的数目
+     * 示例 1：
+     * 输入：nums = [4,5,0,-2,-3,1], k = 5
+     * 输出：7
+     * 解释：
+     * 有 7 个子数组满足其元素之和可被 k = 5 整除：
+     * [4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]
+     */
+    // 暴力法
+    public static int subarraysDivByK1(int[] nums, int k) {
+        if (nums == null || nums.length <= 0) return 0;
+        int ans = 0;
+        int n = nums.length;
+        int[] sum = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            sum[i + 1] = sum[i] + nums[i];
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j <= n; j++) {
+                int res = sum[j] - sum[i];
+                if (res % k == 0) ans++;
+            }
+        }
+        return ans;
+    }
+
+    // 哈希表 + 逐一统计
+    // 思路和算法
+    // 通常，涉及连续子数组问题的时候，我们使用前缀和来解决。
+    public static int subarraysDivByK2(int[] nums, int k) {
+        if (nums == null || nums.length <= 0) return 0;
+        int sum = 0;
+        int ans = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            int mod = (sum % k + k) % k;
+            int same = map.getOrDefault(mod, 0);
+            ans += same;
+            map.put(mod, same + 1);
+        }
+        return ans;
+    }
+
+    // 哈希表 + 单次统计
+    // 可以在遍历时维护哈希表。在遍历结束后，我们再遍历哈希表，用排列组合的方法来统计答案。
+    public static int subarraysDivByK3(int[] nums, int k) {
+        if (nums == null || nums.length <= 0) return 0;
+        int ans = 0;
+        int sum = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            int mod = (sum % k + k) % k;
+            map.put(mod, map.getOrDefault(mod, 0) + 1);
+        }
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            ans += entry.getValue() * (entry.getValue() - 1) / 2;
+        }
+        return ans;
+    }
 
 }

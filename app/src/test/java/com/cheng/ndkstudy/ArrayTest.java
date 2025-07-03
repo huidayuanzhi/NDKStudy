@@ -173,4 +173,34 @@ public class ArrayTest {
         Logger.log("subarraySum2 result = " + result2);
     }
 
+    @Test
+    public void testSubarraysDivByK1() {
+        int[] nums = { 4,5,0,-2,-3,1 };
+        Logger.log("subarraysDivByK1 before");
+        Logger.log(nums);
+        int result = ArrayDemo.subarraysDivByK1(nums, 5);
+        Logger.log("subarraysDivByK1 result = " + result);
+        Logger.log(nums);
+    }
+
+    @Test
+    public void testSubarraysDivByK2() {
+        int[] nums = { 4,5,0,-2,-3,1 };
+        Logger.log("subarraysDivByK2 before");
+        Logger.log(nums);
+        int result = ArrayDemo.subarraysDivByK2(nums, 5);
+        Logger.log("subarraysDivByK2 result = " + result);
+        Logger.log(nums);
+    }
+
+    @Test
+    public void testSubarraysDivByK3() {
+        int[] nums = { 4,5,0,-2,-3,1 };
+        Logger.log("subarraysDivByK3 before");
+        Logger.log(nums);
+        int result = ArrayDemo.subarraysDivByK3(nums, 5);
+        Logger.log("subarraysDivByK3 result = " + result);
+        Logger.log(nums);
+    }
+
 }
