@@ -257,4 +257,16 @@ public class ArrayTest {
         }
     }
 
+    @Test
+    public void testFourSum() {
+        int[] nums = { 1,0,-1,0,-2,2 };
+        Logger.log("fourSum before");
+        Logger.log(nums);
+        List<List<Integer>> result = ArrayDemo.fourSum(nums, 0);
+        Logger.log("fourSum result");
+        for (List<Integer> list : result) {
+            Logger.log(list);
+        }
+    }
+
 }
