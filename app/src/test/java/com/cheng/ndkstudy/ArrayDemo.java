@@ -315,4 +315,52 @@ public class ArrayDemo {
         return slow;
     }
 
+    /**
+     * TODO 1248.统计「优美子数组」!!!
+     */
+
+    /**
+     * 560.和为K的子数组
+     * 给你一个整数数组nums和一个整数k，请你统计并返回该数组中和为k的连续子数组的个数。
+     * 示例 1 :
+     * 输入:nums = [1,1,1], k = 2
+     * 输出: 2 , [1,1] 与 [1,1] 为两种不同的情况。
+     * 示例 2 :
+     * 输入：nums = [1,2,3], k = 3
+     * 输出：2
+     */
+    // 方法一：枚举
+    public static int subarraySum1(int[] nums, int k) {
+        if (nums == null || nums.length <= 0) return 0;
+        int count = 0;
+        for (int start = 0; start < nums.length; start++) {
+            int sum = 0;
+            for (int end = start; end >= 0; end--) {
+                sum += nums[end];
+                if (sum == k) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    // 方法二：前缀和 + 哈希表优化
+    public static int subarraySum2(int[] nums, int k) {
+        if (nums == null || nums.length <= 0) return 0;
+        int pre = 0;
+        int count = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        for (int i = 0; i < nums.length; i++) {
+            pre += nums[i];
+            if (map.containsKey(pre - k)) {
+                count += map.get(pre - k);
+            }
+            map.put(pre, map.getOrDefault(pre, 0) + 1);
+        }
+        return count;
+    }
+
+
 }

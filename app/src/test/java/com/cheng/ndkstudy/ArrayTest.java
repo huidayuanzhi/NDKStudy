@@ -145,4 +145,32 @@ public class ArrayTest {
         Logger.log(nums);
     }
 
+    @Test
+    public void testSubarraySum1() {
+        int[] nums = { 1,1,1 };
+        Logger.log("subarraySum1 before");
+        Logger.log(nums);
+        int result = ArrayDemo.subarraySum1(nums, 2);
+        Logger.log("subarraySum1 result = " + result);
+        int[] nums2 = { 1,2,3 };
+        Logger.log("subarraySum1 before");
+        Logger.log(nums2);
+        int result2 = ArrayDemo.subarraySum1(nums2, 3);
+        Logger.log("subarraySum1 result = " + result2);
+    }
+
+    @Test
+    public void testSubarraySum2() {
+        int[] nums = { 1,1,1 };
+        Logger.log("subarraySum2 before");
+        Logger.log(nums);
+        int result = ArrayDemo.subarraySum2(nums, 2);
+        Logger.log("subarraySum2 result = " + result);
+        int[] nums2 = { 1,2,3 };
+        Logger.log("subarraySum2 before");
+        Logger.log(nums2);
+        int result2 = ArrayDemo.subarraySum2(nums2, 3);
+        Logger.log("subarraySum2 result = " + result2);
+    }
+
 }
