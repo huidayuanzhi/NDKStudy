@@ -464,4 +464,46 @@ public class ArrayDemo {
         return new int[0];
     }
 
+    /**
+     * 167.两数之和 II - 输入有序数组
+     * 给你一个下标从1开始的整数数组numbers，该数组已按非递减顺序排列，请你从数组中找出满足相加之和
+     * 等于目标数target的两个数。如果设这两个数分别是numbers[index1]和numbers[index2]，则1 <=
+     * index1 < index2 <= numbers.length。
+     */
+    // 双指针
+    public static int[] twoSumII1(int[] nums, int target) {
+        if (nums == null || nums.length <= 0) return new int[]{-1, -1};
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            if (nums[left] + nums[right] == target) {
+                return new int[]{left + 1, right + 1};
+            } else if (nums[left] + nums[right] < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
+    public static int[] twoSumII2(int[] nums, int target) {
+        if (nums == null || nums.length <= 0) return new int[]{-1, -1};
+        for (int i = 0; i < nums.length; i++) {
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                int mid = (right - left) / 2 + left;
+                if (nums[mid] == target - nums[i]) {
+                    return new int[]{i + 1, mid + 1};
+                } else if (nums[mid] < target - nums[i]) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
 }
