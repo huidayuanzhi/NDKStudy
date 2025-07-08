@@ -13,7 +13,7 @@ import java.util.Set;
 public class ArrayDemo {
 
     /**
-     * 查找最大值
+     * 查找最大值 - 二分法
      * 有一个整型数组，数组元素不重复，数组元素先升序后降序，
      * 例如：1、3、5、7、9、8、6、4、2，请写一个函数找出数组最大的元素。
      * 思路：
@@ -39,7 +39,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 前 K 个高频元素
+     * 前 K 个高频元素 - 哈希 + 优先级队列
      */
     public static int[] topKFrequent(int[] nums, int k) {
         if (nums == null || nums.length <= 1 || k < 1) return nums;
@@ -73,7 +73,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 209.长度最小的子数组
+     * 209.长度最小的子数组 - 滑动窗口
      * 给定一个含有n个正整数的数组和一个正整数target。
      * 找出该数组中满足其和≥target的长度最小的连续子数组[numsl, numsl+1, ..., numsr-1, numsr]，
      * 并返回其长度。如果不存在符合条件的子数组，返回0。
@@ -119,7 +119,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 219.存在重复元素 II
+     * 219.存在重复元素 II - 哈希
      * 给你一个整数数组nums和一个整数k，判断数组中是否存在两个不同的索引i和j，满足nums[i] == nums[j]
      * 且abs(i - j) <= k。如果存在，返回true；否则，返回false。
      * 示例 1：
@@ -146,6 +146,7 @@ public class ArrayDemo {
     }
 
     public static boolean containsNearByDuplicate2(int[] nums, int k) {
+        if (nums == null || nums.length <= 0) return false;
         Set<Integer> set = new HashSet<>();
         for (int i = 0; i < nums.length; i++) {
             if (i > k) {
@@ -159,7 +160,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 283.移动零
+     * 283.移动零 - 双指针
      * 给定一个数组nums，编写一个函数将所有0移动到数组的末尾，同时保持非零元素的相对顺序。
      * 请注意，必须在不复制数组的情况下原地对数组进行操作。
      * 方法一：双指针
@@ -177,7 +178,7 @@ public class ArrayDemo {
         int right = 0;
         while (right < n) {
             if (nums[right] != 0) {
-                swap(nums,left, right);
+                swap(nums, left, right);
                 left++;
             }
             right++;
@@ -203,7 +204,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 674.最长连续递增序列
+     * 674.最长连续递增序列 - 贪心
      * 给定一个未经排序的整数数组，找到最长且连续递增的子序列，并返回该序列的长度。
      * 思路：
      * 使用贪心的策略得到尽可能长的连续递增序列。做法是使用记录当前连续递增序列的开始下标和结束下标，
@@ -240,7 +241,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 128.最长连续序列
+     * 128.最长连续序列 - 哈希
      * 给定一个未排序的整数数组nums，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
      * 示例 1：
      * 输入：nums = [100,4,200,1,3,2]
@@ -272,7 +273,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 11.盛最多水的容器
+     * 11.盛最多水的容器 - 双指针
      * 给你n个非负整数a1，a2，...，an，每个数代表坐标中的一个点(i, ai)。
      * 在坐标内画n条垂直线，垂直线i的两个端点分别为(i, ai)和(i, 0)。
      * 找出其中的两条线，使得它们与x轴共同构成的容器可以容纳最多的水。
@@ -296,7 +297,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 26.删除有序数组中的重复项【快慢指针】
+     * 26.删除有序数组中的重复项 - 快慢指针
      * 给你一个升序排列的数组nums，请你原地删除重复出现的元素，使每个元素只出现一次，返回删除后数组
      * 的新长度。元素的相对顺序应该保持一致。
      * 示例 2：
@@ -323,7 +324,7 @@ public class ArrayDemo {
      */
 
     /**
-     * 560.和为K的子数组
+     * 560.和为K的子数组 - 前缀和 + 哈希
      * 给你一个整数数组nums和一个整数k，请你统计并返回该数组中和为k的连续子数组的个数。
      * 示例 1 :
      * 输入:nums = [1,1,1], k = 2
@@ -358,7 +359,7 @@ public class ArrayDemo {
         for (int i = 0; i < nums.length; i++) {
             pre += nums[i];
             if (map.containsKey(pre - k)) {
-                count += map.get(pre - k);
+                count += map.get(pre - k); // 说明：pre - (pre - k) = k
             }
             map.put(pre, map.getOrDefault(pre, 0) + 1);
         }
@@ -366,7 +367,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 974.和可被K整除的子数组
+     * 974.和可被K整除的子数组 - 前缀和 + 哈希
      * 给定一个整数数组nums和一个整数k，返回其中元素之和可被k整除的（连续、非空）子数组的数目
      * 示例 1：
      * 输入：nums = [4,5,0,-2,-3,1], k = 5
@@ -401,7 +402,7 @@ public class ArrayDemo {
         int sum = 0;
         int ans = 0;
         Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);
+        map.put(0, 1); // 关键！！！
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
             int mod = (sum % k + k) % k;
@@ -419,7 +420,7 @@ public class ArrayDemo {
         int ans = 0;
         int sum = 0;
         Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);
+        map.put(0, 1); // 关键！！！
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
             int mod = (sum % k + k) % k;
@@ -432,7 +433,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 1.两数之和
+     * 1.两数之和 - 哈希
      * 给定一个整数数组nums和一个整数目标值target，请你在该数组中找出和为目标值target的那两个整数，
      * 并返回它们的数组下标。
      * 示例 1：
@@ -468,7 +469,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 167.两数之和 II - 输入有序数组
+     * 167.两数之和 II - 输入有序数组 - 双指针
      * 给你一个下标从1开始的整数数组numbers，该数组已按非递减顺序排列，请你从数组中找出满足相加之和
      * 等于目标数target的两个数。如果设这两个数分别是numbers[index1]和numbers[index2]，则1 <=
      * index1 < index2 <= numbers.length。
@@ -510,7 +511,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 15.三数之和
+     * 15.三数之和 - 排序 + 双指针
      * 给你一个包含n个整数的数组nums，判断nums中是否存在三个元素a，b，c，使得a + b + c = 0？
      * 请你找出所有和为0且不重复的三元组。
      * 排序 + 双指针
@@ -557,7 +558,7 @@ public class ArrayDemo {
     }
 
     /**
-     * 18.四数之和
+     * 18.四数之和 - 排序 + 双指针
      * 给你一个由n个整数组成的数组nums，和一个目标值target。请你找出并返回满足下述全部条件且不重复的
      * 四元组[nums[a], nums[b], nums[c], nums[d]]
      * 示例 1：
