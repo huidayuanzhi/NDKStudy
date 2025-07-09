@@ -493,4 +493,34 @@ public class ArrayTest {
         Logger.log(result2);
     }
 
+    @Test
+    public void testInsert() {
+        // intervals = [[1,3],[6,9]], newInterval = [2,5] -> [[1,5],[6,9]]
+        int[][] intervals1 = new int[][] {
+                {1, 3},
+                {6, 9}
+        };
+        int[] newInterval1 = new int[]{2, 5};
+        Logger.log("insert");
+        Logger.log(intervals1);
+        Logger.log(newInterval1);
+        int[][] result1 = ArrayDemo.insert(intervals1, newInterval1);
+        Logger.log("insert result - ");
+        Logger.log(result1);
+        Logger.log("insert");
+        // intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8] -> [[1,2],[3,10],[12,16]]
+        int[][] intervals2 = new int[][] {
+                {1, 2},
+                {3, 5},
+                {6, 7},
+                {8, 10},
+                {12, 16}
+        };
+        int[] newInterval2 = new int[]{4, 8};
+        Logger.log(intervals2);
+        int[][] result2 = ArrayDemo.insert(intervals2, newInterval2);
+        Logger.log("insert result - ");
+        Logger.log(result2);
+    }
+
 }
