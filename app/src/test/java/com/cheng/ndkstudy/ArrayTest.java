@@ -337,4 +337,44 @@ public class ArrayTest {
         Logger.log("uniquePaths2 result = " + result);
     }
 
+    @Test
+    public void testUniquePathsWithObstacles1() {
+        // [0,0,0],[0,1,0],[0,0,0]
+        int[][] obstacleGrid1 = new int[][] {
+                {0, 0, 0},
+                {0, 1, 0},
+                {0, 0, 0}
+        };
+        Logger.log("uniquePathsWithObstacles1");
+        int result = ArrayDemo.uniquePathsWithObstacles1(obstacleGrid1);
+        Logger.log("uniquePathsWithObstacles1 result = " + result);
+        // [0,1],[0,0]
+        int[][] obstacleGrid2 = new int[][] {
+                {0, 1},
+                {0, 0}
+        };
+        result = ArrayDemo.uniquePathsWithObstacles1(obstacleGrid2);
+        Logger.log("uniquePathsWithObstacles1 result = " + result);
+    }
+
+    @Test
+    public void testUniquePathsWithObstacles2() {
+        // [0,0,0],[0,1,0],[0,0,0]
+        int[][] obstacleGrid1 = new int[][] {
+                {0, 0, 0},
+                {0, 1, 0},
+                {0, 0, 0}
+        };
+        Logger.log("uniquePathsWithObstacles2");
+        int result = ArrayDemo.uniquePathsWithObstacles2(obstacleGrid1);
+        Logger.log("uniquePathsWithObstacles2 result = " + result);
+        // [0,1],[0,0]
+        int[][] obstacleGrid2 = new int[][] {
+                {0, 1},
+                {0, 0}
+        };
+        result = ArrayDemo.uniquePathsWithObstacles2(obstacleGrid2);
+        Logger.log("uniquePathsWithObstacles2 result = " + result);
+    }
+
 }
