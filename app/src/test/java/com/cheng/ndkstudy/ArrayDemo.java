@@ -800,4 +800,39 @@ public class ArrayDemo {
         return f[n - 1];
     }
 
+    /**
+     * 452. 用最少数量的箭引爆气球
+     * 气球记录在整数数组 points，其中 points[i] = [xstart, xend] 表示水平直径在 xstart 和 xend 之间的气球。
+     * 给你一个数组 points，返回引爆所有气球所必须射出的 最小 弓箭数。
+     * 示例 1：
+     * 输入：points = [[10,16],[2,8],[1,6],[7,12]]
+     * 输出：2
+     * 解释：气球可以用2支箭来爆破:
+     * -在x = 6处射出箭，击破气球[2,8]和[1,6]。
+     * -在x = 11处发射箭，击破气球[10,16]和[7,12]。
+     * 示例 2：
+     * 输入：points = [[1,2],[3,4],[5,6],[7,8]]
+     * 输出：4
+     * 解释：每个气球需要射出一支箭，总共需要4支箭。
+     * 示例 3：
+     * 输入：points = [[1,2],[2,3],[3,4],[4,5]]
+     * 输出：2
+     * 解释：气球可以用2支箭来爆破:
+     * - 在x = 2处发射箭，击破气球[1,2]和[2,3]。
+     * - 在x = 4处射出箭，击破气球[3,4]和[4,5]。
+     */
+    public static int findMinArrowShots(int[][] points) {
+        Arrays.sort(points, Comparator.comparingInt(o -> o[1]));
+        int count = 1;
+        int end = points[0][1];
+        for (int i = 1; i < points.length; i++) {
+            if (points[i][0] > end) {
+                end = points[i][1];
+                count++;
+            }
+        }
+        return count;
+    }
+
+
 }

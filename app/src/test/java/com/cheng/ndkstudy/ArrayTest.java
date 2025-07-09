@@ -377,4 +377,36 @@ public class ArrayTest {
         Logger.log("uniquePathsWithObstacles2 result = " + result);
     }
 
+    @Test
+    public void testFindMinArrowShots() {
+        // [10,16],[2,8],[1,6],[7,12]
+        int[][] points1 = new int[][]{
+                {10, 16},
+                {2, 8},
+                {1, 6},
+                {7, 12}
+        };
+        Logger.log("findMinArrowShots");
+        int result = ArrayDemo.findMinArrowShots(points1);
+        Logger.log("findMinArrowShots - result = " + result);
+        // [1,2],[3,4],[5,6],[7,8]
+        int[][] points2 = new int[][]{
+                {1, 2},
+                {3, 4},
+                {5, 6},
+                {7, 8}
+        };
+        result = ArrayDemo.findMinArrowShots(points2);
+        Logger.log("findMinArrowShots - result = " + result);
+        // [1,2],[2,3],[3,4],[4,5]
+        int[][] points3 = new int[][]{
+                {1, 2},
+                {2, 3},
+                {3, 4},
+                {4, 5}
+        };
+        result = ArrayDemo.findMinArrowShots(points3);
+        Logger.log("findMinArrowShots - result = " + result);
+    }
+
 }
