@@ -571,4 +571,27 @@ public class ArrayTest {
        Logger.log("findLongestChain3 result - " + result);
     }
 
+    @Test
+    public void testMinPathSum() {
+        // [[1,3,1],[1,5,1],[4,2,1]] -> 7
+        int[][] grid1 = new int[][]{
+                {1, 3, 1},
+                {1, 5, 1},
+                {4, 2, 1}
+        };
+        Logger.log("minPathSum");
+        Logger.log(grid1);
+        int result = ArrayDemo.minPathSum(grid1);
+        Logger.log("minPathSum result - " + result);
+        // [[1,2,3],[4,5,6]] -> 12
+        int[][] grid2 = new int[][]{
+                {1, 2, 3},
+                {4, 5, 6}
+        };
+        Logger.log("minPathSum");
+        Logger.log(grid2);
+        result = ArrayDemo.minPathSum(grid2);
+        Logger.log("minPathSum result - " + result);
+    }
+
 }
