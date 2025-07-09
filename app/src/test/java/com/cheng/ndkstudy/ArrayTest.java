@@ -283,4 +283,32 @@ public class ArrayTest {
         Logger.log("canJump result = " + result2);
     }
 
+    @Test
+    public void testJumpII1() {
+        int[] nums1 = { 2,3,1,1,4 };
+        Logger.log("jumpII1 before");
+        Logger.log(nums1);
+        int result1 = ArrayDemo.jumpII1(nums1);
+        Logger.log("jumpII1 result = " + result1);
+        int[] nums2 = { 2,3,0,1,4 };
+        Logger.log("jumpII1 before");
+        Logger.log(nums2);
+        int result2 = ArrayDemo.jumpII1(nums2);
+        Logger.log("jumpII1 result = " + result2);
+    }
+
+    @Test
+    public void testJumpII2() {
+        int[] nums1 = { 2,3,1,1,4 };
+        Logger.log("jumpII2 before");
+        Logger.log(nums1);
+        int result1 = ArrayDemo.jumpII2(nums1);
+        Logger.log("jumpII2 result = " + result1);
+        int[] nums2 = { 2,3,0,1,4 };
+        Logger.log("jumpII2 before");
+        Logger.log(nums2);
+        int result2 = ArrayDemo.jumpII2(nums2);
+        Logger.log("jumpII2 result = " + result2);
+    }
+
 }
