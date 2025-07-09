@@ -691,4 +691,56 @@ public class ArrayDemo {
         return steps;
     }
 
+    /**
+     * 62.不同路径
+     * 一个机器人位于一个 m x n 网格的左上角，机器人每次只能向下或者向右移动一步。机器人试图达到网格的
+     * 右下角。问总共有多少条不同的路径？
+     * 示例 1：
+     * 输入：m = 3, n = 7
+     * 输出：28
+     * 示例 2：
+     *
+     * 输入：m = 3, n = 2
+     * 输出：3
+     * 解释：
+     * 从左上角开始，总共有 3 条路径可以到达右下角。
+     * 1. 向右 -> 向下 -> 向下
+     * 2. 向下 -> 向下 -> 向右
+     * 3. 向下 -> 向右 -> 向下
+     */
+    // 方法一：动态规划
+    // 用 f(i,j) 表示从左上角走到 (i,j) 的路径数量，其中 i 和 j 的范围分别是 [0,m) 和 [0,n)。
+    // 由于每一步只能从向下或者向右移动一步，因此要想走到 (i,j)，如果向下走一步，那么会从 (i−1,j) 走过来；
+    // 如果向右走一步，那么会从 (i,j−1) 走过来。因此可以写出动态规划转移方程：
+    // f(i,j) = f(i−1,j) + f(i,j−1)
+    public static int uniquePaths1(int m, int n) {
+        int[][] f = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            f[i][0] = 1;
+        }
+        for (int j = 0; j < n; j++) {
+            f[0][j] = 1;
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                f[i][j] = f[i - 1][j] + f[i][j - 1];
+            }
+        }
+        return f[m - 1][n - 1];
+    }
+
+    // 方法二：动态规划 + 滚动数组
+    public static int uniquePaths2(int m, int n) {
+        int[] f = new int[n];
+        for (int i = 0; i < n; i++) {
+            f[i] = 1;
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                f[j] += f[j - 1];
+            }
+        }
+        return f[n - 1];
+    }
+
 }

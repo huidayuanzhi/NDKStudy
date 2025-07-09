@@ -311,4 +311,30 @@ public class ArrayTest {
         Logger.log("jumpII2 result = " + result2);
     }
 
+    @Test
+    public void testUniquePaths1() {
+        Logger.log("uniquePaths1 - 3, 7");
+        int result = ArrayDemo.uniquePaths1(3, 7);
+        Logger.log("uniquePaths1 result = " + result);
+        Logger.log("uniquePaths1 - 7, 3");
+        result = ArrayDemo.uniquePaths1(7, 3);
+        Logger.log("uniquePaths1 result = " + result);
+        Logger.log("uniquePaths1 - 3, 2");
+        result = ArrayDemo.uniquePaths1(3, 2);
+        Logger.log("uniquePaths1 result = " + result);
+    }
+
+    @Test
+    public void testUniquePaths2() {
+        Logger.log("uniquePaths2 - 3, 7");
+        int result = ArrayDemo.uniquePaths2(3, 7);
+        Logger.log("uniquePaths2 result = " + result);
+        Logger.log("uniquePaths2 - 7, 3");
+        result = ArrayDemo.uniquePaths2(7, 3);
+        Logger.log("uniquePaths2 result = " + result);
+        Logger.log("uniquePaths2 - 3, 2");
+        result = ArrayDemo.uniquePaths2(3, 2);
+        Logger.log("uniquePaths2 result = " + result);
+    }
+
 }
