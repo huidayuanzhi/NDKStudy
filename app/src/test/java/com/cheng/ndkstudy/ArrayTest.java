@@ -467,4 +467,30 @@ public class ArrayTest {
         Logger.log("eraseOverlapIntervals2 - result = " + result);
     }
 
+    @Test
+    public void testMerge() {
+        // [1,3],[2,6],[8,10],[15,18] -> [1,6],[8,10],[15,18]
+        int[][] intervals1 = new int[][] {
+                {1, 3},
+                {2, 6},
+                {8, 10},
+                {15, 18}
+        };
+        Logger.log("merge");
+        Logger.log(intervals1);
+        int[][] result1 = ArrayDemo.merge(intervals1);
+        Logger.log("merge result - ");
+        Logger.log(result1);
+        Logger.log("merge");
+        // [1,4],[4,5] -> [1,5]
+        int[][] intervals2 = new int[][] {
+                {1, 4},
+                {4, 5}
+        };
+        Logger.log(intervals2);
+        int[][] result2 = ArrayDemo.merge(intervals2);
+        Logger.log("merge result - ");
+        Logger.log(result2);
+    }
+
 }

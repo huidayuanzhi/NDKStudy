@@ -16,4 +16,9 @@ object Logger {
     fun log(msg: String) {
         println(msg)
     }
+
+    @JvmStatic
+    fun log(nums: Array<IntArray>) {
+        println(nums.map { it.joinToString(",") }.joinToString("\n"))
+    }
 }
