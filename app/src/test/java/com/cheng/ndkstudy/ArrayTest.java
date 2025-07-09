@@ -269,4 +269,18 @@ public class ArrayTest {
         }
     }
 
+    @Test
+    public void testCanJump() {
+        int[] nums1 = { 2,3,1,1,4 };
+        Logger.log("canJump before");
+        Logger.log(nums1);
+        boolean result1 = ArrayDemo.canJump(nums1);
+        Logger.log("canJump result = " + result1);
+        int[] nums2 = { 3,2,1,0,4 };
+        Logger.log("canJump before");
+        Logger.log(nums2);
+        boolean result2 = ArrayDemo.canJump(nums2);
+        Logger.log("canJump result = " + result2);
+    }
+
 }
