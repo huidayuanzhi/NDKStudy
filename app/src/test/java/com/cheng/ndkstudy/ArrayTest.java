@@ -409,4 +409,62 @@ public class ArrayTest {
         Logger.log("findMinArrowShots - result = " + result);
     }
 
+    @Test
+    public void testEraseOverlapIntervals1() {
+        // [1,2],[2,3],[3,4],[1,3] -> 1
+        int[][] intervals1 = new int[][] {
+                {1, 2},
+                {2, 3},
+                {3, 4},
+                {1, 3}
+        };
+        Logger.log("eraseOverlapIntervals1");
+        int result = ArrayDemo.eraseOverlapIntervals1(intervals1);
+        Logger.log("eraseOverlapIntervals1 - result = " + result);
+        // [1,2], [1,2], [1,2] -> 2
+        int[][] intervals2 = new int[][] {
+                {1, 2},
+                {1, 2},
+                {1, 2}
+        };
+        result = ArrayDemo.eraseOverlapIntervals1(intervals2);
+        Logger.log("eraseOverlapIntervals1 - result = " + result);
+        // [1,2], [2,3] -> 0
+        int[][] intervals3 = new int[][] {
+                {1, 2},
+                {2, 3}
+        };
+        result = ArrayDemo.eraseOverlapIntervals1(intervals3);
+        Logger.log("eraseOverlapIntervals1 - result = " + result);
+    }
+
+    @Test
+    public void testEraseOverlapIntervals2() {
+        // [1,2],[2,3],[3,4],[1,3] -> 1
+        int[][] intervals1 = new int[][] {
+                {1, 2},
+                {2, 3},
+                {3, 4},
+                {1, 3}
+        };
+        Logger.log("eraseOverlapIntervals2");
+        int result = ArrayDemo.eraseOverlapIntervals2(intervals1);
+        Logger.log("eraseOverlapIntervals2 - result = " + result);
+        // [1,2], [1,2], [1,2] -> 2
+        int[][] intervals2 = new int[][] {
+                {1, 2},
+                {1, 2},
+                {1, 2}
+        };
+        result = ArrayDemo.eraseOverlapIntervals2(intervals2);
+        Logger.log("eraseOverlapIntervals2 - result = " + result);
+        // [1,2], [2,3] -> 0
+        int[][] intervals3 = new int[][] {
+                {1, 2},
+                {2, 3}
+        };
+        result = ArrayDemo.eraseOverlapIntervals2(intervals3);
+        Logger.log("eraseOverlapIntervals2 - result = " + result);
+    }
+
 }
