@@ -523,4 +523,52 @@ public class ArrayTest {
         Logger.log(result2);
     }
 
+    @Test
+    public void testFindLongestChain1() {
+       // [[1,2], [2,3], [3,4]] -> 2
+       int[][] pairs1 = new int[][] {
+               {1, 2},
+               {2, 3},
+               {3, 4}
+       };
+       Logger.log("findLongestChain1");
+       Logger.log(pairs1);
+       int result = ArrayDemo.findLongestChain1(pairs1);
+       Logger.log("findLongestChain1 result - " + result);
+       // [[1,2],[7,8],[4,5]] -> 3
+       int[][] pairs2 = new int[][] {
+               {1, 2},
+               {7, 6},
+               {4, 5}
+       };
+       Logger.log("findLongestChain1");
+       Logger.log(pairs2);
+       result = ArrayDemo.findLongestChain1(pairs2);
+       Logger.log("findLongestChain1 result - " + result);
+    }
+
+    @Test
+    public void testFindLongestChain3() {
+       // [[1,2], [2,3], [3,4]] -> 2
+       int[][] pairs1 = new int[][] {
+               {1, 2},
+               {2, 3},
+               {3, 4}
+       };
+       Logger.log("findLongestChain3");
+       Logger.log(pairs1);
+       int result = ArrayDemo.findLongestChain3(pairs1);
+       Logger.log("findLongestChain3 result - " + result);
+       // [[1,2],[7,8],[4,5]] -> 3
+       int[][] pairs2 = new int[][] {
+               {1, 2},
+               {7, 6},
+               {4, 5}
+       };
+       Logger.log("findLongestChain3");
+       Logger.log(pairs2);
+       result = ArrayDemo.findLongestChain3(pairs2);
+       Logger.log("findLongestChain3 result - " + result);
+    }
+
 }

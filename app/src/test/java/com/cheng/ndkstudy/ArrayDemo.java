@@ -963,4 +963,52 @@ public class ArrayDemo {
         return ansList.toArray(new int[ansList.size()][]);
     }
 
+    /**
+     * 646.最长数对链
+     * 给出 n 个数对。在每一个数对中，第一个数字总是比第二个数字小。
+     * 现在，我们定义一种跟随关系，当且仅当 b < c 时，数对(c, d)才可以跟在(a, b)后面。我们用这种
+     * 形式来构造一个数对链。
+     * 给定一个数对集合，找出能够形成的最长数对链的长度。你不需要用到所有的数对，你可以以任何顺序选择其
+     * 中的一些数对来构造。
+     * 示例 1：
+     * 输入：pairs = [[1,2], [2,3], [3,4]]
+     * 输出：2
+     * 解释：最长的数对链是 [1,2] -> [3,4] 。
+     * 示例 2：
+     * 输入：pairs = [[1,2],[7,8],[4,5]]
+     * 输出：3
+     * 解释：最长的数对链是 [1,2] -> [4,5] -> [7,8] 。
+     */
+    // 方法一：动态规划
+    public static int findLongestChain1(int[][] pairs) {
+        if (pairs == null || pairs.length <= 0) return 0;
+        Arrays.sort(pairs, Comparator.comparingInt(o -> o[0]));
+        int n = pairs.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (pairs[i][0] > pairs[j][1]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        return dp[n - 1];
+    }
+
+    // 方法三：贪心
+    public static int findLongestChain3(int[][] pairs) {
+        if (pairs == null || pairs.length <= 0) return 0;
+        Arrays.sort(pairs, Comparator.comparingInt(o -> o[1]));
+        int right = pairs[0][1];
+        int ans = 1;
+        for (int[] pair : pairs) {
+            if (pair[0] > right) {
+                ans++;
+                right = pair[1];
+            }
+        }
+        return ans;
+    }
+
 }
