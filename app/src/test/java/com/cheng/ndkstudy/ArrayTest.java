@@ -594,4 +594,22 @@ public class ArrayTest {
         Logger.log("minPathSum result - " + result);
     }
 
+    @Test
+    public void testClimbStairs1() {
+        Logger.log("climbStairs1");
+        int result = ArrayDemo.climbStairs1(2);
+        Logger.log("climbStairs1 result - " + result);
+        result = ArrayDemo.climbStairs1(3);
+        Logger.log("climbStairs1 result - " + result);
+    }
+
+    @Test
+    public void testClimbStairs2() {
+        Logger.log("climbStairs2");
+        int result = ArrayDemo.climbStairs2(2);
+        Logger.log("climbStairs2 result - " + result);
+        result = ArrayDemo.climbStairs2(3);
+        Logger.log("climbStairs2 result - " + result);
+    }
+
 }
