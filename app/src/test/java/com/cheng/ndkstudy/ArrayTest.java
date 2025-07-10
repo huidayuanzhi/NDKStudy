@@ -698,4 +698,26 @@ public class ArrayTest {
         Logger.log(result2);
     }
 
+    @Test
+    public void testLengthOfLIS() {
+        // [10,9,2,5,3,7,101,18] -> 4
+        int[] nums1 = new int[]{10,9,2,5,3,7,101,18};
+        int result1 = ArrayDemo.lengthOfLIS(nums1);
+        Logger.log("lengthOfLIS");
+        Logger.log(nums1);
+        Logger.log("lengthOfLIS result - " + result1);
+        // [0,1,0,3,2,3] -> 4
+        int[] nums2 = new int[]{0,1,0,3,2,3};
+        int result2 = ArrayDemo.lengthOfLIS(nums2);
+        Logger.log("lengthOfLIS");
+        Logger.log(nums2);
+        Logger.log("lengthOfLIS result - " + result2);
+        // [7,7,7,7,7,7,7] -> 1
+        int[] nums3 = new int[]{7,7,7,7,7,7,7};
+        int result3 = ArrayDemo.lengthOfLIS(nums3);
+        Logger.log("lengthOfLIS");
+        Logger.log(nums3);
+        Logger.log("lengthOfLIS result - " + result3);
+    }
+
 }
