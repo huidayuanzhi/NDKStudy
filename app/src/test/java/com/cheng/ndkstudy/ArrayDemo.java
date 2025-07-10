@@ -1535,4 +1535,52 @@ public class ArrayDemo {
         return ans;
     }
 
+    /**
+     * 152. 乘积最大子数组
+     * 找出数组中乘积最大的非空连续 子数组
+     * 示例 1:
+     * 输入: nums = [2,3,-2,4]
+     * 输出: 6
+     * 解释: 子数组 [2,3] 有最大乘积 6。
+     * 示例 2:
+     * 输入: nums = [-2,0,-1]
+     * 输出: 0
+     * 解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
+     */
+    public static int maxProduct1(int[] nums) {
+        if (nums == null || nums.length <= 0) return 0;
+        int n = nums.length;
+        long[] maxF = new long[n];
+        long[] minF = new long[n];
+        maxF[0] = nums[0];
+        minF[0] = nums[0];
+        int ans = nums[0];
+        for (int i = 1; i < n; i++) {
+            maxF[i] = nums[i];
+            minF[i] = nums[i];
+            maxF[i] = Math.max(Math.max(nums[i], maxF[i - 1] * nums[i]), minF[i - 1] * nums[i]);
+            minF[i] = Math.min(Math.min(nums[i], maxF[i - 1] * nums[i]), minF[i - 1] * nums[i]);
+            if (minF[i] < -1 << 32) {
+                minF[i] = nums[i];
+            }
+            ans = Math.max(ans, (int) maxF[i]);
+        }
+        return ans;
+    }
+
+    public static int maxProduct2(int[] nums) {
+        if (nums == null || nums.length <= 0) return 0;
+        long maxF = nums[0];
+        long minF = nums[0];
+        int ans = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            long mx = maxF;
+            long mn = minF;
+            maxF = Math.max(Math.max(nums[i], mx * nums[i]), mn * nums[i]);
+            minF = Math.min(Math.min(nums[i], mx * nums[i]), mn * nums[i]);
+            ans = Math.max(ans, (int) maxF);
+        }
+        return ans;
+    }
+
 }

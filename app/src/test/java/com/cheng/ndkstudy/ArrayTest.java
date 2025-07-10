@@ -817,4 +817,36 @@ public class ArrayTest {
         Logger.log("maxAreaOfIsland3 result - " + result);
     }
 
+    @Test
+    public void testMaxProduct1() {
+        // [2,3,-2,4] -> 6
+        Logger.log("maxProduct1");
+        int[] nums1 = {2,3,-2,4};
+        int result = ArrayDemo.maxProduct1(nums1);
+        Logger.log(nums1);
+        Logger.log("maxProduct1 result - " + result);
+        // [-2,0,-1] -> 0
+        Logger.log("maxProduct1");
+        int[] nums2 = {-2,0,-1};
+        result = ArrayDemo.maxProduct1(nums2);
+        Logger.log(nums2);
+        Logger.log("maxProduct1 result - " + result);
+    }
+
+    @Test
+    public void testMaxProduct2() {
+        // [2,3,-2,4] -> 6
+        Logger.log("maxProduct2");
+        int[] nums1 = {2,3,-2,4};
+        int result = ArrayDemo.maxProduct2(nums1);
+        Logger.log(nums1);
+        Logger.log("maxProduct2 result - " + result);
+        // [-2,0,-1] -> 0
+        Logger.log("maxProduct2");
+        int[] nums2 = {-2,0,-1};
+        result = ArrayDemo.maxProduct2(nums2);
+        Logger.log(nums2);
+        Logger.log("maxProduct2 result - " + result);
+    }
+
 }
