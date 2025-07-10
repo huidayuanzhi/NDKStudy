@@ -1140,4 +1140,52 @@ public class ArrayDemo {
         return c;
     }
 
+    /**
+     * TODO 96.不同的二叉搜索树
+     * TODO 95.不同的二叉搜索树 II
+     */
+
+    /**
+     * 875.爱吃香蕉的珂珂 - 二分查找
+     * 返回她可以在 h 小时内吃掉所有香蕉的最小速度 k（k 为整数）
+     * 示例 1：
+     * 输入：piles = [3,6,7,11], h = 8
+     * 输出：4
+     * 示例 2：
+     * 输入：piles = [30,11,23,4,20], h = 5
+     * 输出：30
+     * 示例 3：
+     * 输入：piles = [30,11,23,4,20], h = 6
+     * 输出：23
+     */
+    public static int minEatingSpeed(int[] piles, int h) {
+        if (piles == null || piles.length <= 0 || h < 1) return 0;
+        int n = piles.length;
+        int low = 1;
+        int high = 0;
+        for (int i = 0; i < n; i++) {
+            high = Math.max(high, piles[i]);
+        }
+        int k = high;
+        while (low < high) {
+            int speed = (high - low) / 2 + low;
+            long time = getTime(piles, speed);
+            if (time <= h) {
+                k = speed;
+                high = speed;
+            } else {
+                low = speed + 1;
+            }
+        }
+        return k;
+    }
+
+    private static long getTime(int[] piles, int speed) {
+        long time = 0;
+        for (int i = 0; i < piles.length; i++) {
+            time += (piles[i] + speed - 1) / speed;
+        }
+        return time;
+    }
+
 }

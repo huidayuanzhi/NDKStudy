@@ -634,4 +634,21 @@ public class ArrayTest {
         Logger.log("numDecoding2 06 -> result = " + result);
     }
 
+    @Test
+    public void testMinEatingSpeed() {
+        Logger.log("minEatingSpeed");
+        int[] piles1 = {3,6,7,11};
+        int result = ArrayDemo.minEatingSpeed(piles1, 8); // 4
+        Logger.log(piles1);
+        Logger.log("minEatingSpeed result - " + result);
+        int[] piles2 = {30,11,23,4,20};
+        result = ArrayDemo.minEatingSpeed(piles2, 5); // 30
+        Logger.log(piles2);
+        Logger.log("minEatingSpeed result - " + result);
+        int[] piles3 = {30,11,23,4,20};
+        result = ArrayDemo.minEatingSpeed(piles3, 6); // 23
+        Logger.log(piles3);
+        Logger.log("minEatingSpeed result - " + result);
+    }
+
 }
