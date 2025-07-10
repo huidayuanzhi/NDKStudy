@@ -1619,4 +1619,46 @@ public class ArrayDemo {
         }
     }
 
+    /**
+     * 47. 全排列 II
+     * 给定一个可包含重复数字的序列 nums，按任意顺序返回所有不重复的全排列。
+     * 示例 1：
+     * 输入：nums = [1,1,2]
+     * 输出：
+     * [[1,1,2],
+     *  [1,2,1],
+     *  [2,1,1]]
+     * 示例 2：
+     * 输入：nums = [1,2,3]
+     * 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+     */
+    public static List<List<Integer>> permuteUnique(int[] nums) {
+        if (nums == null || nums.length <= 0) return Collections.emptyList();
+        int n = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> output = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            output.add(nums[i]);
+        }
+        backtraceUnique(n, output, res, 0);
+        return res;
+    }
+
+    private static void backtraceUnique(int n, List<Integer> output, List<List<Integer>> res, int first) {
+        if (first == n - 1) {
+            res.add(new ArrayList<>(output));
+            return;
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = first; i < n; i++) {
+            if (set.contains(output.get(i))) {
+                continue;
+            }
+            set.add(output.get(i));
+            Collections.swap(output, i, first);
+            backtraceUnique(n, output, res, first + 1);
+            Collections.swap(output, i, first);
+        }
+    }
+
 }

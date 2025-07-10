@@ -863,4 +863,26 @@ public class ArrayTest {
         Logger.log(result);
     }
 
+    @Test
+    public void testPermuteUnique() {
+        Logger.log("permuteUnique");
+        int[] nums1 = {1,1,2};
+        Logger.log(nums1);
+        List<List<Integer>> result = ArrayDemo.permuteUnique(nums1);
+        Logger.log("permuteUnique result");
+        Logger.log(result);
+        Logger.log("permuteUnique");
+        int[] nums2 = {1,2,3};
+        Logger.log(nums2);
+        result = ArrayDemo.permuteUnique(nums2);
+        Logger.log("permuteUnique result");
+        Logger.log(result);
+        Logger.log("permuteUnique");
+        int[] nums3 = {1,2,2,3};
+        Logger.log(nums3);
+        result = ArrayDemo.permuteUnique(nums3);
+        Logger.log("permuteUnique result");
+        Logger.log(result);
+    }
+
 }
