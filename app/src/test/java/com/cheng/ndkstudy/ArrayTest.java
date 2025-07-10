@@ -763,4 +763,58 @@ public class ArrayTest {
         Logger.log("maximalSquare2 result - " + result);
     }
 
+    @Test
+    public void testMaxAreaOfIsland1() {
+        int[][] grid = new int[][] {
+                {0,0,1,0,0,0,0,1,0,0,0,0,0},
+                {0,0,0,0,0,0,0,1,1,1,0,0,0},
+                {0,1,1,0,1,0,0,0,0,0,0,0,0},
+                {0,1,0,0,1,1,0,0,1,0,1,0,0},
+                {0,1,0,0,1,1,0,0,1,1,1,0,0},
+                {0,0,0,0,0,0,0,0,0,0,1,0,0},
+                {0,0,0,0,0,0,0,1,1,1,0,0,0},
+                {0,0,0,0,0,0,0,1,1,0,0,0,0}
+        };
+        Logger.log("maxAreaOfIsland1");
+        Logger.log(grid);
+        int result = ArrayDemo.maxAreaOfIsland1(grid);
+        Logger.log("maxAreaOfIsland1 result - " + result);
+    }
+
+    @Test
+    public void testMaxAreaOfIsland2() {
+        int[][] grid = new int[][] {
+                {0,0,1,0,0,0,0,1,0,0,0,0,0},
+                {0,0,0,0,0,0,0,1,1,1,0,0,0},
+                {0,1,1,0,1,0,0,0,0,0,0,0,0},
+                {0,1,0,0,1,1,0,0,1,0,1,0,0},
+                {0,1,0,0,1,1,0,0,1,1,1,0,0},
+                {0,0,0,0,0,0,0,0,0,0,1,0,0},
+                {0,0,0,0,0,0,0,1,1,1,0,0,0},
+                {0,0,0,0,0,0,0,1,1,0,0,0,0}
+        };
+        Logger.log("maxAreaOfIsland2");
+        Logger.log(grid);
+        int result = ArrayDemo.maxAreaOfIsland2(grid);
+        Logger.log("maxAreaOfIsland2 result - " + result);
+    }
+
+    @Test
+    public void testMaxAreaOfIsland3() {
+        int[][] grid = new int[][] {
+                {0,0,1,0,0,0,0,1,0,0,0,0,0},
+                {0,0,0,0,0,0,0,1,1,1,0,0,0},
+                {0,1,1,0,1,0,0,0,0,0,0,0,0},
+                {0,1,0,0,1,1,0,0,1,0,1,0,0},
+                {0,1,0,0,1,1,0,0,1,1,1,0,0},
+                {0,0,0,0,0,0,0,0,0,0,1,0,0},
+                {0,0,0,0,0,0,0,1,1,1,0,0,0},
+                {0,0,0,0,0,0,0,1,1,0,0,0,0}
+        };
+        Logger.log("maxAreaOfIsland3");
+        Logger.log(grid);
+        int result = ArrayDemo.maxAreaOfIsland3(grid);
+        Logger.log("maxAreaOfIsland3 result - " + result);
+    }
+
 }

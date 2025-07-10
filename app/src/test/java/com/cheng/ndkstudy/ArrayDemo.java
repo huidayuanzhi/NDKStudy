@@ -3,11 +3,14 @@ package com.cheng.ndkstudy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 
 public class ArrayDemo {
@@ -1415,5 +1418,121 @@ public class ArrayDemo {
         return maxSide * maxSide;
     }
 
+    /**
+     * 695. 岛屿的最大面积
+     * 示例 1：
+     * 输入：grid =
+     *  [[0,0,1,0,0,0,0,1,0,0,0,0,0],
+     *   [0,0,0,0,0,0,0,1,1,1,0,0,0],
+     *   [0,1,1,0,1,0,0,0,0,0,0,0,0],
+     *   [0,1,0,0,1,1,0,0,1,0,1,0,0],
+     *   [0,1,0,0,1,1,0,0,1,1,1,0,0],
+     *   [0,0,0,0,0,0,0,0,0,0,1,0,0],
+     *   [0,0,0,0,0,0,0,1,1,1,0,0,0],
+     *   [0,0,0,0,0,0,0,1,1,0,0,0,0]]
+     * 输出：6
+     * 解释：答案不应该是 11 ，因为岛屿只能包含水平或垂直这四个方向上的 1 。
+     */
+    // 方法一：深度优先搜索
+    public static int maxAreaOfIsland1(int[][] grid) {
+        if (grid == null || grid.length <= 0 || grid[0].length <= 0) return 0;
+        int ans = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                ans = Math.max(ans, dfs(grid, i, j));
+            }
+        }
+        return ans;
+    }
+
+    private static int dfs(int[][] grid, int cur_i, int cur_j) {
+        int rows = grid.length;
+        int columns = grid[0].length;
+        if (cur_i < 0 || cur_j < 0 || cur_i >= rows || cur_j >= columns || grid[cur_i][cur_j] == 0) {
+            return 0;
+        }
+        int ans = 1;
+        grid[cur_i][cur_j] = 0;
+        int[] di = {0, 0, 1, -1};
+        int[] dj = {1, -1, 0, 0};
+        for (int i = 0; i < di.length; i++) {
+            int next_i = cur_i + di[i];
+            int next_j = cur_j + dj[i];
+            ans += dfs(grid, next_i, next_j);
+        }
+        return ans;
+    }
+
+    // 方法二：深度优先搜索 + 栈
+    public static int maxAreaOfIsland2(int[][] grid) {
+        if (grid == null || grid.length <= 0 || grid[0].length <= 0) return 0;
+        int ans = 0;
+        int rows = grid.length;
+        int columns = grid[0].length;
+        int[] di = {0, 0, 1, -1};
+        int[] dj = {1, -1, 0, 0};
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                int cur = 0;
+                Deque<Integer> stacki = new LinkedList<>();
+                Deque<Integer> stackj = new LinkedList<>();
+                stacki.push(i);
+                stackj.push(j);
+                while (!stacki.isEmpty()) {
+                    int cur_i = stacki.pop();
+                    int cur_j = stackj.pop();
+                    if (cur_i < 0 || cur_j < 0 || cur_i >= rows || cur_j >= columns || grid[cur_i][cur_j] == 0) {
+                        continue;
+                    }
+                    cur++;
+                    grid[cur_i][cur_j] = 0;
+                    for (int index = 0; index < di.length; index++) {
+                        int next_i = cur_i + di[index];
+                        int next_j = cur_j + dj[index];
+                        stacki.push(next_i);
+                        stackj.push(next_j);
+                    }
+                }
+                ans = Math.max(ans, cur);
+            }
+        }
+        return ans;
+    }
+
+    // 方法三：广度优先搜索
+    public static int maxAreaOfIsland3(int[][] grid) {
+        if (grid == null || grid.length <= 0 || grid[0].length <= 0) return 0;
+        int ans = 0;
+        int rows = grid.length;
+        int columns = grid[0].length;
+        int[] di = {0, 0, 1, -1};
+        int[] dj = {1, -1, 0, 0};
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                int cur = 0;
+                Queue<Integer> queuei = new LinkedList<>();
+                Queue<Integer> queuej = new LinkedList<>();
+                queuei.offer(i);
+                queuej.offer(j);
+                while (!queuei.isEmpty()) {
+                    int cur_i = queuei.poll();
+                    int cur_j = queuej.poll();
+                    if (cur_i < 0 || cur_j < 0 || cur_i >= rows || cur_j >= columns || grid[cur_i][cur_j] == 0) {
+                        continue;
+                    }
+                    cur++;
+                    grid[cur_i][cur_j] = 0;
+                    for (int index = 0; index < di.length; index++) {
+                        int next_i = cur_i + di[index];
+                        int next_j = cur_j + dj[index];
+                        queuei.offer(next_i);
+                        queuej.offer(next_j);
+                    }
+                }
+                ans = Math.max(ans, cur);
+            }
+        }
+        return ans;
+    }
 
 }
