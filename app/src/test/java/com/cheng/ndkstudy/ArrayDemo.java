@@ -1188,4 +1188,44 @@ public class ArrayDemo {
         return time;
     }
 
+    /**
+     * 1011. 在 D 天内送达包裹的能力 - 二分查找转化为判定问题
+     * 按给出重量（weights）的顺序往传送带上装载包裹，装载的重量不会超过船的最大运载重量。
+     * 返回能在 days 天内将传送带上的所有包裹送达的船的最低运载能力。
+     * 示例 1：
+     * 输入：weights = [1,2,3,4,5,6,7,8,9,10], days = 5
+     * 输出：15
+     * 请注意，货物必须按照给定的顺序装运，因此使用载重能力为 14 的船舶并将包装分成 (2, 3, 4, 5), (1, 6, 7), (8), (9), (10) 是不允许的。
+     * 示例 2：
+     * 输入：weights = [3,2,2,4,1,4], days = 3
+     * 输出：6
+     * 示例 3：
+     * 输入：weights = [1,2,3,1,1], days = 4
+     * 输出：3
+     */
+    public static int shipWithinDays(int[] weights, int days) {
+        if (weights == null || weights.length <= 0 || days < 1) return 0;
+        int left = Arrays.stream(weights).max().getAsInt();
+        int right = Arrays.stream(weights).sum();
+        while (left < right) {
+            int mid = (right - left) / 2 + left;
+            int need = 1;
+            int curr = 0;
+            for (int weight : weights) {
+                if (curr + weight > mid) {
+                    need++;
+                    curr = 0;
+                }
+                curr += weight;
+            }
+            if (need <= days) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+
+
 }

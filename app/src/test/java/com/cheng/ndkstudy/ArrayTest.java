@@ -651,4 +651,24 @@ public class ArrayTest {
         Logger.log("minEatingSpeed result - " + result);
     }
 
+    @Test
+    public void testShipWithinDays() {
+        Logger.log("shipWithinDays");
+        // weights = [1,2,3,4,5,6,7,8,9,10], days = 5 -> 15
+        int[] weights1 = {1,2,3,4,5,6,7,8,9,10};
+        int result = ArrayDemo.shipWithinDays(weights1, 5);
+        Logger.log(weights1);
+        Logger.log("shipWithinDays result - " + result);
+        // weights = [3,2,2,4,1,4], days = 3 -> 6
+        int[] weights2 = {3,2,2,4,1,4};
+        result = ArrayDemo.shipWithinDays(weights2, 3);
+        Logger.log(weights2);
+        Logger.log("shipWithinDays result - " + result);
+        // weights = [1,2,3,1,1], days = 4 -> 3
+        int[] weights3 = {1,2,3,1,1};
+        result = ArrayDemo.shipWithinDays(weights3, 4);
+        Logger.log(weights3);
+        Logger.log("shipWithinDays result - " + result);
+    }
+
 }
