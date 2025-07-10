@@ -2,6 +2,7 @@ package com.cheng.ndkstudy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
@@ -1581,6 +1582,41 @@ public class ArrayDemo {
             ans = Math.max(ans, (int) maxF);
         }
         return ans;
+    }
+
+    /**
+     * 46.全排列
+     * 给定一个不含重复数字的数组nums，返回其所有可能的全排列。
+     * 可以按任意顺序返回答案。
+     * 示例 1：
+     * 输入：nums = [1,2,3]
+     * 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+     * 示例 2：
+     * 输入：nums = [0,1]
+     * 输出：[[0,1],[1,0]]
+     */
+    public static List<List<Integer>> premute(int[] nums) {
+        if (nums == null || nums.length <= 0) return Collections.emptyList();
+        int n = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> output = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            output.add(nums[i]);
+        }
+        backtrace(n, res, output, 0);
+        return res;
+    }
+
+    private static void backtrace(int n, List<List<Integer>> res, List<Integer> output, int first) {
+        if (first == n) {
+            res.add(new ArrayList<>(output));
+            return;
+        }
+        for (int i = first; i < n; i++) {
+            Collections.swap(output, i, first);
+            backtrace(n, res, output, first + 1);
+            Collections.swap(output, i, first);
+        }
     }
 
 }

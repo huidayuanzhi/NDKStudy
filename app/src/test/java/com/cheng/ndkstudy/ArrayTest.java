@@ -849,4 +849,18 @@ public class ArrayTest {
         Logger.log("maxProduct2 result - " + result);
     }
 
+    @Test
+    public void testPremute() {
+        int[] nums1 = {1, 2, 3};
+        Logger.log("premute");
+        Logger.log(nums1);
+        List<List<Integer>> result = ArrayDemo.premute(nums1);
+        Logger.log(result);
+        int[] nums2 = {0, 1};
+        Logger.log("premute");
+        Logger.log(nums2);
+        result = ArrayDemo.premute(nums2);
+        Logger.log(result);
+    }
+
 }
