@@ -1083,4 +1083,61 @@ public class ArrayDemo {
         return dp[n];
     }
 
+    /**
+     * 91. 解码方法 - 动态规划
+     * 一条包含字母 A-Z 的消息通过以下映射进行了 编码 ：
+     * "1" -> 'A'
+     * "2" -> 'B'
+     * 然而，在解码已编码的消息时，你意识到有许多不同的方式来解码，
+     * 因为有些编码被包含在其它编码当中（"2" 和 "5" 与 "25"）。
+     * 示例 1：
+     * 输入：s = "12"
+     * 输出：2
+     * 解释：它可以解码为 "AB"（1 2）或者 "L"（12）。
+     * 示例 2：
+     * 输入：s = "226"
+     * 输出：3
+     * 解释：它可以解码为 "BZ" (2 26), "VF" (22 6), 或者 "BBF" (2 2 6) 。
+     * 示例 3：
+     * 输入：s = "06"
+     * 输出：0
+     * 解释："06" 无法映射到 "F" ，因为存在前导零（"6" 和 "06" 并不等价）。
+     */
+    public static int numDecoding1(String s) {
+        if (s == null || s.length() <= 0) return 0;
+        int n = s.length();
+        int[] f = new int[n + 1];
+        f[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            if (s.charAt(i - 1) != '0') {
+                f[i] += f[i - 1];
+            }
+            if (i > 1 && s.charAt(i - 2) != '0' && ((s.charAt(i - 2) - '0') * 10 + (s.charAt(i - 1) - '0')) <= 26) {
+                f[i] += f[i - 2];
+            }
+        }
+        return f[n];
+    }
+
+    public static int numDecoding2(String s) {
+        if (s == null || s.length() <= 0) return 0;
+        // a = f[i - 2], b = f[i - 1], c = f[i]
+        int a = 0;
+        int b = 1;
+        int c = 0;
+        int n = s.length();
+        for (int i = 1; i <= n; i++) {
+            c = 0;
+            if (s.charAt(i - 1) != '0') {
+                c += b;
+            }
+            if (i > 1 && s.charAt(i - 2) != '0' && ((s.charAt(i - 2) - '0') * 10 + (s.charAt(i - 1) - '0')) <= 26) {
+                c += a;
+            }
+            a = b;
+            b = c;
+        }
+        return c;
+    }
+
 }

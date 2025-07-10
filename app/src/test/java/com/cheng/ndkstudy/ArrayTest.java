@@ -612,4 +612,26 @@ public class ArrayTest {
         Logger.log("climbStairs2 result - " + result);
     }
 
+    @Test
+    public void testNumDecoding1() {
+        Logger.log("numDecoding1");
+        int result = ArrayDemo.numDecoding1("12"); // 2
+        Logger.log("numDecoding1 12 -> result = " + result);
+        result = ArrayDemo.numDecoding1("226"); // 3
+        Logger.log("numDecoding1 226 -> result = " + result);
+        result = ArrayDemo.numDecoding1("06"); // 0
+        Logger.log("numDecoding1 06 -> result = " + result);
+    }
+
+    @Test
+    public void testNumDecoding2() {
+        Logger.log("numDecoding2");
+        int result = ArrayDemo.numDecoding2("12"); // 2
+        Logger.log("numDecoding2 12 -> result = " + result);
+        result = ArrayDemo.numDecoding2("226"); // 3
+        Logger.log("numDecoding2 226 -> result = " + result);
+        result = ArrayDemo.numDecoding2("06"); // 0
+        Logger.log("numDecoding2 06 -> result = " + result);
+    }
+
 }
