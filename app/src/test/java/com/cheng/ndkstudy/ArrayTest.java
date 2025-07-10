@@ -885,4 +885,32 @@ public class ArrayTest {
         Logger.log(result);
     }
 
+    @Test
+    public void testSubsets1() {
+        Logger.log("subsets1");
+        int[] nums1 = {1, 2, 3};
+        List<List<Integer>> result = ArrayDemo.subsets1(nums1);
+        Logger.log(nums1);
+        Logger.log(result);
+        Logger.log("subsets1");
+        int[] nums2 = {0};
+        result = ArrayDemo.subsets1(nums2);
+        Logger.log(nums2);
+        Logger.log(result);
+    }
+
+    @Test
+    public void testSubsets2() {
+        Logger.log("subsets2");
+        int[] nums1 = {1, 2, 3};
+        List<List<Integer>> result = ArrayDemo.subsets2(nums1);
+        Logger.log(nums1);
+        Logger.log(result);
+        Logger.log("subsets2");
+        int[] nums2 = {0};
+        result = ArrayDemo.subsets1(nums2);
+        Logger.log(nums2);
+        Logger.log(result);
+    }
+
 }

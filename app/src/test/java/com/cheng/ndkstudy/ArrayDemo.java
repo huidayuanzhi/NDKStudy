@@ -1579,6 +1579,9 @@ public class ArrayDemo {
             long mn = minF;
             maxF = Math.max(Math.max(nums[i], mx * nums[i]), mn * nums[i]);
             minF = Math.min(Math.min(nums[i], mx * nums[i]), mn * nums[i]);
+            if (minF < -1 << 32) {
+                minF = nums[i];
+            }
             ans = Math.max(ans, (int) maxF);
         }
         return ans;
@@ -1658,6 +1661,62 @@ public class ArrayDemo {
             Collections.swap(output, i, first);
             backtraceUnique(n, output, res, first + 1);
             Collections.swap(output, i, first);
+        }
+    }
+
+    /**
+     * 78. 子集
+     * 给你一个整数数组 nums，数组中的元素互不相同。返回该数组所有可能的子集（幂集）。
+     * 解集不能包含重复的子集。可以按任意顺序返回解集。
+     * 示例 1：
+     * 输入：nums = [1,2,3]
+     * 输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+     * 示例 2：
+     * 输入：nums = [0]
+     * 输出：[[],[0]]
+     * https://zhuanlan.zhihu.com/p/128025509
+     */
+    // 方法一：递归
+    // 开始假设输出子集为空，每一步都向已生成的子集添加新的整数，并生成新的子集
+    public static List<List<Integer>> subsets1(int[] nums) {
+        if (nums == null || nums.length <= 0) return Collections.emptyList();
+        List<List<Integer>> output = new ArrayList<>();
+        output.add(Collections.emptyList());
+        for (int num : nums) {
+            List<List<Integer>> newSubsets = new ArrayList<>();
+            for (List<Integer> curr : output) {
+                List<Integer> newCurr = new ArrayList<>(curr);
+                newCurr.add(num);
+                newSubsets.add(newCurr);
+            }
+            output.addAll(newSubsets);
+        }
+        return output;
+    }
+
+    // 方法二：回溯
+    // 幂集是所有长度从 0 到 n 所有子集的组合
+    // 根据定义，该问题可以看作是从序列中生成幂集
+    // 遍历子集长度，通过回溯生成所有给定长度的子集
+    public static List<List<Integer>> subsets2(int[] nums) {
+        if (nums == null || nums.length <= 0) return Collections.emptyList();
+        int n = nums.length;
+        List<List<Integer>> output = new ArrayList<>();
+        for (int i = 0; i <= n; i++) {
+            backtrack(i, 0, nums, new ArrayList<>(), output);
+        }
+        return output;
+    }
+
+    private static void backtrack(int k, int first, int[] nums, List<Integer> curr, List<List<Integer>> output) {
+        if (curr.size() == k) {
+            output.add(new ArrayList<>(curr));
+        }
+        int n = nums.length;
+        for (int i = first; i < n; i++) {
+            curr.add(nums[i]);
+            backtrack(k, i + 1, nums, curr, output);
+            curr.remove(curr.size() - 1);
         }
     }
 
