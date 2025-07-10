@@ -682,4 +682,20 @@ public class ArrayTest {
         Logger.log("mySqrt 9 result - " + result);
     }
 
+    @Test
+    public void testSearchRange() {
+        int[] nums1 = new int[]{5,7,7,8,8,10};
+        int[] result1 = ArrayDemo.searchRange(nums1, 8); // [3,4]
+        Logger.log("searchRange");
+        Logger.log(nums1);
+        Logger.log("searchRange result");
+        Logger.log(result1);
+        int[] nums2 = new int[]{5,7,7,8,8,10};
+        int[] result2 = ArrayDemo.searchRange(nums2, 6); // [-1,-1]
+        Logger.log("searchRange");
+        Logger.log(nums2);
+        Logger.log("searchRange result");
+        Logger.log(result2);
+    }
+
 }
