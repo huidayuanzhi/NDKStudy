@@ -1345,4 +1345,75 @@ public class ArrayDemo {
      * 输出：0
      */
 
+    /**
+     * 221. 最大正方形
+     * 在一个由 '0' 和 '1' 组成的二维矩阵内，找到只包含 '1' 的最大正方形，并返回其面积。
+     * 示例 1：
+     * 输入：matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+     * 输出：4
+     * 示例 2：
+     * 输入：matrix = [["0","1"],["1","0"]]
+     * 输出：1
+     * 示例 3：
+     * 输入：matrix = [["0"]]
+     * 输出：0
+     */
+    // 方法一：暴力法
+    public static int maximalSquare1(char[][] matrix) {
+        if (matrix == null || matrix.length <= 0 || matrix[0].length <= 0) return 0;
+        int maxSide = 0;
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (matrix[i][j] == '1') {
+                    maxSide = Math.max(maxSide, 1);
+                    int currentMaxSide = Math.min(rows - i, columns - j);
+                    for (int k = 1; k < currentMaxSide; k++) {
+                        if (matrix[i + k][j + k] == '0') {
+                            break;
+                        }
+                        boolean flag = true;
+                        for (int m = 0; m < k; m++) {
+                            if (matrix[i + k][j + m] == '0' || matrix[i + m][j + k] == '0') {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (flag) {
+                            maxSide = Math.max(maxSide, k + 1);
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return maxSide * maxSide;
+    }
+
+    // 方法二：动态规划
+    // 用 dp(i,j) 表示以 (i,j) 为右下角，且只包含 1 的正方形的边长最大值
+    public static int maximalSquare2(char[][] matrix) {
+        if (matrix == null || matrix.length <= 0 || matrix[0].length <= 0) return 0;
+        int maxSide = 0;
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int[][] dp = new int[rows][columns];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (matrix[i][j] == '1') {
+                    if (i == 0 || j == 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]) + 1;
+                    }
+                    maxSide = Math.max(maxSide, dp[i][j]);
+                }
+            }
+        }
+        return maxSide * maxSide;
+    }
+
+
 }

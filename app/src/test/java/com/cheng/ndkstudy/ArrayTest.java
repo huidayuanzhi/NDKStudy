@@ -720,4 +720,47 @@ public class ArrayTest {
         Logger.log("lengthOfLIS result - " + result3);
     }
 
+    @Test
+    public void testMaximalSquare1() {
+        // [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]] -> 4
+        char[][] matrix1 = new char[][] {
+                {'1', '0', '1', '0', '0'},
+                {'1', '0', '1', '1', '1'},
+                {'1', '1', '1', '1', '1'},
+                {'1', '0', '0', '1', '0'},
+        };
+        Logger.log("maximalSquare1");
+        int result = ArrayDemo.maximalSquare1(matrix1);
+        Logger.log("maximalSquare1 result - " + result);
+        // [["0","1"],["1","0"]] -> 1
+        char[][] matrix2 = new char[][] {
+                {'0', '1'},
+                {'1', '0'},
+        };
+        Logger.log("maximalSquare1");
+        result = ArrayDemo.maximalSquare1(matrix2);
+        Logger.log("maximalSquare1 result - " + result);
+    }
+
+    @Test
+    public void testMaximalSquare2() {
+        // [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]] -> 4
+        char[][] matrix1 = new char[][] {
+                {'1', '0', '1', '0', '0'},
+                {'1', '0', '1', '1', '1'},
+                {'1', '1', '1', '1', '1'},
+                {'1', '0', '0', '1', '0'},
+        };
+        Logger.log("maximalSquare2");
+        int result = ArrayDemo.maximalSquare2(matrix1);
+        Logger.log("maximalSquare2 result - " + result);
+        char[][] matrix2 = new char[][] {
+                {'0', '1'},
+                {'1', '0'},
+        };
+        Logger.log("maximalSquare2");
+        result = ArrayDemo.maximalSquare2(matrix2);
+        Logger.log("maximalSquare2 result - " + result);
+    }
+
 }
