@@ -671,4 +671,15 @@ public class ArrayTest {
         Logger.log("shipWithinDays result - " + result);
     }
 
+    @Test
+    public void testMySqrt() {
+        Logger.log("mySqrt");
+        int result = ArrayDemo.mySqrt(4);
+        Logger.log("mySqrt 4 result - " + result);
+        result = ArrayDemo.mySqrt(8);
+        Logger.log("mySqrt 8 result - " + result);
+        result = ArrayDemo.mySqrt(9);
+        Logger.log("mySqrt 9 result - " + result);
+    }
+
 }

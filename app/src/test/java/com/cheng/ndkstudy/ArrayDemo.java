@@ -1227,5 +1227,31 @@ public class ArrayDemo {
         return left;
     }
 
+    /**
+     * 69.x的平方根 - 二分查找
+     * 返回类型是整数，结果只保留整数部分，小数部分将被舍去
+     * 示例 1：
+     * 输入：x = 4
+     * 输出：2
+     * 示例 2：
+     * 输入：x = 8
+     * 输出：2
+     */
+    public static int mySqrt(int x) {
+        if (x <= 0) return -1;
+        int ans = -1;
+        int left = 1;
+        int right = x;
+        while (left < right) {
+            int mid = (right - left) / 2 + left;
+            if (mid * mid <= x) {
+                ans = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return ans;
+    }
 
 }
