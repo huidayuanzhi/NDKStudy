@@ -1821,4 +1821,46 @@ public class ArrayDemo {
         return res;
     }
 
+    /**
+     * 119. 杨辉三角 II
+     * 给定一个非负索引 rowIndex，返回「杨辉三角」的第 rowIndex 行。
+     * 示例 1:
+     * 输入: rowIndex = 3
+     * 输出: [1,3,3,1]
+     * 示例 2:
+     * 输入: rowIndex = 1
+     * 输出: [1,1]
+     */
+    // 方法一：滚动数组
+    public static List<Integer> getPascalsTriangleRow1(int rowIndex) {
+        if (rowIndex <= 0) return Collections.emptyList();
+        List<Integer> pre = new ArrayList<>();
+        for (int i = 0; i <= rowIndex; i++) {
+            List<Integer> cur = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    cur.add(1);
+                } else {
+                    cur.add(pre.get(j) + pre.get(j - 1));
+                }
+            }
+            pre = cur;
+        }
+        return pre;
+    }
+
+    // 方法二：倒着计算
+    public static List<Integer> getPascalsTriangleRow2(int rowIndex) {
+        if (rowIndex <= 0) return Collections.emptyList();
+        List<Integer> res = new ArrayList<>();
+        res.add(1);
+        for (int i = 1; i <= rowIndex; i++) {
+            res.add(0);
+            for (int j = i; j > 0; j--) {
+                res.set(j, res.get(j) + res.get(j - 1));
+            }
+        }
+        return res;
+    }
+
 }

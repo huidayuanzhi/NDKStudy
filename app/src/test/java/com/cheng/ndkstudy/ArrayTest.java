@@ -953,4 +953,26 @@ public class ArrayTest {
         Logger.log(result);
     }
 
+    @Test
+    public void testGetPascalsTriangle1Row() {
+        Logger.log("getPascalsTriangleRow1");
+        List<Integer> result = ArrayDemo.getPascalsTriangleRow1(3);
+        Logger.log("getPascalsTriangleRow1 3 result");
+        Logger.log(result);
+        result = ArrayDemo.getPascalsTriangleRow1(1);
+        Logger.log("getPascalsTriangleRow1 1 result");
+        Logger.log(result);
+    }
+
+    @Test
+    public void testGetPascalsTriangle2Row() {
+        Logger.log("getPascalsTriangleRow2");
+        List<Integer> result = ArrayDemo.getPascalsTriangleRow2(3);
+        Logger.log("getPascalsTriangleRow2 3 result");
+        Logger.log(result);
+        result = ArrayDemo.getPascalsTriangleRow2(1);
+        Logger.log("getPascalsTriangleRow2 1 result");
+        Logger.log(result);
+    }
+
 }
