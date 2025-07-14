@@ -2137,4 +2137,57 @@ public class ArrayDemo {
         return res.toString();
     }
 
+    /**
+     * 122.买卖股票的最佳时机 II
+     * 给你一个整数数组prices，其中prices[i]表示某支股票第i天的价格。
+     * 在每一天，你可以决定是否购买和/或出售股票。你在任何时候最多只能持有一股股票。你也可以先购买，然
+     * 后在同一天出售。
+     * 返回你能获得的最大利润。
+     * 示例 1：
+     * 输入：prices = [7,1,5,3,6,4]
+     * 输出：7
+     * 示例 2：
+     * 输入：prices = [1,2,3,4,5]
+     * 输出：4
+     * 示例 3：
+     * 输入：prices = [7,6,4,3,1]
+     * 输出：0
+     */
+    // 方法一：动态规划
+    public static int maxProfitII1(int[] prices) {
+        if (prices == null || prices.length <= 0) return 0;
+        int n = prices.length;
+        int[][] dp = new int[n][2];
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0];
+        for (int i = 1; i < n; i++) {
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
+        }
+        return dp[n - 1][0];
+    }
+    // 方法一：动态规划 + 空间优化
+    public static int maxProfitII2(int[] prices) {
+        if (prices == null || prices.length <= 0) return 0;
+        int n = prices.length;
+        int dp0 = 0;
+        int dp1 = -prices[0];
+        for (int i = 1; i < n; i++) {
+            int newDp0 = Math.max(dp0, dp1 + prices[i]);
+            int newDp1 = Math.max(dp1, dp0 - prices[i]);
+            dp0 = newDp0;
+            dp1 = newDp1;
+        }
+        return dp0;
+    }
+    // 方法二：贪心
+    public static int maxProfitII3(int[] prices) {
+        if (prices == null || prices.length <= 0) return 0;
+        int ans = 0;
+        for (int i = 1; i < prices.length; i++) {
+            ans += Math.max(0, prices[i] - prices[i - 1]);
+        }
+        return ans;
+    }
+
 }

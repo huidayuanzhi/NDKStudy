@@ -1109,4 +1109,61 @@ public class ArrayTest {
         Logger.log("largestNumber result - " + result);
     }
 
+    @Test
+    public void testMaxProfitII1() {
+        int[] prices1 = {7,1,5,3,6,4}; // 7
+        Logger.log("maxProfitII1");
+        Logger.log(prices1);
+        int result = ArrayDemo.maxProfitII1(prices1);
+        Logger.log("maxProfitII1 result - " + result);
+        int[] prices2 = {1,2,3,4,5}; // 4
+        Logger.log("maxProfitII1");
+        Logger.log(prices2);
+        result = ArrayDemo.maxProfitII1(prices2);
+        Logger.log("maxProfitII1 result - " + result);
+        int[] prices3 = {7,6,4,3,1}; // 0
+        Logger.log("maxProfitII1");
+        Logger.log(prices3);
+        result = ArrayDemo.maxProfitII1(prices3);
+        Logger.log("maxProfitII1 result - " + result);
+    }
+
+    @Test
+    public void testMaxProfitII2() {
+        int[] prices1 = {7,1,5,3,6,4}; // 7
+        Logger.log("maxProfitII2");
+        Logger.log(prices1);
+        int result = ArrayDemo.maxProfitII2(prices1);
+        Logger.log("maxProfitII2 result - " + result);
+        int[] prices2 = {1,2,3,4,5}; // 4
+        Logger.log("maxProfitII2");
+        Logger.log(prices2);
+        result = ArrayDemo.maxProfitII2(prices2);
+        Logger.log("maxProfitII2 result - " + result);
+        int[] prices3 = {7,6,4,3,1}; // 0
+        Logger.log("maxProfitII2");
+        Logger.log(prices3);
+        result = ArrayDemo.maxProfitII2(prices3);
+        Logger.log("maxProfitII2 result - " + result);
+    }
+
+    @Test
+    public void testMaxProfitII3() {
+        int[] prices1 = {7,1,5,3,6,4}; // 7
+        Logger.log("maxProfitII3");
+        Logger.log(prices1);
+        int result = ArrayDemo.maxProfitII3(prices1);
+        Logger.log("maxProfitII3 result - " + result);
+        int[] prices2 = {1,2,3,4,5}; // 4
+        Logger.log("maxProfitII3");
+        Logger.log(prices2);
+        result = ArrayDemo.maxProfitII3(prices2);
+        Logger.log("maxProfitII3 result - " + result);
+        int[] prices3 = {7,6,4,3,1}; // 0
+        Logger.log("maxProfitII3");
+        Logger.log(prices3);
+        result = ArrayDemo.maxProfitII3(prices3);
+        Logger.log("maxProfitII3 result - " + result);
+    }
+
 }
