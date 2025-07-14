@@ -1212,4 +1212,32 @@ public class ArrayTest {
         Logger.log("maxProfitWithFee2 result - " + result);
     }
 
+    @Test
+    public void testFindUnsortedSubarray1() {
+        int[] nums1 = {2,6,4,8,10,9,15}; // 5
+        Logger.log("findUnsortedSubarray1");
+        Logger.log(nums1);
+        int result = ArrayDemo.findUnsortedSubarray1(nums1);
+        Logger.log("findUnsortedSubarray1 result - " + result);
+        int[] nums2 = {1,2,3,4}; // 0
+        Logger.log("findUnsortedSubarray1");
+        Logger.log(nums2);
+        result = ArrayDemo.findUnsortedSubarray1(nums2);
+        Logger.log("findUnsortedSubarray1 result - " + result);
+    }
+
+    @Test
+    public void testFindUnsortedSubarray2() {
+        int[] nums1 = {2,6,4,8,10,9,15}; // 5
+        Logger.log("findUnsortedSubarray2");
+        Logger.log(nums1);
+        int result = ArrayDemo.findUnsortedSubarray2(nums1);
+        Logger.log("findUnsortedSubarray2 result - " + result);
+        int[] nums2 = {1,2,3,4}; // 0
+        Logger.log("findUnsortedSubarray2");
+        Logger.log(nums2);
+        result = ArrayDemo.findUnsortedSubarray2(nums2);
+        Logger.log("findUnsortedSubarray2 result - " + result);
+    }
+
 }

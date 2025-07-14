@@ -2274,4 +2274,65 @@ public class ArrayDemo {
         return sell;
     }
 
+    /**
+     * 581.最短无序连续子数组
+     * 给你一个整数数组nums，你需要找出一个连续子数组，如果对这个子数组进行升序排序，那么整个数组都会变
+     * 为升序排序。请你找出符合题意的最短子数组，并输出它的长度。
+     * 示例 1：
+     * 输入：nums = [2,6,4,8,10,9,15]
+     * 输出：5
+     * 解释：你只需要对 [6, 4, 8, 10, 9] 进行升序排序，那么整个表都会变为升序排序。
+     * 示例 2：
+     * 输入：nums = [1,2,3,4]
+     * 输出：0
+     */
+    // 方法一：排序
+    public static int findUnsortedSubarray1(int[] nums) {
+        if (nums == null || nums.length <= 0) return 0;
+        if (isSorted(nums)) return 0;
+        int n = nums.length;
+        int[] numsSorted = new int[n];
+        System.arraycopy(nums, 0, numsSorted, 0, n);
+        Arrays.sort(numsSorted);
+        int left = 0;
+        while (left < n && nums[left] == numsSorted[left]) left++;
+        int right = n - 1;
+        while (right >= 0 && nums[right] == numsSorted[right]) right--;
+        return right - left + 1;
+    }
+
+    private static boolean isSorted(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < nums[i - 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // 方法二：一次遍历
+    public static int findUnsortedSubarray2(int[] nums) {
+        if (nums == null || nums.length <= 0) return 0;
+        if (isSorted(nums)) return 0;
+        int n = nums.length;
+        int left = -1;
+        int right = -1;
+        int minn = Integer.MAX_VALUE;
+        int maxn = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (maxn > nums[i]) {
+                right = i;
+            } else {
+                maxn = nums[i];
+            }
+            int l = n - i - 1;
+            if (minn < nums[l]) {
+                left = l;
+            } else {
+                minn = nums[l];
+            }
+        }
+        return right == -1 ? 0 : right - left + 1;
+    }
+
 }
