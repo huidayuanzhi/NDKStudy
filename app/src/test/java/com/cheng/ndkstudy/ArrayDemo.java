@@ -2082,5 +2082,59 @@ public class ArrayDemo {
         return balance >= 0 ? minIndex : -1;
     }
 
+    /**
+     * 179.最大数
+     * 给定一组非负整数nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。
+     * 注意：输出结果可能非常大，所以你需要返回一个字符串而不是整数。
+     * 示例 1：
+     * 输入：nums = [10,2]
+     * 输出："210"
+     * 示例 2：
+     * 输入：nums = [3,30,34,5,9]
+     * 输出："9534330"
+     */
+    public static String largestNumber1(int[] nums) {
+        if (nums == null || nums.length <= 0) return "";
+        int maxDigit = (Arrays.stream(nums).max().getAsInt() + "").length();
+        Integer[] numsArr = new Integer[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            numsArr[i] = nums[i];
+        }
+        Arrays.sort(numsArr, (x, y) -> {
+            int xOffset = (int) Math.pow(10, maxDigit - (x + "").length());
+            int yOffset = (int) Math.pow(10, maxDigit - (y + "").length());
+            return y * yOffset - x * xOffset;
+        });
+        if (numsArr[0] == 0) {
+            return "0";
+        }
+        StringBuilder ret = new StringBuilder();
+        for (int num : numsArr) {
+            ret.append(num);
+        }
+        return ret.toString();
+    }
+
+    public static String largestNumber2(int[] nums) {
+        if (nums == null || nums.length <= 0) return "";
+        int n = nums.length;
+        String[] strArr = new String[n];
+        for (int i = 0; i < n; i++) {
+            strArr[i] = nums[i] + "";
+        }
+        Arrays.sort(strArr, (s1, s2) -> {
+            String order1 = s1 + s2;
+            String order2 = s2 + s1;
+            return order2.compareTo(order1);
+        });
+        if (strArr[0].equals("0")) {
+            return "0";
+        }
+        StringBuilder res = new StringBuilder();
+        for (String str : strArr) {
+            res.append(str);
+        }
+        return res.toString();
+    }
 
 }

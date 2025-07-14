@@ -1081,4 +1081,32 @@ public class ArrayTest {
         Logger.log("canCompleteCircuit result - " + result);
     }
 
+    @Test
+    public void testLargestNumber1() {
+        int[] nums1 = {10,2}; // 210
+        Logger.log("largestNumber");
+        Logger.log(nums1);
+        String result = ArrayDemo.largestNumber1(nums1);
+        Logger.log("largestNumber result - " + result);
+        int[] nums2 = {3,30,34,5,9}; // 9534330
+        Logger.log("largestNumber");
+        Logger.log(nums2);
+        result = ArrayDemo.largestNumber1(nums2);
+        Logger.log("largestNumber result - " + result);
+    }
+
+    @Test
+    public void testLargestNumber2() {
+        int[] nums1 = {10,2}; // 210
+        Logger.log("largestNumber");
+        Logger.log(nums1);
+        String result = ArrayDemo.largestNumber2(nums1);
+        Logger.log("largestNumber result - " + result);
+        int[] nums2 = {3,30,34,5,9}; // 9534330
+        Logger.log("largestNumber");
+        Logger.log(nums2);
+        result = ArrayDemo.largestNumber2(nums2);
+        Logger.log("largestNumber result - " + result);
+    }
+
 }
