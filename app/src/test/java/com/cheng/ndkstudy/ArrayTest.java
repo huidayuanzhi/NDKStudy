@@ -1184,4 +1184,32 @@ public class ArrayTest {
         Logger.log("maxProfitIII2 result - " + result);
     }
 
+    @Test
+    public void testMaxProfitWithFee1() {
+        int[] prices1 = {1, 3, 2, 8, 4, 9}; // 8
+        Logger.log("maxProfitWithFee1");
+        Logger.log(prices1);
+        int result = ArrayDemo.maxProfitWithFee1(prices1, 2);
+        Logger.log("maxProfitWithFee1 result - " + result);
+        int[] prices2 = {1,3,7,5,10,3}; // 6
+        Logger.log("maxProfitWithFee1");
+        Logger.log(prices2);
+        result = ArrayDemo.maxProfitWithFee1(prices2, 3);
+        Logger.log("maxProfitWithFee1 result - " + result);
+    }
+
+    @Test
+    public void testMaxProfitWithFee2() {
+        int[] prices1 = {1, 3, 2, 8, 4, 9}; // 8
+        Logger.log("maxProfitWithFee2");
+        Logger.log(prices1);
+        int result = ArrayDemo.maxProfitWithFee2(prices1, 2);
+        Logger.log("maxProfitWithFee2 result - " + result);
+        int[] prices2 = {1,3,7,5,10,3}; // 6
+        Logger.log("maxProfitWithFee2");
+        Logger.log(prices2);
+        result = ArrayDemo.maxProfitWithFee2(prices2, 3);
+        Logger.log("maxProfitWithFee2 result - " + result);
+    }
+
 }
