@@ -929,4 +929,20 @@ public class ArrayTest {
         Logger.log(res);
     }
 
+    @Test
+    public void maxSubArray() {
+        // [-2,1,-3,4,-1,2,1,-5,4] -> 6
+        Logger.log("maxSubArray");
+        int[] nums1 = {-2,1,-3,4,-1,2,1,-5,4};
+        int result = ArrayDemo.maxSubArray(nums1);
+        Logger.log(nums1);
+        Logger.log("maxSubArray result - " + result);
+        // [5,4,-1,7,8] -> 23
+        int[] nums2 = {5,4,-1,7,8};
+        Logger.log("maxSubArray");
+        result = ArrayDemo.maxSubArray(nums2);
+        Logger.log(nums2);
+        Logger.log("maxSubArray result - " + result);
+    }
+
 }
