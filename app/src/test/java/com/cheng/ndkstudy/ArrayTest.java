@@ -1015,4 +1015,46 @@ public class ArrayTest {
         Logger.log("findMaxAverage result - " + result);
     }
 
+    @Test
+    public void testMaxProfit1() {
+        int[] prices1 = {7,1,5,3,6,4}; // 5
+        Logger.log("maxProfit1");
+        Logger.log(prices1);
+        int result = ArrayDemo.maxProfit1(prices1);
+        Logger.log("maxProfit1 result - " + result);
+        int[] prices2 = {7,6,4,3,1}; // 0
+        Logger.log("maxProfit1");
+        Logger.log(prices2);
+        result = ArrayDemo.maxProfit2(prices2);
+        Logger.log("maxProfit2 result - " + result);
+    }
+
+    @Test
+    public void testMaxProfit2() {
+        int[] prices1 = {7,1,5,3,6,4}; // 5
+        Logger.log("maxProfit2");
+        Logger.log(prices1);
+        int result = ArrayDemo.maxProfit2(prices1);
+        Logger.log("maxProfit2 result - " + result);
+        int[] prices2 = {7,6,4,3,1}; // 0
+        Logger.log("maxProfit2");
+        Logger.log(prices2);
+        result = ArrayDemo.maxProfit2(prices2);
+        Logger.log("maxProfit2 result - " + result);
+    }
+
+    @Test
+    public void testMaxProfit3() {
+        int[] prices1 = {7,1,5,3,6,4}; // 5
+        Logger.log("maxProfit3");
+        Logger.log(prices1);
+        int result = ArrayDemo.maxProfit3(prices1);
+        Logger.log("maxProfit3 result - " + result);
+        int[] prices2 = {7,6,4,3,1}; // 0
+        Logger.log("maxProfit3");
+        Logger.log(prices2);
+        result = ArrayDemo.maxProfit3(prices2);
+        Logger.log("maxProfit3 result - " + result);
+    }
+
 }
