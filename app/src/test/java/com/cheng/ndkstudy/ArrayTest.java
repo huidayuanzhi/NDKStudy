@@ -1166,4 +1166,22 @@ public class ArrayTest {
         Logger.log("maxProfitII3 result - " + result);
     }
 
+    @Test
+    public void testMaxProfitIII1() {
+        int[] prices1 = {1,2,3,0,2}; // 3
+        Logger.log("maxProfitIII1");
+        Logger.log(prices1);
+        int result = ArrayDemo.maxProfitIII1(prices1);
+        Logger.log("maxProfitIII1 result - " + result);
+    }
+
+    @Test
+    public void testMaxProfitIII2() {
+        int[] prices1 = {1,2,3,0,2}; // 3
+        Logger.log("maxProfitIII2");
+        Logger.log(prices1);
+        int result = ArrayDemo.maxProfitIII2(prices1);
+        Logger.log("maxProfitIII2 result - " + result);
+    }
+
 }
