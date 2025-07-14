@@ -1863,4 +1863,54 @@ public class ArrayDemo {
         return res;
     }
 
+    /**
+     * 120. 三角形最小路径和
+     * 给定一个三角形 triangle，找出自顶向下的最小路径和。
+     * 每一步只能移动到下一行中相邻的结点上。
+     * 示例 1：
+     * 输入：triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]
+     * 输出：11
+     * 解释：如下面简图所示：
+     *    2
+     *   3 4
+     *  6 5 7
+     * 4 1 8 3
+     * 自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
+     */
+    // 动态规划
+    public static int minimumTotal1(List<List<Integer>> triangle) {
+        if (triangle == null || triangle.size() <= 0) return 0;
+        int n = triangle.size();
+        int[][] f = new int[n][n];
+        f[0][0] = triangle.get(0).get(0);
+        for (int i = 1; i < n; i++) {
+            f[i][0] = f[i - 1][0] + triangle.get(i).get(0);
+            for (int j = 1; j < i; j++) {
+                f[i][j] = Math.min(f[i - 1][j], f[i - 1][j - 1]) + triangle.get(i).get(j);
+            }
+            f[i][i] = f[i - 1][i - 1] + triangle.get(i).get(i);
+        }
+        int minTotal = f[n - 1][0];
+        for (int i = 1; i < n; i++) {
+            minTotal = Math.min(minTotal, f[n - 1][i]);
+        }
+        return minTotal;
+    }
+
+    // 滚动数组 + 倒着计算
+    public static int minimumTotal2(List<List<Integer>> triangle) {
+        if (triangle == null || triangle.size() <= 0) return 0;
+        int n = triangle.size();
+        int[] f = new int[n];
+        f[0] = triangle.get(0).get(0);
+        for (int i = 1; i < n; i++) {
+            f[i] = f[i - 1] + triangle.get(i).get(i);
+            for (int j = i - 1; j > 0; j--) {
+                f[j] = Math.min(f[j], f[j - 1]) + triangle.get(i).get(j);
+            }
+            f[0] += triangle.get(i).get(0);
+        }
+        return Arrays.stream(f).min().getAsInt();
+    }
+
 }

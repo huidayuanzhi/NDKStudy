@@ -2,6 +2,8 @@ package com.cheng.ndkstudy;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ArrayTest {
@@ -973,6 +975,30 @@ public class ArrayTest {
         result = ArrayDemo.getPascalsTriangleRow2(1);
         Logger.log("getPascalsTriangleRow2 1 result");
         Logger.log(result);
+    }
+
+    @Test
+    public void testMinimumTotal1() {
+        Logger.log("minimumTotal1");
+        List<List<Integer>> triangle = new ArrayList<>();
+        triangle.add(Arrays.asList(2));
+        triangle.add(Arrays.asList(3, 4));
+        triangle.add(Arrays.asList(6, 5, 7));
+        triangle.add(Arrays.asList(4, 1, 8, 3));
+        int result = ArrayDemo.minimumTotal1(triangle);
+        Logger.log("minimumTotal1 result - " + result);
+    }
+
+    @Test
+    public void testMinimumTotal2() {
+        Logger.log("minimumTotal2");
+        List<List<Integer>> triangle = new ArrayList<>();
+        triangle.add(Arrays.asList(2));
+        triangle.add(Arrays.asList(3, 4));
+        triangle.add(Arrays.asList(6, 5, 7));
+        triangle.add(Arrays.asList(4, 1, 8, 3));
+        int result = ArrayDemo.minimumTotal2(triangle);
+        Logger.log("minimumTotal2 result - " + result);
     }
 
 }
