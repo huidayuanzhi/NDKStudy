@@ -945,4 +945,12 @@ public class ArrayTest {
         Logger.log("maxSubArray result - " + result);
     }
 
+    @Test
+    public void testGeneratePascalsTriangle() {
+        Logger.log("generatePascalsTriangle");
+        List<List<Integer>> result = ArrayDemo.generatePascalsTriangle(5);
+        Logger.log("generatePascalsTriangle result");
+        Logger.log(result);
+    }
+
 }
