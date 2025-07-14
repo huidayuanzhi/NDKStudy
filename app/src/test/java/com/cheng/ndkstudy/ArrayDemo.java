@@ -1932,5 +1932,31 @@ public class ArrayDemo {
      * 解释：序列中有 3 个 132 模式的的子序列：[-1, 3, 2]、[-1, 3, 0] 和 [-1, 2, 0] 。
      */
 
+    /**
+     * 643. 子数组最大平均数 I
+     * 给你一个由 n 个元素组成的整数数组 nums 和一个整数 k。
+     * 请你找出平均数最大且长度为 k 的连续子数组，并输出该最大平均数。
+     * 示例 1：
+     * 输入：nums = [1,12,-5,-6,50,3], k = 4
+     * 输出：12.75
+     * 解释：最大平均数 (12-5-6+50)/4 = 51/4 = 12.75
+     * 示例 2：
+     * 输入：nums = [5], k = 1
+     * 输出：5.00000
+     */
+    public static double findMaxAverage(int[] nums, int k) {
+        if (nums == null || k <= 0 || nums.length < k) return 0;
+        int sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+        int maxSum = sum;
+        for (int i = k; i < nums.length; i++) {
+            sum += nums[i] - nums[i - k];
+            maxSum = Math.max(maxSum, sum);
+        }
+        return (maxSum * 1.0) / k;
+    }
+
 
 }

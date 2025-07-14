@@ -1001,4 +1001,18 @@ public class ArrayTest {
         Logger.log("minimumTotal2 result - " + result);
     }
 
+    @Test
+    public void testFindMaxAverage() {
+        int[] nums1 = {1,12,-5,-6,50,3};
+        Logger.log("findMaxAverage");
+        Logger.log(nums1);
+        double result = ArrayDemo.findMaxAverage(nums1, 4);
+        Logger.log("findMaxAverage result - " + result);
+        int[] nums2 = {5};
+        Logger.log("findMaxAverage");
+        Logger.log(nums2);
+        result = ArrayDemo.findMaxAverage(nums2, 1);
+        Logger.log("findMaxAverage result - " + result);
+    }
+
 }
