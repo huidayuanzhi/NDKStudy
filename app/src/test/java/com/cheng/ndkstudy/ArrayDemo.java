@@ -2013,4 +2013,74 @@ public class ArrayDemo {
         return maxprofit;
     }
 
+    /**
+     * 134. 加油站 - 贪心
+     * 在一条环路上有 n 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
+     * 你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站
+     * 需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。
+     * 给定两个整数数组 gas 和 cost，如果你可以按顺序绕环路行驶一周，
+     * 则返回出发时加油站的编号，否则返回 -1。如果存在解，则保证它是唯一的。
+     * 示例 1:
+     * 输入: gas = [1,2,3,4,5], cost = [3,4,5,1,2]
+     * 输出: 3
+     * 解释:
+     * 从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油
+     * 开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油
+     * 开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油
+     * 开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油
+     * 开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油
+     * 开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。
+     * 因此，3 可为起始索引。
+     */
+    // 一次遍历
+    // 首先检查第 0 个加油站，并试图判断能否环绕一周；
+    // 如果不能，就从第一个无法到达的加油站开始继续检查
+    public static int canCompleteCircuit1(int[] gas, int[] cost) {
+        if (gas == null || cost == null || gas.length <= 0 || gas.length != cost.length) return -1;
+        int n = gas.length;
+        int i = 0;
+        while (i < n) {
+            int sumOfGas = 0;
+            int sumOfCost = 0;
+            int cnt = 0;
+            while (cnt < n) {
+                int j = (i + cnt) % n;
+                sumOfGas += gas[j];
+                sumOfCost += cost[j];
+                if (sumOfCost > sumOfGas) {
+                    break;
+                }
+                cnt++;
+            }
+            if (cnt == n) {
+                return i;
+            } else {
+                i = i + cnt + 1;
+            }
+        }
+        return -1;
+    }
+
+    // 可以想象出发前向别人借了足够的油量，走完一圈只要能还上就行了
+    public static int canCompleteCircuit2(int[] gas, int[] cost) {
+        if (gas == null || cost == null || gas.length <= 0 || gas.length != cost.length) return -1;
+        // 最低可能的油量，可能为负，表示出发前借的油
+        int minBalance = 0;
+        int balance = 0;
+        // 达到最低油量的加油站索引，在此加油站出发
+        // 油量不会低于最低值，所以此加油站即为题目所求
+        int minIndex = 0;
+        int n = gas.length;
+        for (int i = 0; i < n; i++) {
+            // 计算后的balance为到达下一加油站i + 1的油量，如果创了新低则记录之
+            balance = balance + gas[i] - cost[i];
+            if (balance < minBalance) {
+                minBalance = balance;
+                minIndex = i + 1;
+            }
+        }
+        return balance >= 0 ? minIndex : -1;
+    }
+
+
 }

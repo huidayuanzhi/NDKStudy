@@ -1057,4 +1057,28 @@ public class ArrayTest {
         Logger.log("maxProfit3 result - " + result);
     }
 
+    @Test
+    public void testCanCompleteCircuit1() {
+        int[] gas = {1,2,3,4,5};
+        int[] cost = {3,4,5,1,2}; // 3
+        Logger.log("canCompleteCircuit - gas");
+        Logger.log(gas);
+        Logger.log("canCompleteCircuit - cost");
+        Logger.log(cost);
+        int result = ArrayDemo.canCompleteCircuit1(gas, cost);
+        Logger.log("canCompleteCircuit result - " + result);
+    }
+
+    @Test
+    public void testCanCompleteCircuit2() {
+        int[] gas = {1,2,3,4,5};
+        int[] cost = {3,4,5,1,2}; // 3
+        Logger.log("canCompleteCircuit - gas");
+        Logger.log(gas);
+        Logger.log("canCompleteCircuit - cost");
+        Logger.log(cost);
+        int result = ArrayDemo.canCompleteCircuit2(gas, cost);
+        Logger.log("canCompleteCircuit result - " + result);
+    }
+
 }
