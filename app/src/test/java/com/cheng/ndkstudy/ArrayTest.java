@@ -913,4 +913,20 @@ public class ArrayTest {
         Logger.log(result);
     }
 
+    @Test
+    public void testGenerateParenthesis() {
+        // n = 3
+        // ["((()))","(()())","(())()","()(())","()()()"]
+        Logger.log("generateParenthesis - n = 3");
+        List<String> res = ArrayDemo.generateParenthesis(3);
+        Logger.log("generateParenthesis result");
+        Logger.log(res);
+        // n = 1
+        // ["()"]
+        Logger.log("generateParenthesis - n = 1");
+        res = ArrayDemo.generateParenthesis(1);
+        Logger.log("generateParenthesis result");
+        Logger.log(res);
+    }
+
 }
