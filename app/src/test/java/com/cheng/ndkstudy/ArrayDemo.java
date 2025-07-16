@@ -382,39 +382,41 @@ public class ArrayDemo {
      */
     // 暴力法
     public static int subarraysDivByK1(int[] nums, int k) {
-        if (nums == null || nums.length <= 0) return 0;
-        int ans = 0;
+        if (nums == null || nums.length <= 0 || k == 0) return 0;
         int n = nums.length;
         int[] sum = new int[n + 1];
         for (int i = 0; i < n; i++) {
             sum[i + 1] = sum[i] + nums[i];
         }
+        int count = 0;
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j <= n; j++) {
-                int res = sum[j] - sum[i];
-                if (res % k == 0) ans++;
+                int temp = sum[j] - sum[i];
+                if (temp % k == 0) {
+                    count++;
+                }
             }
         }
-        return ans;
+        return count;
     }
 
     // 哈希表 + 逐一统计
     // 思路和算法
     // 通常，涉及连续子数组问题的时候，我们使用前缀和来解决。
     public static int subarraysDivByK2(int[] nums, int k) {
-        if (nums == null || nums.length <= 0) return 0;
-        int sum = 0;
-        int ans = 0;
+        if (nums == null || nums.length <= 0 || k == 0) return 0;
         Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1); // 关键！！！
+        int count = 0;
+        int pre = 0;
+        map.put(0, 1);
         for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            int mod = (sum % k + k) % k;
-            int same = map.getOrDefault(mod, 0);
-            ans += same;
-            map.put(mod, same + 1);
+            pre += nums[i];
+            int modulus = (pre % k + k) % k;
+            int some = map.getOrDefault(modulus, 0);
+            count += some;
+            map.put(modulus, some + 1);
         }
-        return ans;
+        return count;
     }
 
     // 哈希表 + 单次统计
@@ -697,7 +699,7 @@ public class ArrayDemo {
 
     /**
      * 62.不同路径
-     * 一个机器人位于一个 m x n 网格的左上角，机器人每次只能向下或者向右移动一步。机器人试图达到网格的
+     * 一个机器人位于一个 m x n 网格的左上角，机器人每次只能向下或者向右移动一步。机器人试图达到网格的
      * 右下角。问总共有多少条不同的路径？
      * 示例 1：
      * 输入：m = 3, n = 7
@@ -718,6 +720,7 @@ public class ArrayDemo {
     // 如果向右走一步，那么会从 (i,j−1) 走过来。因此可以写出动态规划转移方程：
     // f(i,j) = f(i−1,j) + f(i,j−1)
     public static int uniquePaths1(int m, int n) {
+        if (m <= 0 || n <= 0) return 0;
         int[][] f = new int[m][n];
         for (int i = 0; i < m; i++) {
             f[i][0] = 1;
@@ -735,6 +738,7 @@ public class ArrayDemo {
 
     // 方法二：动态规划 + 滚动数组
     public static int uniquePaths2(int m, int n) {
+        if (m <= 0 || n <= 0) return 0;
         int[] f = new int[n];
         for (int i = 0; i < n; i++) {
             f[i] = 1;
@@ -749,7 +753,7 @@ public class ArrayDemo {
 
     /**
      * 63.不同路径 II
-     * 一个机器人位于一个 m x n 网格的左上角，机器人每次只能向下或者向右移动一步。机器人试图达到网格的
+     * 一个机器人位于一个 m x n 网格的左上角，机器人每次只能向下或者向右移动一步。机器人试图达到网格的
      * 右下角。现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？
      * 网格中的障碍物和空位置分别用 1 和 0 来表示。
      * 示例 1：
@@ -765,6 +769,7 @@ public class ArrayDemo {
      */
     // 动态规划
     public static int uniquePathsWithObstacles1(int[][] obstacleGrid) {
+        if (obstacleGrid == null || obstacleGrid.length <= 0 || obstacleGrid[0].length <= 0) return  0;
         int m = obstacleGrid.length;
         int n = obstacleGrid[0].length;
         int[][] dp = new int[m][n];
@@ -786,6 +791,7 @@ public class ArrayDemo {
 
     // 动态规划 + 滚动数组
     public static int uniquePathsWithObstacles2(int[][] obstacleGrid) {
+        if (obstacleGrid == null || obstacleGrid.length <= 0 || obstacleGrid[0].length <= 0) return 0;
         int m = obstacleGrid.length;
         int n = obstacleGrid[0].length;
         int[] f = new int[n];
@@ -826,6 +832,7 @@ public class ArrayDemo {
      * - 在x = 4处射出箭，击破气球[3,4]和[4,5]。
      */
     public static int findMinArrowShots(int[][] points) {
+        if (points == null || points.length <= 0 || points[0].length <= 0) return 0;
         Arrays.sort(points, Comparator.comparingInt(o -> o[1]));
         int count = 1;
         int end = points[0][1];
@@ -1265,9 +1272,6 @@ public class ArrayDemo {
      * 输出：[3,4]
      * 示例 2：
      * 输入：nums = [5,7,7,8,8,10], target = 6
-     * 输出：[-1,-1]
-     * 示例 3：
-     * 输入：nums = [], target = 0
      * 输出：[-1,-1]
      */
     public static int[] searchRange(int[] nums, int target) {
@@ -2079,6 +2083,7 @@ public class ArrayDemo {
                 minIndex = i + 1;
             }
         }
+        // 最后油量 >= 0 说明能走一圈
         return balance >= 0 ? minIndex : -1;
     }
 
@@ -2219,9 +2224,9 @@ public class ArrayDemo {
     public static int maxProfitIII2(int[] prices) {
         if (prices == null || prices.length <= 0) return 0;
         int n = prices.length;
-        int dp0 = -prices[0];
-        int dp1 = 0;
-        int dp2 = 0;
+        int dp0 = -prices[0]; // 持有股票
+        int dp1 = 0;          // 不持有，冻结期
+        int dp2 = 0;          // 不持有，非冻结期
         for (int i = 1; i < n; i++) {
             int newDp0 = Math.max(dp0, dp2 - prices[i]);
             int newDp1 = dp0 + prices[i];
@@ -2311,6 +2316,12 @@ public class ArrayDemo {
     }
 
     // 方法二：一次遍历
+    /*
+    1.从左到右看，数应该越来越大，如果某个数，比前面最大值大，那它没问题，如果小于前面的最大值，那么这个数就有问题
+    2.从左到右不断更新最大值，遇到有问题的数，就记录下来作为right，并且right可以更新
+    3.right更新到最后面不动了，说明right右边的数都比，right左边的max的数大，但是right自己比max小，right右边是排好序的，right左边需要重新排序，right是需要重新排序的区间的右边界
+    4.left同理，left就是从右往左看，数要越来越小才行，如果某个数，比右边最小值还要小，那它没问题，如果它比右边的最小值要大，说明它有问题
+     */
     public static int findUnsortedSubarray2(int[] nums) {
         if (nums == null || nums.length <= 0) return 0;
         if (isSorted(nums)) return 0;

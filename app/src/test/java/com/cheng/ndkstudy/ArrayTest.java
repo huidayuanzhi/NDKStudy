@@ -29,7 +29,7 @@ public class ArrayTest {
 
     @Test
     public void testMinSubArrayLen1() {
-        int[] nums = { 2,3,1,2,4,3 };
+        int[] nums = { 2,3,1,2,4,3 }; // 2
         Logger.log("minSubArrayLen1 before");
         Logger.log(nums);
         int result = ArrayDemo.minSubArrayLen1(nums, 7);
@@ -38,7 +38,7 @@ public class ArrayTest {
 
     @Test
     public void testMinSubArrayLen2() {
-        int[] nums = { 2,3,1,2,4,3 };
+        int[] nums = { 2,3,1,2,4,3 }; // 2
         Logger.log("minSubArrayLen2 before");
         Logger.log(nums);
         int result = ArrayDemo.minSubArrayLen2(nums, 7);
@@ -105,7 +105,7 @@ public class ArrayTest {
 
     @Test
     public void testFindLengthOfLCIS1() {
-        int[] nums = { 1,2,3,0,1,0,2,4,6,7 };
+        int[] nums = { 1,2,3,0,1,0,2,4,6,7 }; // 5
         Logger.log("findLengthOfLCIS1 before");
         Logger.log(nums);
         int result = ArrayDemo.findLengthOfLCIS1(nums);
@@ -114,7 +114,7 @@ public class ArrayTest {
 
     @Test
     public void testFindLengthOfLCIS2() {
-        int[] nums = { 1,2,3,0,1,0,2,4,6,7 };
+        int[] nums = { 1,2,3,0,1,0,2,4,6,7 }; // 5
         Logger.log("findLengthOfLCIS2 before");
         Logger.log(nums);
         int result = ArrayDemo.findLengthOfLCIS2(nums);
@@ -123,7 +123,7 @@ public class ArrayTest {
 
     @Test
     public void testLongestConsecutive() {
-        int[] nums = { 100,4,200,1,3,2 };
+        int[] nums = { 100,4,200,1,3,2 }; // 4
         Logger.log("longestConsecutive before");
         Logger.log(nums);
         int result = ArrayDemo.longestConsecutive(nums);
@@ -132,7 +132,7 @@ public class ArrayTest {
 
     @Test
     public void testMaxArea() {
-        int[] nums = { 1,8,6,2,5,4,8,3,7 };
+        int[] nums = { 1,8,6,2,5,4,8,3,7 }; // 49
         Logger.log("maxArea before");
         Logger.log(nums);
         int result = ArrayDemo.maxArea(nums);
@@ -141,7 +141,7 @@ public class ArrayTest {
 
     @Test
     public void testRemoveDuplicates() {
-        int[] nums = { 0,0,1,1,1,2,2,3,3,4 };
+        int[] nums = { 0,0,1,1,1,2,2,3,3,4 }; // 5
         Logger.log("removeDuplicates before");
         Logger.log(nums);
         int result = ArrayDemo.removeDuplicates(nums);
@@ -179,7 +179,7 @@ public class ArrayTest {
 
     @Test
     public void testSubarraysDivByK1() {
-        int[] nums = { 4,5,0,-2,-3,1 };
+        int[] nums = { 4,5,0,-2,-3,1 }; // 7
         Logger.log("subarraysDivByK1 before");
         Logger.log(nums);
         int result = ArrayDemo.subarraysDivByK1(nums, 5);
@@ -249,7 +249,7 @@ public class ArrayTest {
 
     @Test
     public void testThreeSum() {
-        int[] nums = { -1,0,1,2,-1,-4 };
+        int[] nums = { -1,0,1,2,-1,-4 }; // [-1,0,1] 和 [-1,-1,2]
         Logger.log("threeSum before");
         Logger.log(nums);
         List<List<Integer>> result = ArrayDemo.threeSum(nums);
@@ -273,12 +273,12 @@ public class ArrayTest {
 
     @Test
     public void testCanJump() {
-        int[] nums1 = { 2,3,1,1,4 };
+        int[] nums1 = { 2,3,1,1,4 }; // true
         Logger.log("canJump before");
         Logger.log(nums1);
         boolean result1 = ArrayDemo.canJump(nums1);
         Logger.log("canJump result = " + result1);
-        int[] nums2 = { 3,2,1,0,4 };
+        int[] nums2 = { 3,2,1,0,4 }; // false
         Logger.log("canJump before");
         Logger.log(nums2);
         boolean result2 = ArrayDemo.canJump(nums2);
@@ -287,12 +287,12 @@ public class ArrayTest {
 
     @Test
     public void testJumpII1() {
-        int[] nums1 = { 2,3,1,1,4 };
+        int[] nums1 = { 2,3,1,1,4 }; // 2
         Logger.log("jumpII1 before");
         Logger.log(nums1);
         int result1 = ArrayDemo.jumpII1(nums1);
         Logger.log("jumpII1 result = " + result1);
-        int[] nums2 = { 2,3,0,1,4 };
+        int[] nums2 = { 2,3,0,1,4 }; // 2
         Logger.log("jumpII1 before");
         Logger.log(nums2);
         int result2 = ArrayDemo.jumpII1(nums2);
@@ -381,7 +381,7 @@ public class ArrayTest {
 
     @Test
     public void testFindMinArrowShots() {
-        // [10,16],[2,8],[1,6],[7,12]
+        // [10,16],[2,8],[1,6],[7,12] -> 2
         int[][] points1 = new int[][]{
                 {10, 16},
                 {2, 8},
@@ -391,7 +391,7 @@ public class ArrayTest {
         Logger.log("findMinArrowShots");
         int result = ArrayDemo.findMinArrowShots(points1);
         Logger.log("findMinArrowShots - result = " + result);
-        // [1,2],[3,4],[5,6],[7,8]
+        // [1,2],[3,4],[5,6],[7,8] -> 4
         int[][] points2 = new int[][]{
                 {1, 2},
                 {3, 4},
@@ -400,7 +400,7 @@ public class ArrayTest {
         };
         result = ArrayDemo.findMinArrowShots(points2);
         Logger.log("findMinArrowShots - result = " + result);
-        // [1,2],[2,3],[3,4],[4,5]
+        // [1,2],[2,3],[3,4],[4,5] -> 2
         int[][] points3 = new int[][]{
                 {1, 2},
                 {2, 3},
@@ -686,13 +686,13 @@ public class ArrayTest {
 
     @Test
     public void testSearchRange() {
-        int[] nums1 = new int[]{5,7,7,8,8,10};
+        int[] nums1 = new int[]{5,7,7,8,8,10}; // [3,4]
         int[] result1 = ArrayDemo.searchRange(nums1, 8); // [3,4]
         Logger.log("searchRange");
         Logger.log(nums1);
         Logger.log("searchRange result");
         Logger.log(result1);
-        int[] nums2 = new int[]{5,7,7,8,8,10};
+        int[] nums2 = new int[]{5,7,7,8,8,10}; // [-1,-1]
         int[] result2 = ArrayDemo.searchRange(nums2, 6); // [-1,-1]
         Logger.log("searchRange");
         Logger.log(nums2);
@@ -985,7 +985,7 @@ public class ArrayTest {
         triangle.add(Arrays.asList(3, 4));
         triangle.add(Arrays.asList(6, 5, 7));
         triangle.add(Arrays.asList(4, 1, 8, 3));
-        int result = ArrayDemo.minimumTotal1(triangle);
+        int result = ArrayDemo.minimumTotal1(triangle); // 11
         Logger.log("minimumTotal1 result - " + result);
     }
 
