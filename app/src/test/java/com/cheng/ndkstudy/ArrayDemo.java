@@ -26,54 +26,14 @@ public class ArrayDemo {
      * 由于数组是先升后降，所以第一个元素或最后一个元素不可能是最大元素，查找区间可设定为[1, numsSize - 2]。
      */
     public static int findMax(int[] nums) {
-        if (nums == null || nums.length <= 0) return -1;
-        if (nums.length == 1) return nums[0];
-        if (nums.length == 2) return Math.max(nums[0], nums[1]);
-        int left = 1;
-        int right = nums.length - 2;
-        while (left <= right) {
-            int mid = left + ((right - left) >> 1);
-            if (nums[mid] < nums[mid + 1]) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return nums[left];
+        return 0;
     }
 
     /**
      * 前 K 个高频元素 - 哈希 + 优先级队列
      */
     public static int[] topKFrequent(int[] nums, int k) {
-        if (nums == null || nums.length <= 1 || k < 1) return nums;
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
-        }
-        // int[] 的第一个元素代表数组中的值，第二个元素代表了该值出现的次数
-        PriorityQueue<int[]> queue = new PriorityQueue<int[]>(new Comparator<int[]>() {
-            public int compare(int[] m, int[] n) {
-                return m[1] - n[1];
-            }
-        });
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            int num = entry.getKey();
-            int count = entry.getValue();
-            if (queue.size() == k) {
-                if (queue.peek()[1] < count) {
-                    queue.poll();
-                    queue.offer(new int[]{num, count});
-                }
-            } else {
-                queue.offer(new int[]{num, count});
-            }
-        }
-        int[] result = new int[k];
-        for (int i = 0; i < k; i++) {
-            result[i] = queue.poll()[0];
-        }
-        return result;
+        return null;
     }
 
     /**
@@ -87,39 +47,12 @@ public class ArrayDemo {
      */
     // 方法一：暴力法
     public static int minSubArrayLen1(int[] nums, int target) {
-        if (nums == null || nums.length <= 0) return 0;
-        int ans = Integer.MAX_VALUE;
-        for (int i = 0; i < nums.length; i++) {
-            int sum = 0;
-            for (int j = i; j < nums.length; j++) {
-                sum += nums[j];
-                if (sum >= target) {
-                    ans = Math.min(ans, j - i + 1);
-                    break;
-                }
-            }
-        }
-        return ans == Integer.MAX_VALUE ? 0 : ans;
+        return 0;
     }
 
     // 方法二：滑动窗口
     public static int minSubArrayLen2(int[] nums, int target) {
-        if (nums == null || nums.length <= 0) return 0;
-        int ans = Integer.MAX_VALUE;
-        int start = 0;
-        int end = 0;
-        int n = nums.length;
-        int sum = 0;
-        while (end < n) {
-            sum += nums[end];
-            while (sum >= target) {
-                ans = Math.min(ans, end - start + 1);
-                sum -= nums[start];
-                start++;
-            }
-            end++;
-        }
-        return ans == Integer.MAX_VALUE ? 0 : ans;
+        return 0;
     }
 
     /**
@@ -137,29 +70,10 @@ public class ArrayDemo {
      * 输出：false
      */
     public static boolean containsNearByDuplicate1(int[] nums, int k) {
-        if (nums == null || nums.length <= 0) return false;
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
-            if (map.containsKey(num) && i - map.get(num) <= k) {
-                return true;
-            }
-            map.put(num, i);
-        }
         return false;
     }
 
     public static boolean containsNearByDuplicate2(int[] nums, int k) {
-        if (nums == null || nums.length <= 0) return false;
-        Set<Integer> set = new HashSet<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (i > k) {
-                set.remove(nums[i - k - 1]);
-            }
-            if (!set.add(nums[i])) {
-                return true;
-            }
-        }
         return false;
     }
 
@@ -176,35 +90,11 @@ public class ArrayDemo {
      * - 右指针左边直到左指针处均为零
      */
     public static void moveZeroes1(int[] nums) {
-        if (nums == null || nums.length <= 1) return;
-        int n = nums.length;
-        int left = 0;
-        int right = 0;
-        while (right < n) {
-            if (nums[right] != 0) {
-                swap(nums, left, right);
-                left++;
-            }
-            right++;
-        }
+
     }
-    
-    private static void swap(int[] nums, int left, int right) {
-        int temp = nums[left];
-        nums[left] = nums[right];
-        nums[right] = temp;
-    }
-    
+
     public static void moveZeroes2(int[] nums) {
-        if (nums == null || nums.length <= 1) return;
-        for (int i = 0, j = 0; i < nums.length; i++) {
-            // 当前元素!=0，就把其交换到左边，等于0的交换到右边
-            if (nums[i] != 0) {
-                int temp = nums[i];
-                nums[i] = nums[j];
-                nums[j++] = temp;
-            }
-        }
+
     }
 
     /**
@@ -215,33 +105,11 @@ public class ArrayDemo {
      * 遍历数组的过程中每次比较相邻元素，根据相邻元素的大小关系决定是否需要更新连续递增序列的开始下标。
      */
     public static int findLengthOfLCIS1(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        if (nums.length == 1) return 1;
-        int ans = 0;
-        int start = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (i > 0 && nums[i] < nums[i - 1]) {
-                start = i;
-            }
-            ans = Math.max(ans, i - start + 1);
-        }
-        return ans;
+        return 0;
     }
 
     public static int findLengthOfLCIS2(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        if (nums.length == 1) return 1;
-        int result = 1;
-        int tempResult = 1;
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i + 1] > nums[i]) {
-                tempResult++;
-            } else {
-                tempResult = 1;
-            }
-            result = Math.max(result, tempResult);
-        }
-        return result;
+        return 0;
     }
 
     /**
@@ -253,27 +121,7 @@ public class ArrayDemo {
      * 解释：最长数字连续序列是 [1, 2, 3, 4]。它的长度为 4。
      */
     public static int longestConsecutive(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        if (nums.length == 1) return 1;
-        Set<Integer> numSet = new HashSet<>();
-        for (int num : nums) {
-            numSet.add(num);
-        }
-        int longestStreak = 0;
-        for (int num : numSet) {
-            // 当前数num如果存在前驱数，就应该以该前驱数的前驱数为起点，所以直接跳过
-            if (!numSet.contains(num - 1)) {
-                int currNum = num;
-                int currStreak = 1;
-                // 当前数num有后继则继续往后找
-                while (numSet.contains(currNum + 1)) {
-                    currNum += 1;
-                    currStreak += 1;
-                }
-                longestStreak = Math.max(longestStreak, currStreak);
-            }
-        }
-        return longestStreak;
+        return 0;
     }
 
     /**
@@ -284,20 +132,7 @@ public class ArrayDemo {
      * 思路：双指针法
      */
     public static int maxArea(int[] height) {
-        if (height == null || height.length < 2) return 0;
-        int maxArea = 0;
-        int l = 0;
-        int r = height.length - 1;
-        while (l < r) {
-            int area = Math.min(height[l], height[r]) * (r - l);
-            maxArea = Math.max(maxArea, area);
-            if (height[l] < height[r]) {
-                l++;
-            } else {
-                r--;
-            }
-        }
-        return maxArea;
+        return 0;
     }
 
     /**
@@ -309,18 +144,7 @@ public class ArrayDemo {
      * 输出：5, nums = [0,1,2,3,4]
      */
     public static int removeDuplicates(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        if (nums.length == 1) return 1;
-        int slow = 1;
-        int fast = 1;
-        while (fast < nums.length) {
-            if (nums[fast] != nums[fast - 1]) {
-                nums[slow] = nums[fast];
-                slow++;
-            }
-            fast++;
-        }
-        return slow;
+        return 0;
     }
 
     /**
@@ -339,35 +163,12 @@ public class ArrayDemo {
      */
     // 方法一：枚举
     public static int subarraySum1(int[] nums, int k) {
-        if (nums == null || nums.length <= 0) return 0;
-        int count = 0;
-        for (int start = 0; start < nums.length; start++) {
-            int sum = 0;
-            for (int end = start; end >= 0; end--) {
-                sum += nums[end];
-                if (sum == k) {
-                    count++;
-                }
-            }
-        }
-        return count;
+        return 0;
     }
 
     // 方法二：前缀和 + 哈希表优化
     public static int subarraySum2(int[] nums, int k) {
-        if (nums == null || nums.length <= 0) return 0;
-        int pre = 0;
-        int count = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);
-        for (int i = 0; i < nums.length; i++) {
-            pre += nums[i];
-            if (map.containsKey(pre - k)) {
-                count += map.get(pre - k); // 说明：pre - (pre - k) = k
-            }
-            map.put(pre, map.getOrDefault(pre, 0) + 1);
-        }
-        return count;
+        return 0;
     }
 
     /**
@@ -382,60 +183,20 @@ public class ArrayDemo {
      */
     // 暴力法
     public static int subarraysDivByK1(int[] nums, int k) {
-        if (nums == null || nums.length <= 0 || k == 0) return 0;
-        int n = nums.length;
-        int[] sum = new int[n + 1];
-        for (int i = 0; i < n; i++) {
-            sum[i + 1] = sum[i] + nums[i];
-        }
-        int count = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j <= n; j++) {
-                int temp = sum[j] - sum[i];
-                if (temp % k == 0) {
-                    count++;
-                }
-            }
-        }
-        return count;
+        return 0;
     }
 
     // 哈希表 + 逐一统计
     // 思路和算法
     // 通常，涉及连续子数组问题的时候，我们使用前缀和来解决。
     public static int subarraysDivByK2(int[] nums, int k) {
-        if (nums == null || nums.length <= 0 || k == 0) return 0;
-        Map<Integer, Integer> map = new HashMap<>();
-        int count = 0;
-        int pre = 0;
-        map.put(0, 1);
-        for (int i = 0; i < nums.length; i++) {
-            pre += nums[i];
-            int modulus = (pre % k + k) % k;
-            int some = map.getOrDefault(modulus, 0);
-            count += some;
-            map.put(modulus, some + 1);
-        }
-        return count;
+        return 0;
     }
 
     // 哈希表 + 单次统计
     // 可以在遍历时维护哈希表。在遍历结束后，我们再遍历哈希表，用排列组合的方法来统计答案。
     public static int subarraysDivByK3(int[] nums, int k) {
-        if (nums == null || nums.length <= 0) return 0;
-        int ans = 0;
-        int sum = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1); // 关键！！！
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            int mod = (sum % k + k) % k;
-            map.put(mod, map.getOrDefault(mod, 0) + 1);
-        }
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            ans += entry.getValue() * (entry.getValue() - 1) / 2;
-        }
-        return ans;
+        return 0;
     }
 
     /**
@@ -449,29 +210,12 @@ public class ArrayDemo {
      */
     // 暴力枚举
     public static int[] twoSum1(int[] nums, int target) {
-        if (nums == null || nums.length <= 0) return new int[0];
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[i] + nums[j] == target) {
-                    return new int[]{i, j};
-                }
-            }
-        }
-        return new int[0];
+        return null;
     }
 
     // 哈希表
     public static int[] twoSum2(int[] nums, int target) {
-        if (nums == null || nums.length <= 0) return new int[0];
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int other = target - nums[i];
-            if (map.containsKey(other)) {
-                return new int[] {map.get(other), i};
-            }
-            map.put(nums[i], i);
-        }
-        return new int[0];
+        return null;
     }
 
     /**
@@ -482,38 +226,11 @@ public class ArrayDemo {
      */
     // 双指针
     public static int[] twoSumII1(int[] nums, int target) {
-        if (nums == null || nums.length <= 0) return new int[]{-1, -1};
-        int left = 0;
-        int right = nums.length - 1;
-        while (left < right) {
-            if (nums[left] + nums[right] == target) {
-                return new int[]{left + 1, right + 1};
-            } else if (nums[left] + nums[right] < target) {
-                left++;
-            } else {
-                right--;
-            }
-        }
-        return new int[]{-1, -1};
+        return null;
     }
 
     public static int[] twoSumII2(int[] nums, int target) {
-        if (nums == null || nums.length <= 0) return new int[]{-1, -1};
-        for (int i = 0; i < nums.length; i++) {
-            int left = i + 1;
-            int right = nums.length - 1;
-            while (left < right) {
-                int mid = (right - left) / 2 + left;
-                if (nums[mid] == target - nums[i]) {
-                    return new int[]{i + 1, mid + 1};
-                } else if (nums[mid] < target - nums[i]) {
-                    left++;
-                } else {
-                    right--;
-                }
-            }
-        }
-        return new int[]{-1, -1};
+        return null;
     }
 
     /**
@@ -531,36 +248,7 @@ public class ArrayDemo {
      * 注意，输出的顺序和三元组的顺序并不重要。
      */
     public static List<List<Integer>> threeSum(int[] nums) {
-        if (nums == null || nums.length < 3) return null;
-        Arrays.sort(nums);
-        int n = nums.length;
-        List<List<Integer>> result = new ArrayList<>();
-        for (int first = 0; first < n; first++) {
-            if (first > 0 && nums[first] == nums[first - 1]) {
-                continue;
-            }
-            int third = n - 1;
-            int target = -nums[first];
-            for (int second = first + 1; second < n; second++) {
-                if (second > first + 1 && nums[second] == nums[second - 1]) {
-                    continue;
-                }
-                while (second < third && nums[second] + nums[third] > target) {
-                    third--;
-                }
-                if (second == third) {
-                    break;
-                }
-                if (nums[first] + nums[second] + nums[third] == 0) {
-                    List<Integer> list = new ArrayList<>();
-                    list.add(nums[first]);
-                    list.add(nums[second]);
-                    list.add(nums[third]);
-                    result.add(list);
-                }
-            }
-        }
-        return result;
+        return null;
     }
 
     /**
@@ -572,53 +260,7 @@ public class ArrayDemo {
      * 输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
      */
     public static List<List<Integer>> fourSum(int[] nums, int target) {
-        if (nums == null || nums.length < 4) return null;
-        List<List<Integer>> result = new ArrayList<>();
-        int n = nums.length;
-        Arrays.sort(nums);
-        for (int i = 0; i < n - 3; i++) {
-            if (i > 0 && nums[i] == nums[i - 1]) {
-                continue;
-            }
-            if (((long) nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3]) > target) {
-                break;
-            }
-            if (((long) nums[i] + nums[n - 3] + nums[n - 2] + nums[n - 1]) < target) {
-                continue;
-            }
-            for (int j = i + 1; j < n - 2; j++) {
-                if (j > i + 1 && nums[j] == nums[j - 1]) {
-                    continue;
-                }
-                if (((long) nums[i] + nums[j] + nums[j + 1] + nums[j + 2]) > target) {
-                    break;
-                }
-                if (((long) nums[i] + nums[j] + nums[n - 1] + nums[n - 2]) < target) {
-                    continue;
-                }
-                int left = j + 1;
-                int right = n - 1;
-                while (left < right) {
-                    int sum = nums[i] + nums[j] + nums[left] + nums[right];
-                    if (sum == target) {
-                        result.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
-                        while (left < right && nums[left] == nums[left + 1]) {
-                            left++;
-                        }
-                        left++;
-                        while (left < right && nums[right] == nums[right - 1]) {
-                            right--;
-                        }
-                        right--;
-                    } else if (sum < target) {
-                        left++;
-                    } else {
-                        right--;
-                    }
-                }
-            }
-        }
-        return result;
+        return null;
     }
 
     /**
@@ -636,17 +278,6 @@ public class ArrayDemo {
      * 解释：无论怎样，总会到达下标为 3 的位置。但该下标的最大跳跃长度是 0，所以永远不可能到达最后一个下标。
      */
     public static boolean canJump(int[] nums) {
-        if (nums == null || nums.length <= 1) return true;
-        int n = nums.length;
-        int rightmost = 0;
-        for (int i = 0; i < n; i++) {
-            if (i <= rightmost) {
-                rightmost = Math.max(rightmost, nums[i] + i);
-                if (rightmost >= n - 1) {
-                    return true;
-                }
-            }
-        }
         return false;
     }
 
@@ -665,36 +296,12 @@ public class ArrayDemo {
      */
     // 方法一：反向查找出发位置
     public static int jumpII1(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        int position = nums.length - 1;
-        int steps = 0;
-        while (position > 0) {
-            for (int i = 0; i < position; i++) {
-                if (nums[i] + i >= position) {
-                    position = i;
-                    steps++;
-                    break;
-                }
-            }
-        }
-        return steps;
+        return 0;
     }
 
     // 方法二：正向查找可到达的最大位置
     public static int jumpII2(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        int n = nums.length;
-        int steps = 0;
-        int maxPosition = 0;
-        int end = 0;
-        for (int i = 0; i < n - 1; i++) {
-            maxPosition = Math.max(maxPosition, nums[i] + i);
-            if (i == end) {
-                end = maxPosition;
-                steps++;
-            }
-        }
-        return steps;
+        return 0;
     }
 
     /**
@@ -720,35 +327,12 @@ public class ArrayDemo {
     // 如果向右走一步，那么会从 (i,j−1) 走过来。因此可以写出动态规划转移方程：
     // f(i,j) = f(i−1,j) + f(i,j−1)
     public static int uniquePaths1(int m, int n) {
-        if (m <= 0 || n <= 0) return 0;
-        int[][] f = new int[m][n];
-        for (int i = 0; i < m; i++) {
-            f[i][0] = 1;
-        }
-        for (int j = 0; j < n; j++) {
-            f[0][j] = 1;
-        }
-        for (int i = 1; i < m; i++) {
-            for (int j = 1; j < n; j++) {
-                f[i][j] = f[i - 1][j] + f[i][j - 1];
-            }
-        }
-        return f[m - 1][n - 1];
+        return 0;
     }
 
     // 方法二：动态规划 + 滚动数组
     public static int uniquePaths2(int m, int n) {
-        if (m <= 0 || n <= 0) return 0;
-        int[] f = new int[n];
-        for (int i = 0; i < n; i++) {
-            f[i] = 1;
-        }
-        for (int i = 1; i < m; i++) {
-            for (int j = 1; j < n; j++) {
-                f[j] += f[j - 1];
-            }
-        }
-        return f[n - 1];
+        return 0;
     }
 
     /**
@@ -769,45 +353,12 @@ public class ArrayDemo {
      */
     // 动态规划
     public static int uniquePathsWithObstacles1(int[][] obstacleGrid) {
-        if (obstacleGrid == null || obstacleGrid.length <= 0 || obstacleGrid[0].length <= 0) return  0;
-        int m = obstacleGrid.length;
-        int n = obstacleGrid[0].length;
-        int[][] dp = new int[m][n];
-        for (int i = 0; i < m && obstacleGrid[i][0] == 0; i++) {
-            dp[i][0] = 1;
-        }
-        for (int j = 0; j < n && obstacleGrid[0][j] == 0; j++) {
-            dp[0][j] = 1;
-        }
-        for (int i = 1; i < m; i++) {
-            for (int j = 1; j < n; j++) {
-                if (obstacleGrid[i][j] == 0) {
-                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-                }
-            }
-        }
-        return dp[m - 1][n - 1];
+        return 0;
     }
 
     // 动态规划 + 滚动数组
     public static int uniquePathsWithObstacles2(int[][] obstacleGrid) {
-        if (obstacleGrid == null || obstacleGrid.length <= 0 || obstacleGrid[0].length <= 0) return 0;
-        int m = obstacleGrid.length;
-        int n = obstacleGrid[0].length;
-        int[] f = new int[n];
-        f[0] = obstacleGrid[0][0] == 0 ? 1 : 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (obstacleGrid[i][j] == 1) {
-                    f[j] = 0;
-                    continue;
-                }
-                if (j >= 1 && obstacleGrid[i][j - 1] == 0) {
-                    f[j] += f[j - 1];
-                }
-            }
-        }
-        return f[n - 1];
+        return 0;
     }
 
     /**
@@ -832,17 +383,7 @@ public class ArrayDemo {
      * - 在x = 4处射出箭，击破气球[3,4]和[4,5]。
      */
     public static int findMinArrowShots(int[][] points) {
-        if (points == null || points.length <= 0 || points[0].length <= 0) return 0;
-        Arrays.sort(points, Comparator.comparingInt(o -> o[1]));
-        int count = 1;
-        int end = points[0][1];
-        for (int i = 1; i < points.length; i++) {
-            if (points[i][0] > end) {
-                end = points[i][1];
-                count++;
-            }
-        }
-        return count;
+        return 0;
     }
 
     /**
@@ -865,42 +406,13 @@ public class ArrayDemo {
     // 方法一：动态规划
     // 选出最多数量的区间，使得它们互不重叠，令 f(i) 表示「以区间 i 为最后一个区间，可以选出的区间数量的最大值」
     public static int eraseOverlapIntervals1(int[][] intervals) {
-        if (intervals == null || intervals.length <= 0) return 0;
-        // 先将所有的 n 个区间按照左端点从小到大进行排序
-        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
-        int n = intervals.length;
-        int[] f = new int[n];
-        Arrays.fill(f, 1);
-        for (int i = 1; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                // j 右侧 <= i 的左侧，说明第 j 个区间与第 i 个区间不相交
-                if (intervals[j][1] <= intervals[i][0]) {
-                    f[i] = Math.max(f[i], f[j] + 1);
-                }
-            }
-        }
-        return n - Arrays.stream(f).max().getAsInt();
+        return 0;
     }
 
     // 方法二：贪心
     // 首个区间就是所有可以选择的区间中右端点最小的那个区间
     public static int eraseOverlapIntervals2(int[][] intervals) {
-        if (intervals == null || intervals.length <= 0) return 0;
-        // 先将所有的 n 个区间按照右端点从小到大进行排序
-        Arrays.sort(intervals, Comparator.comparingInt(o -> o[1]));
-        int n = intervals.length;
-        // 记录不相交区间数量
-        int ans = 1;
-        // 记录右端点
-        int right = intervals[0][1];
-        for (int i = 1; i < n; i++) {
-            // i 区间的左侧 >= 右端点，说明 i 区间与当前右端点不相交
-            if (intervals[i][0] >= right) {
-                ans++;
-                right = intervals[i][1];
-            }
-        }
-        return n - ans;
+        return 0;
     }
 
     /**
@@ -917,20 +429,7 @@ public class ArrayDemo {
      * 解释：区间 [1,4] 和 [4,5] 可被视为重叠区间。
      */
     public static int[][] merge(int[][] intervals) {
-        if (intervals == null || intervals.length <= 0) return intervals;
-        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
-        List<int[]> merged = new ArrayList<>();
-        for (int i = 0; i < intervals.length; i++) {
-            int size = merged.size();
-            int L = intervals[i][0];
-            int R = intervals[i][1];
-            if (size == 0 || merged.get(size - 1)[1] < L) {
-                merged.add(new int[]{L, R});
-            } else {
-                merged.get(size - 1)[1] = Math.max(merged.get(size - 1)[1], R);
-            }
-        }
-        return merged.toArray(new int[merged.size()][]);
+        return null;
     }
 
     /**
@@ -946,32 +445,7 @@ public class ArrayDemo {
      * 解释：这是因为新的区间 [4,8] 与 [3,5],[6,7],[8,10] 重叠。
      */
     public static int[][] insert(int[][] intervals, int[] newInterval) {
-        if (newInterval == null || newInterval.length != 2) return intervals;
-        int left = newInterval[0];
-        int right = newInterval[1];
-        boolean placed = false;
-        List<int[]> ansList = new ArrayList<>();
-        for (int[] interval : intervals) {
-            if (interval[0] > right) {
-                // 在插入区间的右侧且无交集
-                if (!placed) {
-                    ansList.add(new int[]{left, right});
-                    placed = true;
-                }
-                ansList.add(interval);
-            } else if (interval[1] < left) {
-                // 在插入区间的左侧且无交集
-                ansList.add(interval);
-            } else {
-                // 与插入区间有交集，计算它们的并集
-                left = Math.min(left, interval[0]);
-                right = Math.max(right, interval[1]);
-            }
-        }
-        if (!placed) {
-            ansList.add(new int[]{left, right});
-        }
-        return ansList.toArray(new int[ansList.size()][]);
+        return null;
     }
 
     /**
@@ -992,34 +466,12 @@ public class ArrayDemo {
      */
     // 方法一：动态规划
     public static int findLongestChain1(int[][] pairs) {
-        if (pairs == null || pairs.length <= 0) return 0;
-        Arrays.sort(pairs, Comparator.comparingInt(o -> o[0]));
-        int n = pairs.length;
-        int[] dp = new int[n];
-        Arrays.fill(dp, 1);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                if (pairs[i][0] > pairs[j][1]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-        }
-        return dp[n - 1];
+        return 0;
     }
 
     // 方法三：贪心
     public static int findLongestChain3(int[][] pairs) {
-        if (pairs == null || pairs.length <= 0) return 0;
-        Arrays.sort(pairs, Comparator.comparingInt(o -> o[1]));
-        int right = pairs[0][1];
-        int ans = 1;
-        for (int[] pair : pairs) {
-            if (pair[0] > right) {
-                ans++;
-                right = pair[1];
-            }
-        }
-        return ans;
+        return 0;
     }
 
     /**
@@ -1035,23 +487,7 @@ public class ArrayDemo {
      * 输出：12
      */
     public static int minPathSum(int[][] grid) {
-        if (grid == null || grid.length <= 0 || grid[0].length <= 0) return 0;
-        int rows = grid.length;
-        int columns = grid[0].length;
-        int[][] dp = new int[rows][columns];
-        dp[0][0] = grid[0][0];
-        for (int i = 1; i < rows; i++) {
-            dp[i][0] = dp[i - 1][0] + grid[i][0];
-        }
-        for (int j = 1; j < columns; j++) {
-            dp[0][j] = dp[0][j - 1] + grid[0][j];
-        }
-        for (int i = 1; i < rows; i++) {
-            for (int j = 1; j < columns; j++) {
-                dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
-            }
-        }
-        return dp[rows - 1][columns - 1];
+        return 0;
     }
 
     /**
@@ -1073,25 +509,11 @@ public class ArrayDemo {
      * 3. 2 阶 + 1 阶
      */
     public static int climbStairs1(int n) {
-        if (n <= 1) return n;
-        int p = 0, q = 0, r = 1;
-        for (int i = 1; i <= n; i++) {
-            p = q;
-            q = r;
-            r = p + q;
-        }
-        return r;
+        return 0;
     }
 
     public static int climbStairs2(int n) {
-        if (n <= 1) return n;
-        int[] dp = new int[n + 1];
-        dp[0] = 1;
-        dp[1] = 1;
-        for (int i = 2; i <= n; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2];
-        }
-        return dp[n];
+        return 0;
     }
 
     /**
@@ -1115,40 +537,11 @@ public class ArrayDemo {
      * 解释："06" 无法映射到 "F" ，因为存在前导零（"6" 和 "06" 并不等价）。
      */
     public static int numDecoding1(String s) {
-        if (s == null || s.length() <= 0) return 0;
-        int n = s.length();
-        int[] f = new int[n + 1];
-        f[0] = 1;
-        for (int i = 1; i <= n; i++) {
-            if (s.charAt(i - 1) != '0') {
-                f[i] += f[i - 1];
-            }
-            if (i > 1 && s.charAt(i - 2) != '0' && ((s.charAt(i - 2) - '0') * 10 + (s.charAt(i - 1) - '0')) <= 26) {
-                f[i] += f[i - 2];
-            }
-        }
-        return f[n];
+        return 0;
     }
 
     public static int numDecoding2(String s) {
-        if (s == null || s.length() <= 0) return 0;
-        // a = f[i - 2], b = f[i - 1], c = f[i]
-        int a = 0;
-        int b = 1;
-        int c = 0;
-        int n = s.length();
-        for (int i = 1; i <= n; i++) {
-            c = 0;
-            if (s.charAt(i - 1) != '0') {
-                c += b;
-            }
-            if (i > 1 && s.charAt(i - 2) != '0' && ((s.charAt(i - 2) - '0') * 10 + (s.charAt(i - 1) - '0')) <= 26) {
-                c += a;
-            }
-            a = b;
-            b = c;
-        }
-        return c;
+        return 0;
     }
 
     /**
@@ -1170,33 +563,7 @@ public class ArrayDemo {
      * 输出：23
      */
     public static int minEatingSpeed(int[] piles, int h) {
-        if (piles == null || piles.length <= 0 || h < 1) return 0;
-        int n = piles.length;
-        int low = 1;
-        int high = 0;
-        for (int i = 0; i < n; i++) {
-            high = Math.max(high, piles[i]);
-        }
-        int k = high;
-        while (low < high) {
-            int speed = (high - low) / 2 + low;
-            long time = getTime(piles, speed);
-            if (time <= h) {
-                k = speed;
-                high = speed;
-            } else {
-                low = speed + 1;
-            }
-        }
-        return k;
-    }
-
-    private static long getTime(int[] piles, int speed) {
-        long time = 0;
-        for (int i = 0; i < piles.length; i++) {
-            time += (piles[i] + speed - 1) / speed;
-        }
-        return time;
+        return 0;
     }
 
     /**
@@ -1215,27 +582,7 @@ public class ArrayDemo {
      * 输出：3
      */
     public static int shipWithinDays(int[] weights, int days) {
-        if (weights == null || weights.length <= 0 || days < 1) return 0;
-        int left = Arrays.stream(weights).max().getAsInt();
-        int right = Arrays.stream(weights).sum();
-        while (left < right) {
-            int mid = (right - left) / 2 + left;
-            int need = 1;
-            int curr = 0;
-            for (int weight : weights) {
-                if (curr + weight > mid) {
-                    need++;
-                    curr = 0;
-                }
-                curr += weight;
-            }
-            if (need <= days) {
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
-        }
-        return left;
+        return 0;
     }
 
     /**
@@ -1249,20 +596,7 @@ public class ArrayDemo {
      * 输出：2
      */
     public static int mySqrt(int x) {
-        if (x <= 0) return -1;
-        int ans = -1;
-        int left = 1;
-        int right = x;
-        while (left < right) {
-            int mid = (right - left) / 2 + left;
-            if (mid * mid <= x) {
-                ans = mid;
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return ans;
+        return 0;
     }
 
     /**
@@ -1275,29 +609,7 @@ public class ArrayDemo {
      * 输出：[-1,-1]
      */
     public static int[] searchRange(int[] nums, int target) {
-        if (nums == null || nums.length <= 0) return new int[]{-1, -1};
-        int leftIdx = binarySearch(nums, target, true);
-        int rightIdx = binarySearch(nums, target, false) - 1;
-        if (leftIdx <= rightIdx && rightIdx < nums.length && nums[leftIdx] == target && nums[rightIdx] == target) {
-            return new int[]{leftIdx, rightIdx};
-        }
-        return new int[]{-1, -1};
-    }
-
-    private static int binarySearch(int[] nums, int target, boolean lower) {
-        int left = 0;
-        int right = nums.length - 1;
-        int ans = nums.length;
-        while (left <= right) {
-            int mid = (right - left) / 2 + left;
-            if (nums[mid] > target || (lower && nums[mid] >= target)) {
-                right = mid - 1;
-                ans = mid;
-            } else {
-                left = mid + 1;
-            }
-        }
-        return ans;
+        return null;
     }
 
     /**
@@ -1319,21 +631,7 @@ public class ArrayDemo {
      */
     // 定义 dp[i] 为考虑前 i 个元素，以第 i 个数字结尾的最长上升子序列的长度，注意 nums[i] 必须被选取。
     public static int lengthOfLIS(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        int n = nums.length;
-        int ans = 1;
-        int[] dp = new int[n];
-        dp[0] = 1;
-        for (int i = 1; i < n; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-            ans = Math.max(ans, dp[i]);
-        }
-        return ans;
+        return 0;
     }
 
     /**
@@ -1368,59 +666,13 @@ public class ArrayDemo {
      */
     // 方法一：暴力法
     public static int maximalSquare1(char[][] matrix) {
-        if (matrix == null || matrix.length <= 0 || matrix[0].length <= 0) return 0;
-        int maxSide = 0;
-        int rows = matrix.length;
-        int columns = matrix[0].length;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                if (matrix[i][j] == '1') {
-                    maxSide = Math.max(maxSide, 1);
-                    int currentMaxSide = Math.min(rows - i, columns - j);
-                    for (int k = 1; k < currentMaxSide; k++) {
-                        if (matrix[i + k][j + k] == '0') {
-                            break;
-                        }
-                        boolean flag = true;
-                        for (int m = 0; m < k; m++) {
-                            if (matrix[i + k][j + m] == '0' || matrix[i + m][j + k] == '0') {
-                                flag = false;
-                                break;
-                            }
-                        }
-                        if (flag) {
-                            maxSide = Math.max(maxSide, k + 1);
-                        } else {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return maxSide * maxSide;
+        return 0;
     }
 
     // 方法二：动态规划
     // 用 dp(i,j) 表示以 (i,j) 为右下角，且只包含 1 的正方形的边长最大值
     public static int maximalSquare2(char[][] matrix) {
-        if (matrix == null || matrix.length <= 0 || matrix[0].length <= 0) return 0;
-        int maxSide = 0;
-        int rows = matrix.length;
-        int columns = matrix[0].length;
-        int[][] dp = new int[rows][columns];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                if (matrix[i][j] == '1') {
-                    if (i == 0 || j == 0) {
-                        dp[i][j] = 1;
-                    } else {
-                        dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]) + 1;
-                    }
-                    maxSide = Math.max(maxSide, dp[i][j]);
-                }
-            }
-        }
-        return maxSide * maxSide;
+        return 0;
     }
 
     /**
@@ -1440,104 +692,17 @@ public class ArrayDemo {
      */
     // 方法一：深度优先搜索
     public static int maxAreaOfIsland1(int[][] grid) {
-        if (grid == null || grid.length <= 0 || grid[0].length <= 0) return 0;
-        int ans = 0;
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                ans = Math.max(ans, dfs(grid, i, j));
-            }
-        }
-        return ans;
-    }
-
-    private static int dfs(int[][] grid, int cur_i, int cur_j) {
-        int rows = grid.length;
-        int columns = grid[0].length;
-        if (cur_i < 0 || cur_j < 0 || cur_i >= rows || cur_j >= columns || grid[cur_i][cur_j] == 0) {
-            return 0;
-        }
-        int ans = 1;
-        grid[cur_i][cur_j] = 0;
-        int[] di = {0, 0, 1, -1};
-        int[] dj = {1, -1, 0, 0};
-        for (int i = 0; i < di.length; i++) {
-            int next_i = cur_i + di[i];
-            int next_j = cur_j + dj[i];
-            ans += dfs(grid, next_i, next_j);
-        }
-        return ans;
+        return 0;
     }
 
     // 方法二：深度优先搜索 + 栈
     public static int maxAreaOfIsland2(int[][] grid) {
-        if (grid == null || grid.length <= 0 || grid[0].length <= 0) return 0;
-        int ans = 0;
-        int rows = grid.length;
-        int columns = grid[0].length;
-        int[] di = {0, 0, 1, -1};
-        int[] dj = {1, -1, 0, 0};
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                int cur = 0;
-                Deque<Integer> stacki = new LinkedList<>();
-                Deque<Integer> stackj = new LinkedList<>();
-                stacki.push(i);
-                stackj.push(j);
-                while (!stacki.isEmpty()) {
-                    int cur_i = stacki.pop();
-                    int cur_j = stackj.pop();
-                    if (cur_i < 0 || cur_j < 0 || cur_i >= rows || cur_j >= columns || grid[cur_i][cur_j] == 0) {
-                        continue;
-                    }
-                    cur++;
-                    grid[cur_i][cur_j] = 0;
-                    for (int index = 0; index < di.length; index++) {
-                        int next_i = cur_i + di[index];
-                        int next_j = cur_j + dj[index];
-                        stacki.push(next_i);
-                        stackj.push(next_j);
-                    }
-                }
-                ans = Math.max(ans, cur);
-            }
-        }
-        return ans;
+        return 0;
     }
 
     // 方法三：广度优先搜索
     public static int maxAreaOfIsland3(int[][] grid) {
-        if (grid == null || grid.length <= 0 || grid[0].length <= 0) return 0;
-        int ans = 0;
-        int rows = grid.length;
-        int columns = grid[0].length;
-        int[] di = {0, 0, 1, -1};
-        int[] dj = {1, -1, 0, 0};
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                int cur = 0;
-                Queue<Integer> queuei = new LinkedList<>();
-                Queue<Integer> queuej = new LinkedList<>();
-                queuei.offer(i);
-                queuej.offer(j);
-                while (!queuei.isEmpty()) {
-                    int cur_i = queuei.poll();
-                    int cur_j = queuej.poll();
-                    if (cur_i < 0 || cur_j < 0 || cur_i >= rows || cur_j >= columns || grid[cur_i][cur_j] == 0) {
-                        continue;
-                    }
-                    cur++;
-                    grid[cur_i][cur_j] = 0;
-                    for (int index = 0; index < di.length; index++) {
-                        int next_i = cur_i + di[index];
-                        int next_j = cur_j + dj[index];
-                        queuei.offer(next_i);
-                        queuej.offer(next_j);
-                    }
-                }
-                ans = Math.max(ans, cur);
-            }
-        }
-        return ans;
+        return 0;
     }
 
     /**
@@ -1553,42 +718,11 @@ public class ArrayDemo {
      * 解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
      */
     public static int maxProduct1(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        int n = nums.length;
-        long[] maxF = new long[n];
-        long[] minF = new long[n];
-        maxF[0] = nums[0];
-        minF[0] = nums[0];
-        int ans = nums[0];
-        for (int i = 1; i < n; i++) {
-            maxF[i] = nums[i];
-            minF[i] = nums[i];
-            maxF[i] = Math.max(Math.max(nums[i], maxF[i - 1] * nums[i]), minF[i - 1] * nums[i]);
-            minF[i] = Math.min(Math.min(nums[i], maxF[i - 1] * nums[i]), minF[i - 1] * nums[i]);
-            if (minF[i] < -1 << 32) {
-                minF[i] = nums[i];
-            }
-            ans = Math.max(ans, (int) maxF[i]);
-        }
-        return ans;
+        return 0;
     }
 
     public static int maxProduct2(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        long maxF = nums[0];
-        long minF = nums[0];
-        int ans = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            long mx = maxF;
-            long mn = minF;
-            maxF = Math.max(Math.max(nums[i], mx * nums[i]), mn * nums[i]);
-            minF = Math.min(Math.min(nums[i], mx * nums[i]), mn * nums[i]);
-            if (minF < -1 << 32) {
-                minF = nums[i];
-            }
-            ans = Math.max(ans, (int) maxF);
-        }
-        return ans;
+        return 0;
     }
 
     /**
@@ -1603,27 +737,7 @@ public class ArrayDemo {
      * 输出：[[0,1],[1,0]]
      */
     public static List<List<Integer>> premute(int[] nums) {
-        if (nums == null || nums.length <= 0) return Collections.emptyList();
-        int n = nums.length;
-        List<List<Integer>> res = new ArrayList<>();
-        List<Integer> output = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            output.add(nums[i]);
-        }
-        backtrace(n, res, output, 0);
-        return res;
-    }
-
-    private static void backtrace(int n, List<List<Integer>> res, List<Integer> output, int first) {
-        if (first == n) {
-            res.add(new ArrayList<>(output));
-            return;
-        }
-        for (int i = first; i < n; i++) {
-            Collections.swap(output, i, first);
-            backtrace(n, res, output, first + 1);
-            Collections.swap(output, i, first);
-        }
+        return null;
     }
 
     /**
@@ -1640,32 +754,7 @@ public class ArrayDemo {
      * 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
      */
     public static List<List<Integer>> permuteUnique(int[] nums) {
-        if (nums == null || nums.length <= 0) return Collections.emptyList();
-        int n = nums.length;
-        List<List<Integer>> res = new ArrayList<>();
-        List<Integer> output = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            output.add(nums[i]);
-        }
-        backtraceUnique(n, output, res, 0);
-        return res;
-    }
-
-    private static void backtraceUnique(int n, List<Integer> output, List<List<Integer>> res, int first) {
-        if (first == n - 1) {
-            res.add(new ArrayList<>(output));
-            return;
-        }
-        Set<Integer> set = new HashSet<>();
-        for (int i = first; i < n; i++) {
-            if (set.contains(output.get(i))) {
-                continue;
-            }
-            set.add(output.get(i));
-            Collections.swap(output, i, first);
-            backtraceUnique(n, output, res, first + 1);
-            Collections.swap(output, i, first);
-        }
+        return null;
     }
 
     /**
@@ -1683,19 +772,7 @@ public class ArrayDemo {
     // 方法一：递归
     // 开始假设输出子集为空，每一步都向已生成的子集添加新的整数，并生成新的子集
     public static List<List<Integer>> subsets1(int[] nums) {
-        if (nums == null || nums.length <= 0) return Collections.emptyList();
-        List<List<Integer>> output = new ArrayList<>();
-        output.add(Collections.emptyList());
-        for (int num : nums) {
-            List<List<Integer>> newSubsets = new ArrayList<>();
-            for (List<Integer> curr : output) {
-                List<Integer> newCurr = new ArrayList<>(curr);
-                newCurr.add(num);
-                newSubsets.add(newCurr);
-            }
-            output.addAll(newSubsets);
-        }
-        return output;
+        return null;
     }
 
     // 方法二：回溯
@@ -1703,25 +780,7 @@ public class ArrayDemo {
     // 根据定义，该问题可以看作是从序列中生成幂集
     // 遍历子集长度，通过回溯生成所有给定长度的子集
     public static List<List<Integer>> subsets2(int[] nums) {
-        if (nums == null || nums.length <= 0) return Collections.emptyList();
-        int n = nums.length;
-        List<List<Integer>> output = new ArrayList<>();
-        for (int i = 0; i <= n; i++) {
-            backtrack(i, 0, nums, new ArrayList<>(), output);
-        }
-        return output;
-    }
-
-    private static void backtrack(int k, int first, int[] nums, List<Integer> curr, List<List<Integer>> output) {
-        if (curr.size() == k) {
-            output.add(new ArrayList<>(curr));
-        }
-        int n = nums.length;
-        for (int i = first; i < n; i++) {
-            curr.add(nums[i]);
-            backtrack(k, i + 1, nums, curr, output);
-            curr.remove(curr.size() - 1);
-        }
+        return null;
     }
 
     /**
@@ -1736,27 +795,7 @@ public class ArrayDemo {
      */
     // 剩余左括号总数要小于等于右括号，递归把所有符合要求的加上去就行了
     public static List<String> generateParenthesis(int n) {
-        if (n <= 0) return Collections.emptyList();
-        List<String> res = new ArrayList<>();
-        getParenthesis("", n, n, res);
-        return res;
-    }
-
-    private static void getParenthesis(String str, int left, int right, List<String> res) {
-        if (left == 0 && right == 0) {
-            res.add(str);
-            return;
-        }
-        if (left == right) {
-            // 剩余左右括号数相等，下一个只能用左括号
-            getParenthesis(str + "(", left - 1, right, res);
-        } else if (left < right) {
-            // 剩余左括号小于右括号，下一个可以用左括号也可以用右括号
-            if (left > 0) {
-                getParenthesis(str + "(", left - 1, right, res);
-            }
-            getParenthesis(str + ")", left, right - 1, res);
-        }
+        return null;
     }
 
     /**
@@ -1790,14 +829,7 @@ public class ArrayDemo {
      * 输出：23
      */
     public static int maxSubArray(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        int pre = 0;
-        int maxAns = nums[0];
-        for (int num : nums) {
-            pre = Math.max(pre + num, num);
-            maxAns = Math.max(maxAns, pre);
-        }
-        return maxAns;
+        return 0;
     }
 
     /**
@@ -1809,20 +841,7 @@ public class ArrayDemo {
      * 输出: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
      */
     public static List<List<Integer>> generatePascalsTriangle(int numRows) {
-        if (numRows <= 0) return Collections.emptyList();
-        List<List<Integer>> res = new ArrayList<>();
-        for (int i = 0; i < numRows; i++) {
-            List<Integer> row = new ArrayList<>();
-            for (int j = 0; j <= i; j++) {
-                if (j == 0 || j == i) {
-                    row.add(1);
-                } else {
-                    row.add(res.get(i - 1).get(j - 1) + res.get(i - 1).get(j));
-                }
-            }
-            res.add(row);
-        }
-        return res;
+        return null;
     }
 
     /**
@@ -1837,34 +856,12 @@ public class ArrayDemo {
      */
     // 方法一：滚动数组
     public static List<Integer> getPascalsTriangleRow1(int rowIndex) {
-        if (rowIndex <= 0) return Collections.emptyList();
-        List<Integer> pre = new ArrayList<>();
-        for (int i = 0; i <= rowIndex; i++) {
-            List<Integer> cur = new ArrayList<>();
-            for (int j = 0; j <= i; j++) {
-                if (j == 0 || j == i) {
-                    cur.add(1);
-                } else {
-                    cur.add(pre.get(j) + pre.get(j - 1));
-                }
-            }
-            pre = cur;
-        }
-        return pre;
+        return null;
     }
 
     // 方法二：倒着计算
     public static List<Integer> getPascalsTriangleRow2(int rowIndex) {
-        if (rowIndex <= 0) return Collections.emptyList();
-        List<Integer> res = new ArrayList<>();
-        res.add(1);
-        for (int i = 1; i <= rowIndex; i++) {
-            res.add(0);
-            for (int j = i; j > 0; j--) {
-                res.set(j, res.get(j) + res.get(j - 1));
-            }
-        }
-        return res;
+        return null;
     }
 
     /**
@@ -1883,38 +880,12 @@ public class ArrayDemo {
      */
     // 动态规划
     public static int minimumTotal1(List<List<Integer>> triangle) {
-        if (triangle == null || triangle.size() <= 0) return 0;
-        int n = triangle.size();
-        int[][] f = new int[n][n];
-        f[0][0] = triangle.get(0).get(0);
-        for (int i = 1; i < n; i++) {
-            f[i][0] = f[i - 1][0] + triangle.get(i).get(0);
-            for (int j = 1; j < i; j++) {
-                f[i][j] = Math.min(f[i - 1][j], f[i - 1][j - 1]) + triangle.get(i).get(j);
-            }
-            f[i][i] = f[i - 1][i - 1] + triangle.get(i).get(i);
-        }
-        int minTotal = f[n - 1][0];
-        for (int i = 1; i < n; i++) {
-            minTotal = Math.min(minTotal, f[n - 1][i]);
-        }
-        return minTotal;
+        return 0;
     }
 
     // 滚动数组 + 倒着计算
     public static int minimumTotal2(List<List<Integer>> triangle) {
-        if (triangle == null || triangle.size() <= 0) return 0;
-        int n = triangle.size();
-        int[] f = new int[n];
-        f[0] = triangle.get(0).get(0);
-        for (int i = 1; i < n; i++) {
-            f[i] = f[i - 1] + triangle.get(i).get(i);
-            for (int j = i - 1; j > 0; j--) {
-                f[j] = Math.min(f[j], f[j - 1]) + triangle.get(i).get(j);
-            }
-            f[0] += triangle.get(i).get(0);
-        }
-        return Arrays.stream(f).min().getAsInt();
+        return 0;
     }
 
     /**
@@ -1949,17 +920,7 @@ public class ArrayDemo {
      * 输出：5.00000
      */
     public static double findMaxAverage(int[] nums, int k) {
-        if (nums == null || k <= 0 || nums.length < k) return 0;
-        int sum = 0;
-        for (int i = 0; i < k; i++) {
-            sum += nums[i];
-        }
-        int maxSum = sum;
-        for (int i = k; i < nums.length; i++) {
-            sum += nums[i] - nums[i - k];
-            maxSum = Math.max(maxSum, sum);
-        }
-        return (maxSum * 1.0) / k;
+        return 0;
     }
 
     /**
@@ -1980,41 +941,16 @@ public class ArrayDemo {
      */
     // 方法一：暴力法
     public static int maxProfit1(int[] prices) {
-        if (prices == null || prices.length < 2) return 0;
-        int maxprofit = 0;
-        for (int i = 0; i < prices.length - 1; i++) {
-            for (int j = i + 1; j < prices.length; j++) {
-                int profit = prices[j] - prices[i];
-                maxprofit = Math.max(maxprofit, profit);
-            }
-        }
-        return maxprofit;
+        return 0;
     }
 
     // 方法二：一次遍历
     public static int maxProfit2(int[] prices) {
-        if (prices == null || prices.length < 2) return 0;
-        int minprice = Integer.MAX_VALUE;
-        int maxprofit = 0;
-        for (int i = 0; i < prices.length; i++) {
-            if (minprice > prices[i]) {
-                minprice = prices[i];
-            } else if (maxprofit < prices[i] - minprice) {
-                maxprofit = prices[i] - minprice;
-            }
-        }
-        return maxprofit;
+        return 0;
     }
 
     public static int maxProfit3(int[] prices) {
-        if (prices == null || prices.length < 2) return 0;
-        int minprice = Integer.MAX_VALUE;
-        int maxprofit = 0;
-        for (int i = 0; i < prices.length; i++) {
-            minprice = Math.min(minprice, prices[i]);
-            maxprofit = Math.max(maxprofit, prices[i] - minprice);
-        }
-        return maxprofit;
+        return 0;
     }
 
     /**
@@ -2040,51 +976,12 @@ public class ArrayDemo {
     // 首先检查第 0 个加油站，并试图判断能否环绕一周；
     // 如果不能，就从第一个无法到达的加油站开始继续检查
     public static int canCompleteCircuit1(int[] gas, int[] cost) {
-        if (gas == null || cost == null || gas.length <= 0 || gas.length != cost.length) return -1;
-        int n = gas.length;
-        int i = 0;
-        while (i < n) {
-            int sumOfGas = 0;
-            int sumOfCost = 0;
-            int cnt = 0;
-            while (cnt < n) {
-                int j = (i + cnt) % n;
-                sumOfGas += gas[j];
-                sumOfCost += cost[j];
-                if (sumOfCost > sumOfGas) {
-                    break;
-                }
-                cnt++;
-            }
-            if (cnt == n) {
-                return i;
-            } else {
-                i = i + cnt + 1;
-            }
-        }
         return -1;
     }
 
     // 可以想象出发前向别人借了足够的油量，走完一圈只要能还上就行了
     public static int canCompleteCircuit2(int[] gas, int[] cost) {
-        if (gas == null || cost == null || gas.length <= 0 || gas.length != cost.length) return -1;
-        // 最低可能的油量，可能为负，表示出发前借的油
-        int minBalance = 0;
-        int balance = 0;
-        // 达到最低油量的加油站索引，在此加油站出发
-        // 油量不会低于最低值，所以此加油站即为题目所求
-        int minIndex = 0;
-        int n = gas.length;
-        for (int i = 0; i < n; i++) {
-            // 计算后的balance为到达下一加油站i + 1的油量，如果创了新低则记录之
-            balance = balance + gas[i] - cost[i];
-            if (balance < minBalance) {
-                minBalance = balance;
-                minIndex = i + 1;
-            }
-        }
-        // 最后油量 >= 0 说明能走一圈
-        return balance >= 0 ? minIndex : -1;
+        return 0;
     }
 
     /**
@@ -2099,47 +996,11 @@ public class ArrayDemo {
      * 输出："9534330"
      */
     public static String largestNumber1(int[] nums) {
-        if (nums == null || nums.length <= 0) return "";
-        int maxDigit = (Arrays.stream(nums).max().getAsInt() + "").length();
-        Integer[] numsArr = new Integer[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            numsArr[i] = nums[i];
-        }
-        Arrays.sort(numsArr, (x, y) -> {
-            int xOffset = (int) Math.pow(10, maxDigit - (x + "").length());
-            int yOffset = (int) Math.pow(10, maxDigit - (y + "").length());
-            return y * yOffset - x * xOffset;
-        });
-        if (numsArr[0] == 0) {
-            return "0";
-        }
-        StringBuilder ret = new StringBuilder();
-        for (int num : numsArr) {
-            ret.append(num);
-        }
-        return ret.toString();
+        return "";
     }
 
     public static String largestNumber2(int[] nums) {
-        if (nums == null || nums.length <= 0) return "";
-        int n = nums.length;
-        String[] strArr = new String[n];
-        for (int i = 0; i < n; i++) {
-            strArr[i] = nums[i] + "";
-        }
-        Arrays.sort(strArr, (s1, s2) -> {
-            String order1 = s1 + s2;
-            String order2 = s2 + s1;
-            return order2.compareTo(order1);
-        });
-        if (strArr[0].equals("0")) {
-            return "0";
-        }
-        StringBuilder res = new StringBuilder();
-        for (String str : strArr) {
-            res.append(str);
-        }
-        return res.toString();
+        return "";
     }
 
     /**
@@ -2160,39 +1021,15 @@ public class ArrayDemo {
      */
     // 方法一：动态规划
     public static int maxProfitII1(int[] prices) {
-        if (prices == null || prices.length <= 0) return 0;
-        int n = prices.length;
-        int[][] dp = new int[n][2];
-        dp[0][0] = 0;
-        dp[0][1] = -prices[0];
-        for (int i = 1; i < n; i++) {
-            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
-            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
-        }
-        return dp[n - 1][0];
+        return 0;
     }
     // 方法一：动态规划 + 空间优化
     public static int maxProfitII2(int[] prices) {
-        if (prices == null || prices.length <= 0) return 0;
-        int n = prices.length;
-        int dp0 = 0;
-        int dp1 = -prices[0];
-        for (int i = 1; i < n; i++) {
-            int newDp0 = Math.max(dp0, dp1 + prices[i]);
-            int newDp1 = Math.max(dp1, dp0 - prices[i]);
-            dp0 = newDp0;
-            dp1 = newDp1;
-        }
-        return dp0;
+        return 0;
     }
     // 方法二：贪心
     public static int maxProfitII3(int[] prices) {
-        if (prices == null || prices.length <= 0) return 0;
-        int ans = 0;
-        for (int i = 1; i < prices.length; i++) {
-            ans += Math.max(0, prices[i] - prices[i - 1]);
-        }
-        return ans;
+        return 0;
     }
 
     /**
@@ -2206,36 +1043,11 @@ public class ArrayDemo {
      */
     // 动态规划
     public static int maxProfitIII1(int[] prices) {
-        if (prices == null || prices.length < 2) return 0;
-        int n = prices.length;
-        int[][] dp = new int[n][3];
-        // dp[i][0]: 手上持有股票的最大收益
-        // dp[i][1]: 手上不持有股票，并且处于冷冻期中的累计最大收益
-        // dp[i][2]: 手上不持有股票，并且不在冷冻期中的累计最大收益
-        dp[0][0] = -prices[0];
-        for (int i = 1; i < n; i++) {
-            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][2] - prices[i]);
-            dp[i][1] = dp[i - 1][0] + prices[i];
-            dp[i][2] = Math.max(dp[i - 1][1], dp[i - 1][2]);
-        }
-        return Math.max(dp[n - 1][1], dp[n - 1][2]);
+        return 0;
     }
 
     public static int maxProfitIII2(int[] prices) {
-        if (prices == null || prices.length <= 0) return 0;
-        int n = prices.length;
-        int dp0 = -prices[0]; // 持有股票
-        int dp1 = 0;          // 不持有，冻结期
-        int dp2 = 0;          // 不持有，非冻结期
-        for (int i = 1; i < n; i++) {
-            int newDp0 = Math.max(dp0, dp2 - prices[i]);
-            int newDp1 = dp0 + prices[i];
-            int newDp2 = Math.max(dp1, dp2);
-            dp0 = newDp0;
-            dp1 = newDp1;
-            dp2 = newDp2;
-        }
-        return Math.max(dp1, dp2);
+        return 0;
     }
 
     /**
@@ -2255,28 +1067,11 @@ public class ArrayDemo {
      */
     // 动态规划
     public static int maxProfitWithFee1(int[] prices, int fee) {
-        if (prices == null || prices.length <= 0) return 0;
-        int n = prices.length;
-        int[][] dp = new int[n][2];
-        dp[0][0] = 0;
-        dp[0][1] = -prices[0];
-        for (int i = 1; i < n; i++) {
-            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i] - fee);
-            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
-        }
-        return dp[n - 1][0];
+        return 0;
     }
 
     public static int maxProfitWithFee2(int[] prices, int fee) {
-        if (prices == null || prices.length <= 0) return 0;
-        int n = prices.length;
-        int sell = 0;
-        int buy = -prices[0];
-        for (int i = 1; i < n; i++) {
-            sell = Math.max(sell, buy + prices[i] - fee);
-            buy = Math.max(buy, sell - prices[i]);
-        }
-        return sell;
+        return 0;
     }
 
     /**
@@ -2293,25 +1088,11 @@ public class ArrayDemo {
      */
     // 方法一：排序
     public static int findUnsortedSubarray1(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        if (isSorted(nums)) return 0;
-        int n = nums.length;
-        int[] numsSorted = new int[n];
-        System.arraycopy(nums, 0, numsSorted, 0, n);
-        Arrays.sort(numsSorted);
-        int left = 0;
-        while (left < n && nums[left] == numsSorted[left]) left++;
-        int right = n - 1;
-        while (right >= 0 && nums[right] == numsSorted[right]) right--;
-        return right - left + 1;
+        return 0;
     }
 
     private static boolean isSorted(int[] nums) {
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i] < nums[i - 1]) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -2323,27 +1104,7 @@ public class ArrayDemo {
     4.left同理，left就是从右往左看，数要越来越小才行，如果某个数，比右边最小值还要小，那它没问题，如果它比右边的最小值要大，说明它有问题
      */
     public static int findUnsortedSubarray2(int[] nums) {
-        if (nums == null || nums.length <= 0) return 0;
-        if (isSorted(nums)) return 0;
-        int n = nums.length;
-        int left = -1;
-        int right = -1;
-        int minn = Integer.MAX_VALUE;
-        int maxn = Integer.MIN_VALUE;
-        for (int i = 0; i < n; i++) {
-            if (maxn > nums[i]) {
-                right = i;
-            } else {
-                maxn = nums[i];
-            }
-            int l = n - i - 1;
-            if (minn < nums[l]) {
-                left = l;
-            } else {
-                minn = nums[l];
-            }
-        }
-        return right == -1 ? 0 : right - left + 1;
+        return 0;
     }
 
 }
