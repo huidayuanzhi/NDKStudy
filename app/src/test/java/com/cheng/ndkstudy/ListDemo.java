@@ -1,5 +1,7 @@
 package com.cheng.ndkstudy;
 
+import java.util.PriorityQueue;
+
 public class ListDemo {
 
     public static class ListNode {
@@ -97,5 +99,37 @@ public class ListDemo {
         return newHead;
     }
 
+    /**
+     * 23. 合并 K 个升序链表
+     * 示例 1：
+     * 输入：lists = [[1,4,5],[1,3,4],[2,6]]
+     * 输出：[1,1,2,3,4,4,5,6]
+     * 解释：链表数组如下：
+     * [
+     *   1->4->5,
+     *   1->3->4,
+     *   2->6
+     * ]
+     * 将它们合并到一个有序链表中得到。
+     * 1->1->2->3->4->4->5->6
+     */
+    public static ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length <= 0) return null;
+        ListNode head = new ListNode(0);
+        ListNode tail = head;
+        PriorityQueue<ListNode> queue = new PriorityQueue<>((o1, o2) -> o1.val - o2.val);
+        for (ListNode node : lists) {
+            queue.offer(node);
+        }
+        while (!queue.isEmpty()) {
+            ListNode temp = queue.poll();
+            tail.next = temp;
+            tail = tail.next;
+            if (temp.next != null) {
+                queue.offer(temp.next);
+            }
+        }
+        return head.next;
+    }
 
 }
