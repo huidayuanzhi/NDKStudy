@@ -59,17 +59,17 @@ public class ListTest {
     public void testReverseList1() {
         // 1,2,3,4,5
         ListDemo.ListNode head1 = create(new int[]{1, 2, 3, 4, 5});
-        Logger.log("reverseList - before");
+        Logger.log("reverseList1 - before");
         log(head1);
         ListDemo.ListNode preHead1 = ListDemo.reverseList1(head1);
-        Logger.log("reverseList - after");
+        Logger.log("reverseList1 - after");
         log(preHead1);
         // 1,2
         ListDemo.ListNode head2 = create(new int[]{1, 2});
-        Logger.log("reverseList - before");
+        Logger.log("reverseList1 - before");
         log(head2);
         ListDemo.ListNode preHead2 = ListDemo.reverseList1(head2);
-        Logger.log("reverseList - after");
+        Logger.log("reverseList1 - after");
         log(preHead2);
     }
 
@@ -77,17 +77,35 @@ public class ListTest {
     public void testReverseList2() {
         // 1,2,3,4,5
         ListDemo.ListNode head1 = create(new int[]{1, 2, 3, 4, 5});
-        Logger.log("reverseList - before");
+        Logger.log("reverseList2 - before");
         log(head1);
         ListDemo.ListNode preHead1 = ListDemo.reverseList2(head1);
-        Logger.log("reverseList - after");
+        Logger.log("reverseList2 - after");
         log(preHead1);
         // 1,2
         ListDemo.ListNode head2 = create(new int[]{1, 2});
-        Logger.log("reverseList - before");
+        Logger.log("reverseList2 - before");
         log(head2);
         ListDemo.ListNode preHead2 = ListDemo.reverseList2(head2);
-        Logger.log("reverseList - after");
+        Logger.log("reverseList2 - after");
+        log(preHead2);
+    }
+
+    @Test
+    public void testReverseList3() {
+        // 1,2,3,4,5
+        ListDemo.ListNode head1 = create(new int[]{1, 2, 3, 4, 5});
+        Logger.log("reverseList3 - before");
+        log(head1);
+        ListDemo.ListNode preHead1 = ListDemo.reverseList3(head1);
+        Logger.log("reverseList3 - after");
+        log(preHead1);
+        // 1,2
+        ListDemo.ListNode head2 = create(new int[]{1, 2});
+        Logger.log("reverseList3 - before");
+        log(head2);
+        ListDemo.ListNode preHead2 = ListDemo.reverseList3(head2);
+        Logger.log("reverseList3 - after");
         log(preHead2);
     }
 
@@ -156,6 +174,38 @@ public class ListTest {
         }
         tail.next = head2.next.next;
         result = ListDemo.hasCycle(head2);
+        Logger.log("hasCycle result - " + result);
+    }
+
+    @Test
+    public void testDetectCycle1() {
+        Logger.log("hasCycle");
+        ListDemo.ListNode head1 = create(new int[]{1, 2, 3, 4, 5});
+        ListDemo.ListNode result = ListDemo.detectCycle1(head1);
+        Logger.log("hasCycle result - " + result);
+        ListDemo.ListNode head2 = create(new int[]{1, 2, 3, 4, 5, 6});
+        ListDemo.ListNode tail = head2;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+        tail.next = head2.next.next;
+        result = ListDemo.detectCycle1(head2);
+        Logger.log("hasCycle result - " + result);
+    }
+
+    @Test
+    public void testDetectCycle2() {
+        Logger.log("hasCycle");
+        ListDemo.ListNode head1 = create(new int[]{1, 2, 3, 4, 5});
+        ListDemo.ListNode result = ListDemo.detectCycle2(head1);
+        Logger.log("hasCycle result - " + result);
+        ListDemo.ListNode head2 = create(new int[]{1, 2, 3, 4, 5, 6});
+        ListDemo.ListNode tail = head2;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+        tail.next = head2.next.next;
+        result = ListDemo.detectCycle2(head2);
         Logger.log("hasCycle result - " + result);
     }
 

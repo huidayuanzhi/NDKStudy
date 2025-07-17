@@ -1,6 +1,10 @@
 package com.cheng.ndkstudy;
 
+import androidx.annotation.NonNull;
+
+import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 public class ListDemo {
 
@@ -10,6 +14,12 @@ public class ListDemo {
       ListNode() {}
       ListNode(int val) { this.val = val; }
       ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return super.toString() + " -> val = " + val;
+        }
     }
     /**
      * 876. 链表的中间结点
@@ -90,10 +100,23 @@ public class ListDemo {
         return pre;
     }
 
-    // 方法二：递归
     public static ListNode reverseList2(ListNode head) {
         if (head == null || head.next == null) return head;
-        ListNode newHead = reverseList2(head.next);
+        ListNode pre = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
+        return pre;
+    }
+
+    // 方法二：递归
+    public static ListNode reverseList3(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode newHead = reverseList3(head.next);
         head.next.next = head;
         head.next = null;
         return newHead;
@@ -264,6 +287,52 @@ public class ListDemo {
             }
         }
         return false;
+    }
+
+    /**
+     * 142. 环形链表 II
+     * 给定一个链表的头节点 head，返回链表开始入环的第一个节点。如果链表无环，则返回 null。
+     */
+    // 方法一：哈希表
+    public static ListNode detectCycle1(ListNode head) {
+        if (head == null || head.next == null) return null;
+        ListNode pos = head;
+        Set<ListNode> set = new HashSet<>();
+        while (pos != null) {
+            if (set.contains(pos)) {
+                return pos;
+            } else {
+                set.add(pos);
+            }
+            pos = pos.next;
+        }
+        return null;
+    }
+
+    // 方法二：快慢指针
+    // 当发现 slow 与 fast 相遇时，再额外使用一个指针 ptr。起始，它指向链表头部；
+    // 随后，它和 slow 每次向后移动一个位置。最终，它们会在入环点相遇。
+    public static ListNode detectCycle2(ListNode head) {
+        if (head == null || head.next == null) return null;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null) {
+            slow = slow.next;
+            if (fast.next != null) {
+                fast = fast.next.next;
+            } else {
+                return null;
+            }
+            if (fast == slow) {
+                ListNode ptr = head;
+                while (ptr != slow) {
+                    ptr = ptr.next;
+                    slow = slow.next;
+                }
+                return ptr;
+            }
+        }
+        return null;
     }
 
 }
