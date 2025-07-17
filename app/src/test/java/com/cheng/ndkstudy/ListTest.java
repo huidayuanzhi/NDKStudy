@@ -107,4 +107,26 @@ public class ListTest {
         log(head);
     }
 
+    @Test
+    public void testReverseBetween1() {
+        Logger.log("reverseBetween1");
+        // head = [1,2,3,4,5], left = 2, right = 4 -> [1,4,3,2,5]
+        ListDemo.ListNode head = create(new int[]{1,2,3,4,5});
+        log(head);
+        ListDemo.ListNode newHead = ListDemo.reverseBetween1(head, 2, 4);
+        Logger.log("reverseBetween1 result -");
+        log(newHead);
+    }
+
+    @Test
+    public void testReverseBetween2() {
+        Logger.log("reverseBetween2");
+        // head = [1,2,3,4,5], left = 2, right = 4 -> [1,4,3,2,5]
+        ListDemo.ListNode head = create(new int[]{1,2,3,4,5});
+        log(head);
+        ListDemo.ListNode newHead = ListDemo.reverseBetween2(head, 2, 4);
+        Logger.log("reverseBetween1 result -");
+        log(newHead);
+    }
+
 }
