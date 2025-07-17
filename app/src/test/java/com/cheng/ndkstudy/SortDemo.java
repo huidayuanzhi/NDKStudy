@@ -12,6 +12,17 @@ public class SortDemo {
      * 平均情况：T(n) = O(n2)
      */
     public static int[] bubbleSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (nums[j] < nums[i]) {
+                    int temp = nums[j];
+                    nums[j] = nums[i];
+                    nums[i] = temp;
+                }
+            }
+        }
         return nums;
     }
 
@@ -23,6 +34,22 @@ public class SortDemo {
      * 平均情况：T(n) = O(n2)
      */
     public static int[] selectionSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        int minIndex = 0;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (nums[j] < nums[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            if (minIndex != i) {
+                int temp = nums[i];
+                nums[i] = nums[minIndex];
+                nums[minIndex] = temp;
+            }
+        }
         return nums;
     }
 
@@ -34,6 +61,17 @@ public class SortDemo {
      * 平均情况：T(n) = O(n2)
      */
     public static int[] insertSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        int n = nums.length;
+        for (int i = 0; i < n - 1; i++) {
+            int curr = nums[i + 1];
+            int index = i;
+            while (index >= 0 && curr < nums[index]) {
+                nums[index + 1] = nums[index];
+                index--;
+            }
+            nums[index + 1] = curr;
+        }
         return nums;
     }
 
@@ -45,6 +83,20 @@ public class SortDemo {
      * 平均情况：T(n) = O(nlog2n)
      */
     public static int[] shellSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        int gap = nums.length >> 1;
+        while (gap > 0) {
+            for (int i = gap; i < nums.length; i++) {
+                int curr = nums[i];
+                int index = i - gap;
+                while (index >= 0 && curr < nums[index]) {
+                    nums[index + gap] = nums[index];
+                    index -= gap;
+                }
+                nums[index + gap] = curr;
+            }
+            gap /= 2;
+        }
         return nums;
     }
 
@@ -56,7 +108,27 @@ public class SortDemo {
      * 平均情况：T(n) = O(nlogn)
      */
     public static int[] mergeSort(int[] nums) {
-        return nums;
+        if (nums == null || nums.length <= 1) return nums;
+        int mid = nums.length >> 1;
+        int[] left = Arrays.copyOfRange(nums, 0, mid);
+        int[] right = Arrays.copyOfRange(nums, mid, nums.length);
+        return merge(mergeSort(left), mergeSort(right));
+    }
+
+    private static int[] merge(int[] left, int[] right) {
+        int[] result = new int[left.length + right.length];
+        for (int i = 0, l = 0, r = 0; i < result.length; i++) {
+            if (l >= left.length) {
+                result[i] = right[r++];
+            } else if (r >= right.length) {
+                result[i] = left[l++];
+            } else if (left[l] < right[r]) {
+                result[i] = left[l++];
+            } else {
+                result[i] = right[r++];
+            }
+        }
+        return result;
     }
 
     /**
@@ -67,7 +139,32 @@ public class SortDemo {
      * 平均情况：T(n) = O(nlogn)
      */
     public static int[] quickSort(int[] nums) {
+        if (nums == null || nums.length <= 1) return nums;
+        quickSort(nums, 0, nums.length - 1);
         return nums;
+    }
+
+    private static void quickSort(int[] nums, int left, int right) {
+        if (left >= right) return;
+        int privotpos = partition(nums, left, right);
+        quickSort(nums, left, privotpos - 1);
+        quickSort(nums, privotpos + 1, right);
+    }
+
+    private static int partition(int[] nums, int left, int right) {
+        int privot = nums[left];
+        while (left < right) {
+            while (left < right && nums[right] > privot) {
+                right--;
+            }
+            nums[left] = nums[right];
+            while (left < right && nums[left] < privot) {
+                left++;
+            }
+            nums[right] = nums[left];
+        }
+        nums[left] = privot;
+        return left;
     }
 
     /**
