@@ -143,4 +143,20 @@ public class ListTest {
         log(result2);
     }
 
+    @Test
+    public void testHasCycle() {
+        Logger.log("hasCycle");
+        ListDemo.ListNode head1 = create(new int[]{1, 2, 3, 4, 5});
+        boolean result = ListDemo.hasCycle(head1);
+        Logger.log("hasCycle result - " + result);
+        ListDemo.ListNode head2 = create(new int[]{1, 2, 3, 4, 5, 6});
+        ListDemo.ListNode tail = head2;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+        tail.next = head2.next.next;
+        result = ListDemo.hasCycle(head2);
+        Logger.log("hasCycle result - " + result);
+    }
+
 }

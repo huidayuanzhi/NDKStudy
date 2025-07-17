@@ -248,4 +248,22 @@ public class ListDemo {
         return new ListNode[]{tail, head};
     }
 
+    /**
+     * 141. 环形链表
+     * 给你一个链表的头节点 head ，判断链表中是否有环。
+     */
+    public static boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) return false;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
