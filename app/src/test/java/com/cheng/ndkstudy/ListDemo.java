@@ -201,4 +201,51 @@ public class ListDemo {
         return dummyNode.next;
     }
 
+    /**
+     * 25. K 个一组翻转链表
+     * 如果节点总数不是 k 的整数倍，那么将最后剩余的节点保持原有顺序。
+     * 示例 1：
+     * 输入：head = [1,2,3,4,5], k = 2
+     * 输出：[2,1,4,3,5]
+     * 示例 2：
+     * 输入：head = [1,2,3,4,5], k = 3
+     * 输出：[3,2,1,4,5]
+     */
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || head.next == null || k < 1) return head;
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+        ListNode pre = dummyNode;
+        while (head != null) {
+            ListNode tail = pre;
+            for (int i = 0; i < k; i++) {
+                tail = tail.next;
+                if (tail == null) {
+                    return dummyNode.next;
+                }
+            }
+            ListNode next = tail.next;
+            ListNode[] reverse = reverse(head, tail);
+            head = reverse[0];
+            tail = reverse[1];
+            pre.next = head;
+            tail.next = next;
+            pre = tail;
+            head = tail.next;
+        }
+        return dummyNode.next;
+    }
+
+    private static ListNode[] reverse(ListNode head, ListNode tail) {
+        ListNode prev = tail.next;
+        ListNode p = head;
+        while (prev != tail) {
+            ListNode next = p.next;
+            p.next = prev;
+            prev = p;
+            p = next;
+        }
+        return new ListNode[]{tail, head};
+    }
+
 }

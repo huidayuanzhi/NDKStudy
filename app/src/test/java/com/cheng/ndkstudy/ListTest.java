@@ -129,4 +129,18 @@ public class ListTest {
         log(newHead);
     }
 
+    @Test
+    public void testReverseKGroup() {
+        Logger.log("reverseKGroup");
+        ListDemo.ListNode head1 = create(new int[]{1,2,3,4,5});
+        log(head1);
+        ListDemo.ListNode result1 = ListDemo.reverseKGroup(head1, 2);
+        Logger.log("reverseKGroup [1,2,3,4,5], k = 2");
+        log(result1);
+        ListDemo.ListNode head2 = create(new int[]{1,2,3,4,5});
+        ListDemo.ListNode result2 = ListDemo.reverseKGroup(head2, 3);
+        Logger.log("reverseKGroup [1,2,3,4,5], k = 3");
+        log(result2);
+    }
+
 }
