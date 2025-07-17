@@ -66,4 +66,36 @@ public class ListDemo {
         return pre;
     }
 
+    /**
+     * 206. 反转链表
+     * 示例 1：
+     * 输入：head = [1,2,3,4,5]
+     * 输出：[5,4,3,2,1]
+     * 示例 2：
+     * 输入：head = [1,2]
+     * 输出：[2,1]
+     */
+    // 方法一：迭代
+    public static ListNode reverseList1(ListNode head) {
+        if (head == null) return head;
+        ListNode pre = head;
+        while (head != null && head.next != null) {
+            ListNode next = head.next;
+            head.next = next.next;
+            next.next = pre;
+            pre = next;
+        }
+        return pre;
+    }
+
+    // 方法二：递归
+    public static ListNode reverseList2(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode newHead = reverseList2(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
+
+
 }
