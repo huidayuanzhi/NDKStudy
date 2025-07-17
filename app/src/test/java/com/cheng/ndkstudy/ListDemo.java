@@ -24,4 +24,46 @@ public class ListDemo {
         }
         return slower;
     }
+
+    /**
+     * 234. 回文链表
+     * 示例 1：
+     * 输入：head = [1,2,2,1]
+     * 输出：true
+     * 示例 2：
+     * 输入：head = [1,2]
+     * 输出：false
+     */
+    public static boolean isPalindrome(ListNode head) {
+        if (head == null) return false;
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slow = rotate(slow.next);
+        ListNode pre = slow;
+        while (slow != null) {
+            if (slow.val != head.val) {
+                return false;
+            }
+            slow = slow.next;
+            head = head.next;
+        }
+        rotate(pre);
+        return true;
+    }
+
+    private static ListNode rotate(ListNode head) {
+        ListNode pre = head;
+        while (head != null && head.next != null) {
+            ListNode next = head.next;
+            head.next = next.next;
+            next.next = pre;
+            pre = next;
+        }
+        return pre;
+    }
+
 }
