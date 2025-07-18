@@ -209,4 +209,20 @@ public class ListTest {
         Logger.log("hasCycle result - " + result);
     }
 
+    @Test
+    public void testInsertionSortList() {
+        // head = [4,2,1,3] -> [1,2,3,4]
+        Logger.log("insertionSortList");
+        ListDemo.ListNode head1 = create(new int[]{4,2,1,3});
+        log(head1);
+        ListDemo.ListNode newHead1 = ListDemo.insertionSortList(head1);
+        log(newHead1);
+        // head = [-1,5,3,4,0] -> [-1,0,3,4,5]
+        Logger.log("insertionSortList");
+        ListDemo.ListNode head2 = create(new int[]{-1,5,3,4,0});
+        log(head2);
+        ListDemo.ListNode newHead2 = ListDemo.insertionSortList(head2);
+        log(newHead2);
+    }
+
 }
