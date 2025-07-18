@@ -251,4 +251,20 @@ public class ListTest {
         log(newHead2);
     }
 
+    @Test
+    public void testSortList() {
+        // head = [4,2,1,3] -> [1,2,3,4]
+        Logger.log("sortList");
+        ListDemo.ListNode head1 = create(new int[]{4,2,1,3});
+        log(head1);
+        ListDemo.ListNode sorted1 = ListDemo.sortList(head1);
+        log(sorted1);
+        // head = [-1,5,3,4,0] -> [-1,0,3,4,5]
+        Logger.log("sortList");
+        ListDemo.ListNode head2 = create(new int[]{-1,5,3,4,0});
+        log(head2);
+        ListDemo.ListNode sorted2 = ListDemo.sortList(head2);
+        log(sorted2);
+    }
+
 }

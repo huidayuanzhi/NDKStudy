@@ -409,4 +409,61 @@ public class ListDemo {
         return dummyHead.next;
     }
 
+    /**
+     * 148. 排序链表
+     * 给你链表的头结点 head，请将其按升序排列并返回排序后的链表。
+     * 要求达到 O(nlogn) 的时间复杂度和 O(1) 的空间复杂度
+     */
+    // 方法一：自顶向下归并排序
+    public static ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) return head;
+        return sortList(head, null);
+    }
+
+    private static ListNode sortList(ListNode head, ListNode tail) {
+        if (head == null) return head;
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != tail) {
+            slow = slow.next;
+            fast = fast.next;
+            if (fast != tail) {
+                fast = fast.next;
+            }
+        }
+        ListNode mid = slow;
+        ListNode list1 = sortList(head, mid);
+        ListNode list2 = sortList(mid, tail);
+        ListNode sorted = merge(list1, list2);
+        return sorted;
+    }
+
+    private static ListNode merge(ListNode list1, ListNode list2) {
+        ListNode dummyHead = new ListNode(-1);
+        ListNode prev = dummyHead;
+        ListNode temp1 = list1;
+        ListNode temp2 = list2;
+        while (temp1 != null && temp2 != null) {
+            if (temp1.val < temp2.val) {
+                prev.next = temp1;
+                temp1 = temp1.next;
+            } else {
+                prev.next = temp2;
+                temp2 = temp2.next;
+            }
+            prev = prev.next;
+        }
+        if (temp1 != null) {
+            prev.next = temp1;
+        }
+        if (temp2 != null) {
+            prev.next = temp2;
+        }
+        return dummyHead.next;
+    }
+
 }
