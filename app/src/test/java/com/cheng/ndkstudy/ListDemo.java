@@ -335,4 +335,36 @@ public class ListDemo {
         return null;
     }
 
+    /**
+     * 147. 对链表进行插入排序
+     * 给定单个链表的头 head，使用插入排序对链表进行排序，并返回排序后链表的头。
+     */
+    // 方法一：从前往后找插入点
+    public static ListNode insertionSortList(ListNode head) {
+        /*
+         * lastSorted 为链表的已排序部分的最后一个节点，初始时 lastSorted = head
+         * curr 为待插入的元素，初始时 curr = head.next
+         */
+        if (head == null || head.next == null) return head;
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+        ListNode lastSorted = head;
+        ListNode curr = head.next;
+        while (curr != null) {
+            if (lastSorted.val < curr.val) {
+                lastSorted = lastSorted.next;
+            } else {
+                ListNode prev = dummyHead;
+                while (prev.next.val < curr.val) {
+                    prev = prev.next;
+                }
+                lastSorted.next = curr.next;
+                curr.next = prev.next;
+                prev.next = curr;
+            }
+            curr = lastSorted.next;
+        }
+        return dummyHead.next;
+    }
+
 }
