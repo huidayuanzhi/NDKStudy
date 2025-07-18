@@ -466,4 +466,40 @@ public class ListDemo {
         return dummyHead.next;
     }
 
+    /**
+     * 160. 相交链表
+     * 给你两个单链表的头节点 headA 和 headB，请找出并返回两个单链表相交的起始节点。
+     * 如果两个链表不存在相交节点，返回 null。
+     */
+    // 方法一：哈希集合
+    public static ListNode getIntersectionNode1(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        Set<ListNode> visited = new HashSet<>();
+        ListNode temp = headA;
+        while (temp != null) {
+            visited.add(temp);
+            temp = temp.next;
+        }
+        temp = headB;
+        while (temp != null) {
+            if (visited.contains(temp)) {
+                return temp;
+            }
+            temp = temp.next;
+        }
+        return null;
+    }
+
+    // 方法二：双指针
+    public static ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        ListNode pA = headA;
+        ListNode pB = headB;
+        while (pA != pB) {
+            pA = pA == null ? headB : pA.next;
+            pB = pB == null ? headA : pB.next;
+        }
+        return pA;
+    }
+
 }

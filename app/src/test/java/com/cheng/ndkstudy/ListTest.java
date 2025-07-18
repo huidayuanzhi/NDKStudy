@@ -267,4 +267,42 @@ public class ListTest {
         log(sorted2);
     }
 
+    @Test
+    public void testGetIntersectionNode1() {
+        Logger.log("getIntersectionNode1");
+        // listA = [4,1,8,4,5], listB = [5,6,1,8,4,5] -> 8
+        ListDemo.ListNode listA = create(new int[]{4,1});
+        ListDemo.ListNode listB = create(new int[]{5,6,1});
+        ListDemo.ListNode tail = create(new int[]{8,4,5});
+        ListDemo.ListNode tailA = listA;
+        ListDemo.ListNode tailB = listB;
+        while (tailA.next != null) tailA = tailA.next;
+        while (tailB.next != null) tailB = tailB.next;
+        tailA.next = tail;
+        tailB.next = tail;
+        log(listA);
+        log(listB);
+        ListDemo.ListNode result = ListDemo.getIntersectionNode1(listA, listB);
+        Logger.log("getIntersectionNode1 result - " + result);
+    }
+
+    @Test
+    public void testGetIntersectionNode2() {
+        Logger.log("getIntersectionNode2");
+        // listA = [4,1,8,4,5], listB = [5,6,1,8,4,5] -> 8
+        ListDemo.ListNode listA = create(new int[]{4,1});
+        ListDemo.ListNode listB = create(new int[]{5,6,1});
+        ListDemo.ListNode tail = create(new int[]{8,4,5});
+        ListDemo.ListNode tailA = listA;
+        ListDemo.ListNode tailB = listB;
+        while (tailA.next != null) tailA = tailA.next;
+        while (tailB.next != null) tailB = tailB.next;
+        tailA.next = tail;
+        tailB.next = tail;
+        log(listA);
+        log(listB);
+        ListDemo.ListNode result = ListDemo.getIntersectionNode2(listA, listB);
+        Logger.log("getIntersectionNode2 result - " + result);
+    }
+
 }
