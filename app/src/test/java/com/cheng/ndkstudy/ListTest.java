@@ -148,6 +148,32 @@ public class ListTest {
     }
 
     @Test
+    public void testMergeTwoLists1() {
+        // l1 = [1,2,4], l2 = [1,3,4] -> [1,1,2,3,4,4]
+        Logger.log("mergeTwoLists1");
+        ListDemo.ListNode list1 = create(new int[]{1,2,4});
+        ListDemo.ListNode list2 = create(new int[]{1,3,4});
+        log(list1);
+        log(list2);
+        ListDemo.ListNode mergeList = ListDemo.mergeTwoLists1(list1, list2);
+        Logger.log("mergeTwoLists1 result -");
+        log(mergeList);
+    }
+
+    @Test
+    public void testMergeTwoLists2() {
+        // l1 = [1,2,4], l2 = [1,3,4] -> [1,1,2,3,4,4]
+        Logger.log("mergeTwoLists2");
+        ListDemo.ListNode list1 = create(new int[]{1,2,4});
+        ListDemo.ListNode list2 = create(new int[]{1,3,4});
+        log(list1);
+        log(list2);
+        ListDemo.ListNode mergeList = ListDemo.mergeTwoLists2(list1, list2);
+        Logger.log("mergeTwoLists2 result -");
+        log(mergeList);
+    }
+
+    @Test
     public void testReverseKGroup() {
         Logger.log("reverseKGroup");
         ListDemo.ListNode head1 = create(new int[]{1,2,3,4,5});
