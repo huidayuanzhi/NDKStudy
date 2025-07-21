@@ -44,4 +44,14 @@ public class StringTest {
         Logger.log("longestSubstring ababbc, k = 2 -> result = " + result2);
     }
 
+    @Test
+    public void testLongestPalindromeSubseq() {
+        Logger.log("longestPalindromeSubseq");
+        int result = StringDemo.longestPalindromeSubseq("bbbab"); // 4
+        Logger.log("testLongestPalindromeSubseq bbbab, result = " + result);
+        Logger.log("longestPalindromeSubseq");
+        result = StringDemo.longestPalindromeSubseq("cbbd"); // 2
+        Logger.log("testLongestPalindromeSubseq cbbd, result = " + result);
+    }
+
 }
