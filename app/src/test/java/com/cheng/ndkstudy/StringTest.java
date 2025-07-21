@@ -2,6 +2,8 @@ package com.cheng.ndkstudy;
 
 import org.junit.Test;
 
+import java.util.List;
+
 public class StringTest {
 
     @Test
@@ -62,6 +64,28 @@ public class StringTest {
         Logger.log("characterReplacement");
         int result2 = StringDemo.characterReplacement("AABABBA", 1); // 4
         Logger.log("characterReplacement AABABBA, 1 -> result = " + result2);
+    }
+
+    @Test
+    public void testFindAnagrams1() {
+        Logger.log("findAnagrams1");
+        List<Integer> result = StringDemo.findAnagrams1("cbaebabacd", "abc");
+        Logger.log("findAnagrams1 result -"); // [0,6]
+        Logger.log(result);
+        List<Integer> result2 = StringDemo.findAnagrams1("abab", "ab");
+        Logger.log("findAnagrams1 result -"); // [0,1,2]
+        Logger.log(result2);
+    }
+
+    @Test
+    public void testFindAnagrams2() {
+        Logger.log("findAnagrams2");
+        List<Integer> result = StringDemo.findAnagrams2("cbaebabacd", "abc");
+        Logger.log("findAnagrams2 result -"); // [0,6]
+        Logger.log(result);
+        List<Integer> result2 = StringDemo.findAnagrams2("abab", "ab");
+        Logger.log("findAnagrams2 result -"); // [0,1,2]
+        Logger.log(result2);
     }
 
 }

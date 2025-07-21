@@ -1,5 +1,10 @@
 package com.cheng.ndkstudy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class StringDemo {
 
     /**
@@ -203,5 +208,86 @@ public class StringDemo {
         return right - left;
     }
 
+    /**
+     * 438. 找到字符串中所有字母异位词
+     * 给定两个字符串 s 和 p，找到 s 中所有 p 的异位词的子串，返回这些子串的起始索引。
+     * 示例 1:
+     * 输入: s = "cbaebabacd", p = "abc"
+     * 输出: [0,6]
+     * 解释:
+     * 起始索引等于 0 的子串是 "cba", 它是 "abc" 的异位词。
+     * 起始索引等于 6 的子串是 "bac", 它是 "abc" 的异位词。
+     * 示例 2:
+     * 输入: s = "abab", p = "ab"
+     * 输出: [0,1,2]
+     * 解释:
+     * 起始索引等于 0 的子串是 "ab", 它是 "ab" 的异位词。
+     * 起始索引等于 1 的子串是 "ba", 它是 "ab" 的异位词。
+     * 起始索引等于 2 的子串是 "ab", 它是 "ab" 的异位词。
+     */
+    // 方法一：滑动窗口
+    public static List<Integer> findAnagrams1(String s, String p) {
+        if (s == null || p == null || s.length() < p.length()) return Collections.emptyList();
+        int sLen = s.length();
+        int pLen = p.length();
+        List<Integer> res = new ArrayList<>();
+        int[] sCount = new int[26];
+        int[] pCount = new int[26];
+        for (int i = 0; i < pLen; i++) {
+            sCount[s.charAt(i) - 'a']++;
+            pCount[p.charAt(i) - 'a']++;
+        }
+        if (Arrays.equals(sCount, pCount)) {
+            res.add(0);
+        }
+        for (int i = 0; i < sLen - pLen; i++) {
+            sCount[s.charAt(i) - 'a']--;
+            sCount[s.charAt(i + pLen) - 'a']++;
+            if (Arrays.equals(sCount, pCount)) {
+                res.add(i + 1);
+            }
+        }
+        return res;
+    }
+
+    // 方法二：优化的滑动窗口
+    public static List<Integer> findAnagrams2(String s, String p) {
+        if (s == null || p == null || s.length() < p.length()) return Collections.emptyList();
+        int sLen = s.length();
+        int pLen = p.length();
+        List<Integer> res = new ArrayList<>();
+        int[] count = new int[26];
+        for (int i = 0; i < pLen; i++) {
+            count[s.charAt(i) - 'a']++;
+            count[p.charAt(i) - 'a']--;
+        }
+        int differ = 0;
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0) {
+                differ++;
+            }
+        }
+        if (differ == 0) {
+            res.add(0);
+        }
+        for (int i = 0; i < sLen - pLen; i++) {
+            if (count[s.charAt(i) - 'a'] == 1) {
+                differ--;
+            } else if (count[s.charAt(i) - 'a'] == 0) {
+                differ++;
+            }
+            --count[s.charAt(i) - 'a'];
+            if (count[s.charAt(i + pLen) - 'a'] == -1) {
+                differ--;
+            } else if (count[s.charAt(i + pLen) - 'a'] == 0) {
+                differ++;
+            }
+            ++count[s.charAt(i + pLen) - 'a'];
+            if (differ == 0) {
+                res.add(i + 1);
+            }
+        }
+        return res;
+    }
 
 }
