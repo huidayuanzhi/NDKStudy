@@ -180,11 +180,11 @@ public class ListTest {
         log(head1);
         ListDemo.ListNode result1 = ListDemo.reverseKGroup(head1, 2);
         Logger.log("reverseKGroup [1,2,3,4,5], k = 2");
-        log(result1);
+        log(result1); // 2,1,4,3,5
         ListDemo.ListNode head2 = create(new int[]{1,2,3,4,5});
         ListDemo.ListNode result2 = ListDemo.reverseKGroup(head2, 3);
         Logger.log("reverseKGroup [1,2,3,4,5], k = 3");
-        log(result2);
+        log(result2); // 3,2,1,4,5
     }
 
     @Test
@@ -192,7 +192,7 @@ public class ListTest {
         Logger.log("hasCycle");
         ListDemo.ListNode head1 = create(new int[]{1, 2, 3, 4, 5});
         boolean result = ListDemo.hasCycle(head1);
-        Logger.log("hasCycle result - " + result);
+        Logger.log("hasCycle result - " + result); // false
         ListDemo.ListNode head2 = create(new int[]{1, 2, 3, 4, 5, 6});
         ListDemo.ListNode tail = head2;
         while (tail.next != null) {
@@ -200,7 +200,7 @@ public class ListTest {
         }
         tail.next = head2.next.next;
         result = ListDemo.hasCycle(head2);
-        Logger.log("hasCycle result - " + result);
+        Logger.log("hasCycle result - " + result); // true
     }
 
     @Test
