@@ -133,4 +133,37 @@ public class StringTest {
         Logger.log("countSubstrings2 aaa - result = " + result);
     }
 
+    @Test
+    public void testLongestCommonPrefix1() {
+        String[] strs1 = new String[]{
+                "flower","flow","flight"
+        };
+        Logger.log("longestCommonPrefix1");
+        String result = StringDemo.longestCommonPrefix1(strs1); // "fl"
+        Logger.log("longestCommonPrefix1 result - " + result);
+        String[] strs2 = new String[]{
+                "dog","racecar","car"
+        };
+        Logger.log("longestCommonPrefix1");
+        String result2 = StringDemo.longestCommonPrefix1(strs2); // ""
+        Logger.log("longestCommonPrefix1 result - " + result2);
+    }
+
+    @Test
+    public void testLongestCommonPrefix2() {
+        String[] strs1 = new String[]{
+                "flower","flow","flight"
+        };
+        Logger.log("longestCommonPrefix2");
+        String result = StringDemo.longestCommonPrefix2(strs1); // "fl"
+        Logger.log("longestCommonPrefix2 result - " + result);
+        String[] strs2 = new String[]{
+                "dog","racecar","car"
+        };
+        Logger.log("longestCommonPrefix2");
+        String result2 = StringDemo.longestCommonPrefix2(strs2); // ""
+        Logger.log("longestCommonPrefix2 result - " + result2);
+    }
+
+
 }
