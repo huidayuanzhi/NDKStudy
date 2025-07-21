@@ -88,4 +88,31 @@ public class StringTest {
         Logger.log(result2);
     }
 
+    @Test
+    public void testCheckInclusion1() {
+        Logger.log("checkInclusion1");
+        boolean result = StringDemo.checkInclusion1("ab", "eidbaooo");
+        Logger.log("checkInclusion1 ab, eidbaooo -> result = " + result);
+        boolean result2 = StringDemo.checkInclusion1("ab", "eidboaoo");
+        Logger.log("checkInclusion1 ab, eidboaoo -> result = " + result2);
+    }
+
+    @Test
+    public void testCheckInclusion2() {
+        Logger.log("checkInclusion2");
+        boolean result = StringDemo.checkInclusion2("ab", "eidbaooo");
+        Logger.log("checkInclusion2 ab, eidbaooo -> result = " + result);
+        boolean result2 = StringDemo.checkInclusion2("ab", "eidboaoo");
+        Logger.log("checkInclusion2 ab, eidboaoo -> result = " + result2);
+    }
+
+    @Test
+    public void testCheckInclusion3() {
+        Logger.log("checkInclusion3");
+        boolean result = StringDemo.checkInclusion3("ab", "eidbaooo");
+        Logger.log("checkInclusion3 ab, eidbaooo -> result = " + result);
+        boolean result2 = StringDemo.checkInclusion3("ab", "eidboaoo");
+        Logger.log("checkInclusion3 ab, eidboaoo -> result = " + result2);
+    }
+
 }
