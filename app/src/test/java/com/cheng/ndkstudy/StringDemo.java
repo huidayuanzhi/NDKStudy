@@ -396,4 +396,50 @@ public class StringDemo {
         return false;
     }
 
+    /**
+     * 647. 回文子串
+     * 示例 1：
+     * 输入：s = "abc"
+     * 输出：3
+     * 解释：三个回文子串: "a", "b", "c"
+     * 示例 2：
+     * 输入：s = "aaa"
+     * 输出：6
+     * 解释：6个回文子串: "a", "a", "a", "aa", "aa", "aaa"
+     */
+    // 方法一：中心拓展
+    public static int countSubstrings1(String s) {
+        if (s == null || s.length() <= 0) return 0;
+        int n = s.length();
+        int ans = 0;
+        for (int i = 0, len = 2 * n - 1; i < len; i++) {
+            int l = i / 2;
+            int r = i / 2 + i % 2;
+            while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
+                l--;
+                r++;
+                ans++;
+            }
+        }
+        return ans;
+    }
+
+    // 方法二：动态规划
+    public static int countSubstrings2(String s) {
+        if (s == null || s.length() <= 0) return 0;
+        int n = s.length();
+        boolean[][] dp = new boolean[n][n];
+        int ans = 0;
+        char[] charArr = s.toCharArray();
+        for (int j = 0; j < n; j++) {
+            for (int i = 0; i <= j; i++) {
+                if (charArr[i] == charArr[j] && (j - i < 2 || dp[i + 1][j - 1])) {
+                    dp[i][j] = true;
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+
 }

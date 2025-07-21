@@ -115,4 +115,22 @@ public class StringTest {
         Logger.log("checkInclusion3 ab, eidboaoo -> result = " + result2);
     }
 
+    @Test
+    public void testCountSubstrings1() {
+        Logger.log("countSubstrings1");
+        int result = StringDemo.countSubstrings1("abc"); // 3
+        Logger.log("countSubstrings1 abc - result = " + result);
+        result = StringDemo.countSubstrings1("aaa"); // 6
+        Logger.log("countSubstrings1 aaa - result = " + result);
+    }
+
+    @Test
+    public void testCountSubstrings2() {
+        Logger.log("countSubstrings2");
+        int result = StringDemo.countSubstrings2("abc"); // 3
+        Logger.log("countSubstrings2 abc - result = " + result);
+        result = StringDemo.countSubstrings2("aaa"); // 6
+        Logger.log("countSubstrings2 aaa - result = " + result);
+    }
+
 }
