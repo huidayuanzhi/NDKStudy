@@ -163,4 +163,45 @@ public class StringDemo {
         return dp[0][n - 1];
     }
 
+    /**
+     * 424. 替换后的最长重复字符
+     * 给你一个字符串 s 和一个整数 k。可以选择字符串中的任一字符，
+     * 并将其更改为任何其他大写英文字符。该操作最多可执行 k 次。
+     * 在执行上述操作后，返回包含相同字母的最长子字符串的长度。
+     * 示例 1：
+     * 输入：s = "ABAB", k = 2
+     * 输出：4
+     * 解释：用两个'A'替换为两个'B',反之亦然。
+     * 示例 2：
+     * 输入：s = "AABABBA", k = 1
+     * 输出：4
+     * 解释：
+     * 将中间的一个'A'替换为'B',字符串变为 "AABBBBA"。
+     */
+    /*
+    maxCount 是当前及过去滑动窗口维护过的最大字符数，所以 maxCount+k 是出现过的最大重复字符串数
+    当 right - left != maxCount + k时，右移是没有意义的，所以左移，然后继续向右探索
+    窗口大小始终维持最大重复字符串数，因为比这小的也是没有意义的
+     */
+    // 双指针（滑动窗口）
+    public static int characterReplacement(String s, int k) {
+        if (s == null || s.length() < 2 || k < 1) return 0;
+        int n = s.length();
+        int[] nums = new int[26];
+        int left = 0;
+        int right = 0;
+        int maxCount = 1;
+        while (right < n) {
+            nums[s.charAt(right) - 'A']++;
+            maxCount = Math.max(maxCount, nums[s.charAt(right) - 'A']);
+            if (right - left + 1 - maxCount > k) {
+                nums[s.charAt(left) - 'A']--;
+                left++;
+            }
+            right++;
+        }
+        return right - left;
+    }
+
+
 }

@@ -54,4 +54,14 @@ public class StringTest {
         Logger.log("testLongestPalindromeSubseq cbbd, result = " + result);
     }
 
+    @Test
+    public void testCharacterReplacement() {
+        Logger.log("characterReplacement");
+        int result = StringDemo.characterReplacement("ABAB", 2); // 4
+        Logger.log("characterReplacement ABAB, 2 -> result = " + result);
+        Logger.log("characterReplacement");
+        int result2 = StringDemo.characterReplacement("AABABBA", 1); // 4
+        Logger.log("characterReplacement AABABBA, 1 -> result = " + result2);
+    }
+
 }
