@@ -442,4 +442,51 @@ public class StringDemo {
         return ans;
     }
 
+    /**
+     * 14. 最长公共前缀
+     * 示例 1：
+     * 输入：strs = ["flower","flow","flight"]
+     * 输出："fl"
+     * 示例 2：
+     * 输入：strs = ["dog","racecar","car"]
+     * 输出：""
+     */
+    // 方法一：横向扫描
+    public static String longestCommonPrefix1(String[] strs) {
+        if (strs == null || strs.length == 0) return "";
+        String prefix = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            prefix = longestCommonPrefix1(prefix, strs[i]);
+            if (prefix.isEmpty()) {
+                break;
+            }
+        }
+        return prefix;
+    }
+
+    private static String longestCommonPrefix1(String str1, String str2) {
+        int length = Math.min(str1.length(), str2.length());
+        int index = 0;
+        while (index < length && str1.charAt(index) == str2.charAt(index)) {
+            index++;
+        }
+        return str1.substring(0, index);
+    }
+
+    // 方法二：纵向扫描
+    public static String longestCommonPrefix2(String[] strs) {
+        if (strs == null || strs.length == 0) return "";
+        int length = strs[0].length();
+        int count = strs.length;
+        for (int i = 0; i < length; i++) {
+            char c = strs[0].charAt(i);
+            for (int j = 1; j < count; j++) {
+                if (i == strs[j].length() || strs[j].charAt(i) != c) {
+                    return strs[0].substring(0, i);
+                }
+            }
+        }
+        return "";
+    }
+
 }
