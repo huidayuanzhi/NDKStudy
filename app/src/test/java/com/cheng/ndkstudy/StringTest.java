@@ -207,4 +207,16 @@ public class StringTest {
         Logger.log("isInterleave2 result = " + result2);
     }
 
+    @Test
+    public void testWordBreak() {
+        Logger.log("wordBreak");
+        boolean result = StringDemo.wordBreak("leetcode", List.of("leet", "code"));
+        Logger.log("wordBreak result = " + result); // true
+        result = StringDemo.wordBreak("applepenapple", List.of("apple", "pen"));
+        Logger.log("wordBreak result = " + result); // true
+        result = StringDemo.wordBreak("catsandog", List.of("cats", "dog", "sand", "and", "cat"));
+        Logger.log("wordBreak result = " + result); // false
+
+    }
+
 }
