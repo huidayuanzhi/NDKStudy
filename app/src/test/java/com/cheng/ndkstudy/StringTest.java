@@ -165,5 +165,27 @@ public class StringTest {
         Logger.log("longestCommonPrefix2 result - " + result2);
     }
 
+    @Test
+    public void testLengthOfLongestSubstring1() {
+        // abcabcbb -> 3
+        Logger.log("lengthOfLongestSubstring1");
+        int result = StringDemo.lengthOfLongestSubstring1("abcabcbb");
+        Logger.log("lengthOfLongestSubstring1 abcabcbb, result = " + result);
+        // bbbbb -> 1
+        int result2 = StringDemo.lengthOfLongestSubstring1("bbbbb");
+        Logger.log("lengthOfLongestSubstring1 bbbbb, result = " + result2);
+    }
+
+    @Test
+    public void testLengthOfLongestSubstring2() {
+        // abcabcbb -> 3
+        Logger.log("lengthOfLongestSubstring2");
+        int result = StringDemo.lengthOfLongestSubstring2("abcabcbb");
+        Logger.log("lengthOfLongestSubstring2 abcabcbb, result = " + result);
+        // bbbbb -> 1
+        int result2 = StringDemo.lengthOfLongestSubstring2("bbbbb");
+        Logger.log("lengthOfLongestSubstring2 bbbbb, result = " + result2);
+    }
+
 
 }
