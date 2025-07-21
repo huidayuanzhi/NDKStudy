@@ -3,7 +3,9 @@ package com.cheng.ndkstudy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class StringDemo {
 
@@ -487,6 +489,53 @@ public class StringDemo {
             }
         }
         return "";
+    }
+
+    /**
+     * 3. 无重复字符的最长子串
+     * 示例 1:
+     * 输入: s = "abcabcbb"
+     * 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+     * 示例 2:
+     * 输入: s = "bbbbb"
+     * 输出: 1
+     * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+     */
+    public static int lengthOfLongestSubstring1(String s) {
+        if (s == null || s.isEmpty()) return 0;
+        Set<Character> set = new HashSet<>();
+        int r = -1;
+        int ans = 0;
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            if (i > 0) {
+                set.remove(s.charAt(i - 1));
+            }
+            while (r + 1 < n && !set.contains(s.charAt(r + 1))) {
+                set.add(s.charAt(r + 1));
+                r++;
+            }
+            ans = Math.max(ans, r - i + 1);
+        }
+        return ans;
+    }
+
+    public static int lengthOfLongestSubstring2(String s) {
+        if (s == null || s.isEmpty()) return 0;
+        Set<Character> set = new HashSet<>();
+        int length = s.length();
+        int ans = 1;
+        for (int left = 0, right = 0; right < length; right++) {
+            char currChar = s.charAt(right);
+            while (set.contains(currChar)) {
+                set.remove(s.charAt(left));
+                left++;
+            }
+            set.add(currChar);
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
     }
 
 }
