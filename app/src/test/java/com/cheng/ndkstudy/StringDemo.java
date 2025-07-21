@@ -608,5 +608,36 @@ public class StringDemo {
      * 输出：[["a"]]
      */
 
+    /**
+     * 139. 单词拆分
+     * 给你一个字符串 s 和一个字符串列表 wordDict 作为字典。
+     * 如果可以利用字典中出现的一个或多个单词拼接出 s 则返回 true。
+     * 示例 1：
+     * 输入: s = "leetcode", wordDict = ["leet", "code"]
+     * 输出: true
+     * 示例 2：
+     * 输入: s = "applepenapple", wordDict = ["apple", "pen"]
+     * 输出: true
+     * 示例 3：
+     * 输入: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+     * 输出: false
+     */
+    public static boolean wordBreak(String s, List<String> wordDict) {
+        if (s == null || s.isEmpty() || wordDict == null || wordDict.isEmpty()) return false;
+        Set<String> wordDictSet = new HashSet<>(wordDict);
+        int n = s.length();
+        boolean[] dp = new boolean[n + 1];
+        dp[0] = true;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && wordDictSet.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[n];
+    }
+
 
 }
