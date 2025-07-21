@@ -32,4 +32,16 @@ public class StringTest {
         Logger.log("longestPalindrome2 in : cbbd, out : " + result2);
     }
 
+    @Test
+    public void testLongestSubstring() {
+        Logger.log("longestSubstring");
+        String str1 = "aaabb";
+        int result = StringDemo.longestSubstring(str1, 3); // 3
+        Logger.log("longestSubstring aaabb, k = 3 -> result = " + result);
+        Logger.log("longestSubstring");
+        String str2 = "ababbc";
+        int result2 = StringDemo.longestSubstring(str2, 2); // 5
+        Logger.log("longestSubstring ababbc, k = 2 -> result = " + result2);
+    }
+
 }
