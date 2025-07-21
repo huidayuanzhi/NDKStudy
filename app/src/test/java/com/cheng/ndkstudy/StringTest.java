@@ -187,5 +187,24 @@ public class StringTest {
         Logger.log("lengthOfLongestSubstring2 bbbbb, result = " + result2);
     }
 
+    @Test
+    public void testIsInterleave1() {
+        Logger.log("isInterleave1");
+        boolean result = StringDemo.isInterleave1("aabcc", "dbbca", "aadbbcbcac"); // true
+        Logger.log("isInterleave1 result = " + result);
+        Logger.log("isInterleave1");
+        boolean result2 = StringDemo.isInterleave1("aabcc", "dbbca", "aadbbbaccc"); // true
+        Logger.log("isInterleave1 result = " + result2);
+    }
+
+    @Test
+    public void testIsInterleave2() {
+        Logger.log("isInterleave2");
+        boolean result = StringDemo.isInterleave2("aabcc", "dbbca", "aadbbcbcac"); // true
+        Logger.log("isInterleave2 result = " + result);
+        Logger.log("isInterleave2");
+        boolean result2 = StringDemo.isInterleave2("aabcc", "dbbca", "aadbbbaccc"); // true
+        Logger.log("isInterleave2 result = " + result2);
+    }
 
 }
