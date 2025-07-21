@@ -80,4 +80,56 @@ public class StringDemo {
         return right - left - 1;
     }
 
+    /**
+     * 395. 至少有 K 个重复字符的最长子串
+     * 给你一个字符串 s 和一个整数 k，找出 s 中的最长子串，要求
+     * 该子串中的每一字符出现次数都不少于 k。返回这一子串的长度。
+     * 示例 1：
+     * 输入：s = "aaabb", k = 3
+     * 输出：3
+     * 解释：最长子串为 "aaa" ，其中 'a' 重复了 3 次。
+     * 示例 2：
+     * 输入：s = "ababbc", k = 2
+     * 输出：5
+     * 解释：最长子串为 "ababb" ，其中 'a' 重复了 2 次， 'b' 重复了 3 次。
+     */
+    public static int longestSubstring(String s, int k) {
+        if (s == null || k < 2 || s.length() < k) return 0;
+        return dfs(s, 0, s.length() - 1, k);
+    }
+
+    private static int dfs(String s, int l, int r, int k) {
+        int[] cnt = new int[26];
+        for (int i = l; i <= r; i++) {
+            cnt[s.charAt(i) - 'a']++;
+        }
+        char split = 0;
+        for (int i = 0; i < 26; i++) {
+            if (cnt[i] > 0 && cnt[i] < k) {
+                split = (char) (i + 'a');
+                break;
+            }
+        }
+        if (split == 0) {
+            return r - l + 1;
+        }
+        int i = l;
+        int ret = 0;
+        while (i <= r) {
+            while (i <= r && s.charAt(i) == split) {
+                i++;
+            }
+            if (i > r) {
+                break;
+            }
+            int start = i;
+            while (i <= r && s.charAt(i) != split) {
+                i++;
+            }
+            int length = dfs(s, start, i - 1, k);
+            ret = Math.max(ret, length);
+        }
+        return ret;
+    }
+
 }
