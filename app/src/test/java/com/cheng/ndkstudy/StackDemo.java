@@ -20,44 +20,12 @@ public class StackDemo {
      */
     // 方法一：暴力
     public static int[] nextGreaterElement1(int[] nums1, int[] nums2) {
-        if (nums1 == null || nums2 == null || nums1.length <= 0 || nums2.length <= 0) return new int[0];
-        int m = nums1.length;
-        int n = nums2.length;
-        int[] res = new int[m];
-        for (int i = 0; i < m; i++) {
-            int j = 0;
-            while (j < n && nums2[j] != nums1[i]) {
-                j++;
-            }
-            int k = j + 1;
-            while (k < n && nums2[k] < nums1[i]) {
-                k++;
-            }
-            res[i] = k < n ? nums2[k] : -1;
-        }
-        return res;
+        return null;
     }
 
     // 方法二：单调栈 + 哈希表
     public static int[] nextGreaterElement2(int[] nums1, int[] nums2) {
-        if (nums1 == null || nums2 == null || nums1.length <= 0 || nums2.length <= 0) return new int[0];
-        int m = nums1.length;
-        int n = nums2.length;
-        int[] res = new int[m];
-        Map<Integer, Integer> map = new HashMap<>();
-        Deque<Integer> stack = new LinkedList<>();
-        for (int i = n - 1; i >= 0; i--) {
-            int num = nums2[i];
-            while (!stack.isEmpty() && num >= stack.peek()) {
-                stack.pop();
-            }
-            map.put(num, stack.isEmpty() ? -1 : stack.peek());
-            stack.push(num);
-        }
-        for (int i = 0; i < m; i++) {
-            res[i] = map.getOrDefault(nums1[i], -1);
-        }
-        return res;
+        return null;
     }
 
     /**
@@ -74,18 +42,7 @@ public class StackDemo {
     // 可以把这个循环数组「拉直」，即复制该序列的前 n−1 个元素拼接在原序列的后面。
     // 这样就可以将这个新序列当作普通序列。在这里只需要在处理时对下标取模即可。
     public static int[] nextGreaterElementsII(int[] nums) {
-        if (nums == null || nums.length <= 0) return new int[0];
-        int n = nums.length;
-        Deque<Integer> stack = new LinkedList<>();
-        int[] res = new int[n];
-        Arrays.fill(res, -1);
-        for (int i = 0; i < 2 * n - 1; i++) {
-            while (!stack.isEmpty() && nums[stack.peek()] < nums[i % n]) {
-                res[stack.pop()] = nums[i % n];
-            }
-            stack.push(i % n);
-        }
-        return res;
+        return null;
     }
 
     /**
@@ -102,26 +59,7 @@ public class StackDemo {
      * 输出：false
      */
     public static boolean isValid(String s) {
-        if (s == null || s.isEmpty() || s.length() % 2 != 0) return false;
-        int n = s.length();
-        Map<Character, Character> pairs = new HashMap<>();
-        pairs.put(')', '(');
-        pairs.put('}', '{');
-        pairs.put(']', '[');
-        Deque<Character> stack = new LinkedList<>();
-        for (int i = 0; i < n; i++) {
-            char ch = s.charAt(i);
-            // 当前字符为有括号
-            if (pairs.containsKey(ch)) {
-                if (stack.isEmpty() || stack.peek() != pairs.get(ch)) {
-                    return false;
-                }
-                stack.pop();
-            } else {
-                stack.push(ch);
-            }
-        }
-        return stack.isEmpty();
+        return false;
     }
 
     /**
@@ -144,27 +82,7 @@ public class StackDemo {
      * 输出："/.../b/d"
      */
     public static String simplifyPath(String path) {
-        if (path == null || path.isEmpty()) return "/";
-        String[] names = path.split("/");
-        Deque<String> stack = new LinkedList<>();
-        for (String name : names) {
-            if ("..".equals(name)) {
-                if (!stack.isEmpty()) {
-                    stack.pollLast();
-                }
-            } else if (name.length() > 0 && !".".equals(name)) {
-                stack.offerLast(name);
-            }
-        }
-        StringBuilder builder = new StringBuilder();
-        if (stack.isEmpty()) {
-            return "/";
-        }
-        while (!stack.isEmpty()) {
-            builder.append("/");
-            builder.append(stack.pollFirst());
-        }
-        return builder.toString();
+        return null;
     }
 
 }

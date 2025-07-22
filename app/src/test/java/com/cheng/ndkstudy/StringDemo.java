@@ -26,69 +26,12 @@ public class StringDemo {
      */
     // 方法一：动态规划
     public static String longestPalindrome1(String s) {
-        if (s == null || s.length() < 2) return s;
-        int len = s.length();
-        boolean[][] dp = new boolean[len][len];
-        for (int i = 0; i < len; i++) {
-            dp[i][i] = true;
-        }
-        char[] charArray = s.toCharArray();
-        int maxLen = 1;
-        int begin = 0;
-        for (int L = 2; L <= len; L++) {
-            for (int i = 0; i < len; i++) {
-                // 由 L 和 i 可以确定右边界，即 j - i + 1 = L 得
-                int j = L + i - 1;
-                // 如果右边界越界，就可以退出当前循环
-                if (j >= len) {
-                    break;
-                }
-                if (charArray[i] != charArray[j]) {
-                    dp[i][j] = false;
-                } else {
-                    if (j - i < 3) {
-                        dp[i][j] = true;
-                    } else {
-                        dp[i][j] = dp[i + 1][j - 1];
-                    }
-                }
-                if (dp[i][j] && j - i + 1 > maxLen) {
-                    maxLen = j - i + 1;
-                    begin = i;
-                }
-            }
-        }
-        return s.substring(begin, begin + maxLen);
+        return null;
     }
 
     // 方法二：中心扩展算法
     public static String longestPalindrome2(String s) {
-        if (s == null || s.length() < 2) return s;
-        int start = 0;
-        int end = 0;
-        for (int i = 0; i < s.length(); i++) {
-            // 两种边界情况，子串长度为1和2的情况
-            // 子串长度1：以该字符为中心扩展，两边字符相同才是回文
-            // 子串长度2：以虚拟的中心扩展，这两个字符相同时继续扩展的前提
-            int len1 = expandAroundCenter(s, i, i);
-            int len2 = expandAroundCenter(s, i, i + 1);
-            int len = Math.max(len1, len2);
-            if (len > end - start) {
-                start = i - (len - 1) / 2;
-                end = i + len / 2;
-            }
-        }
-        return s.substring(start, end + 1);
-    }
-
-    private static int expandAroundCenter(String s, int left, int right) {
-        int length = s.length();
-        char[] charArray = s.toCharArray();
-        while (left >= 0 && right < length && charArray[left] == charArray[right]) {
-            left--;
-            right++;
-        }
-        return right - left - 1;
+        return "";
     }
 
     /**
@@ -105,42 +48,7 @@ public class StringDemo {
      * 解释：最长子串为 "ababb" ，其中 'a' 重复了 2 次， 'b' 重复了 3 次。
      */
     public static int longestSubstring(String s, int k) {
-        if (s == null || k < 2 || s.length() < k) return 0;
-        return dfs(s, 0, s.length() - 1, k);
-    }
-
-    private static int dfs(String s, int l, int r, int k) {
-        int[] cnt = new int[26];
-        for (int i = l; i <= r; i++) {
-            cnt[s.charAt(i) - 'a']++;
-        }
-        char split = 0;
-        for (int i = 0; i < 26; i++) {
-            if (cnt[i] > 0 && cnt[i] < k) {
-                split = (char) (i + 'a');
-                break;
-            }
-        }
-        if (split == 0) {
-            return r - l + 1;
-        }
-        int i = l;
-        int ret = 0;
-        while (i <= r) {
-            while (i <= r && s.charAt(i) == split) {
-                i++;
-            }
-            if (i > r) {
-                break;
-            }
-            int start = i;
-            while (i <= r && s.charAt(i) != split) {
-                i++;
-            }
-            int length = dfs(s, start, i - 1, k);
-            ret = Math.max(ret, length);
-        }
-        return ret;
+        return 0;
     }
 
     /**
@@ -158,20 +66,7 @@ public class StringDemo {
     // 动态规划
     // 用 dp[i][j] 表示字符串s的下标范围 [i,j] 内的最长回文子序列的长度
     public static int longestPalindromeSubseq(String s) {
-        if (s == null || s.length() <= 0) return 0;
-        int n = s.length();
-        int[][] dp = new int[n][n];
-        for (int i = n - 1; i >= 0; i--) {
-            dp[i][i] = 1;
-            for (int j = i + 1; j < n; j++) {
-                if (s.charAt(i) == s.charAt(j)) {
-                    dp[i][j] = dp[i + 1][j - 1] + 2;
-                } else {
-                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
-                }
-            }
-        }
-        return dp[0][n - 1];
+        return 0;
     }
 
     /**
@@ -196,22 +91,7 @@ public class StringDemo {
      */
     // 双指针（滑动窗口）
     public static int characterReplacement(String s, int k) {
-        if (s == null || s.length() < 2 || k < 1) return 0;
-        int n = s.length();
-        int[] nums = new int[26];
-        int left = 0;
-        int right = 0;
-        int maxCount = 1;
-        while (right < n) {
-            nums[s.charAt(right) - 'A']++;
-            maxCount = Math.max(maxCount, nums[s.charAt(right) - 'A']);
-            if (right - left + 1 - maxCount > k) {
-                nums[s.charAt(left) - 'A']--;
-                left++;
-            }
-            right++;
-        }
-        return right - left;
+        return 0;
     }
 
     /**
@@ -233,67 +113,12 @@ public class StringDemo {
      */
     // 方法一：滑动窗口
     public static List<Integer> findAnagrams1(String s, String p) {
-        if (s == null || p == null || s.length() < p.length()) return Collections.emptyList();
-        int sLen = s.length();
-        int pLen = p.length();
-        List<Integer> res = new ArrayList<>();
-        int[] sCount = new int[26];
-        int[] pCount = new int[26];
-        for (int i = 0; i < pLen; i++) {
-            sCount[s.charAt(i) - 'a']++;
-            pCount[p.charAt(i) - 'a']++;
-        }
-        if (Arrays.equals(sCount, pCount)) {
-            res.add(0);
-        }
-        for (int i = 0; i < sLen - pLen; i++) {
-            sCount[s.charAt(i) - 'a']--;
-            sCount[s.charAt(i + pLen) - 'a']++;
-            if (Arrays.equals(sCount, pCount)) {
-                res.add(i + 1);
-            }
-        }
-        return res;
+        return null;
     }
 
     // 方法二：优化的滑动窗口
     public static List<Integer> findAnagrams2(String s, String p) {
-        if (s == null || p == null || s.length() < p.length()) return Collections.emptyList();
-        int sLen = s.length();
-        int pLen = p.length();
-        List<Integer> res = new ArrayList<>();
-        int[] count = new int[26];
-        for (int i = 0; i < pLen; i++) {
-            count[s.charAt(i) - 'a']++;
-            count[p.charAt(i) - 'a']--;
-        }
-        int differ = 0;
-        for (int i = 0; i < 26; i++) {
-            if (count[i] != 0) {
-                differ++;
-            }
-        }
-        if (differ == 0) {
-            res.add(0);
-        }
-        for (int i = 0; i < sLen - pLen; i++) {
-            if (count[s.charAt(i) - 'a'] == 1) {
-                differ--;
-            } else if (count[s.charAt(i) - 'a'] == 0) {
-                differ++;
-            }
-            --count[s.charAt(i) - 'a'];
-            if (count[s.charAt(i + pLen) - 'a'] == -1) {
-                differ--;
-            } else if (count[s.charAt(i + pLen) - 'a'] == 0) {
-                differ++;
-            }
-            ++count[s.charAt(i + pLen) - 'a'];
-            if (differ == 0) {
-                res.add(i + 1);
-            }
-        }
-        return res;
+        return null;
     }
 
     /**
@@ -309,96 +134,16 @@ public class StringDemo {
      */
     // 方法一：滑动窗口
     public static boolean checkInclusion1(String s1, String s2) {
-        if (s1 == null || s2 == null || s2.length() < s1.length()) return false;
-        int n = s1.length();
-        int m = s2.length();
-        int[] cnt1 = new int[26];
-        int[] cnt2 = new int[26];
-        for (int i = 0; i < n; i++) {
-            cnt1[s1.charAt(i) - 'a']++;
-            cnt2[s2.charAt(i) - 'a']++;
-        }
-        if (Arrays.equals(cnt1, cnt2)) {
-            return true;
-        }
-        // 注意 i 是从 n 开始的，也就是说第 i 个字符是没有被计数的，所以是进入计数(++)
-        for (int i = n; i < m; i++) {
-            ++cnt2[s2.charAt(i) - 'a'];
-            --cnt2[s2.charAt(i - n) - 'a'];
-            if (Arrays.equals(cnt1, cnt2)) {
-                return true;
-            }
-        }
         return false;
     }
 
     // 优化
     public static boolean checkInclusion2(String s1, String s2) {
-        if (s1 == null || s2 == null || s2.length() < s1.length()) return false;
-        int n = s1.length();
-        int m = s2.length();
-        int[] cnt = new int[26];
-        for (int i = 0; i < n; i++) {
-            --cnt[s1.charAt(i) - 'a'];
-            ++cnt[s2.charAt(i) - 'a'];
-        }
-        int diff = 0;
-        for (int i = 0; i < 26; i++) {
-            if (cnt[i] != 0) {
-                diff++;
-            }
-        }
-        if (diff == 0) {
-            return true;
-        }
-        for (int i = n; i < m; i++) {
-            int x = s2.charAt(i) - 'a';
-            int y = s2.charAt(i - n) - 'a';
-            if (x == y) {
-                continue;
-            }
-            if (cnt[x] == 0) {
-                diff++;
-            }
-            cnt[x]++;
-            if (cnt[x] == 0) {
-                diff--;
-            }
-            if (cnt[y] == 0) {
-                diff++;
-            }
-            cnt[y]--;
-            if (cnt[y] == 0) {
-                diff--;
-            }
-            if (diff == 0) {
-                return true;
-            }
-        }
         return false;
     }
 
     // 方法二：双指针
     public static boolean checkInclusion3(String s1, String s2) {
-        if (s1 == null || s2 == null || s2.length() < s1.length()) return false;
-        int n = s1.length();
-        int m = s2.length();
-        int[] cnt = new int[26];
-        for (int i = 0; i < n; i++) {
-            cnt[s1.charAt(i) - 'a']--;
-        }
-        int left = 0;
-        for (int right = 0; right < m; right++) {
-            int x = s2.charAt(right) - 'a';
-            ++cnt[x];
-            while (cnt[x] > 0) {
-                --cnt[s2.charAt(left) - 'a'];
-                left++;
-            }
-            if (right - left + 1 == n) {
-                return true;
-            }
-        }
         return false;
     }
 
@@ -415,37 +160,12 @@ public class StringDemo {
      */
     // 方法一：中心拓展
     public static int countSubstrings1(String s) {
-        if (s == null || s.length() <= 0) return 0;
-        int n = s.length();
-        int ans = 0;
-        for (int i = 0, len = 2 * n - 1; i < len; i++) {
-            int l = i / 2;
-            int r = i / 2 + i % 2;
-            while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
-                l--;
-                r++;
-                ans++;
-            }
-        }
-        return ans;
+        return 0;
     }
 
     // 方法二：动态规划
     public static int countSubstrings2(String s) {
-        if (s == null || s.length() <= 0) return 0;
-        int n = s.length();
-        boolean[][] dp = new boolean[n][n];
-        int ans = 0;
-        char[] charArr = s.toCharArray();
-        for (int j = 0; j < n; j++) {
-            for (int i = 0; i <= j; i++) {
-                if (charArr[i] == charArr[j] && (j - i < 2 || dp[i + 1][j - 1])) {
-                    dp[i][j] = true;
-                    ans++;
-                }
-            }
-        }
-        return ans;
+        return 0;
     }
 
     /**
@@ -459,39 +179,11 @@ public class StringDemo {
      */
     // 方法一：横向扫描
     public static String longestCommonPrefix1(String[] strs) {
-        if (strs == null || strs.length == 0) return "";
-        String prefix = strs[0];
-        for (int i = 1; i < strs.length; i++) {
-            prefix = longestCommonPrefix1(prefix, strs[i]);
-            if (prefix.isEmpty()) {
-                break;
-            }
-        }
-        return prefix;
-    }
-
-    private static String longestCommonPrefix1(String str1, String str2) {
-        int length = Math.min(str1.length(), str2.length());
-        int index = 0;
-        while (index < length && str1.charAt(index) == str2.charAt(index)) {
-            index++;
-        }
-        return str1.substring(0, index);
+        return "";
     }
 
     // 方法二：纵向扫描
     public static String longestCommonPrefix2(String[] strs) {
-        if (strs == null || strs.length == 0) return "";
-        int length = strs[0].length();
-        int count = strs.length;
-        for (int i = 0; i < length; i++) {
-            char c = strs[0].charAt(i);
-            for (int j = 1; j < count; j++) {
-                if (i == strs[j].length() || strs[j].charAt(i) != c) {
-                    return strs[0].substring(0, i);
-                }
-            }
-        }
         return "";
     }
 
@@ -507,39 +199,11 @@ public class StringDemo {
      * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
      */
     public static int lengthOfLongestSubstring1(String s) {
-        if (s == null || s.isEmpty()) return 0;
-        Set<Character> set = new HashSet<>();
-        int r = -1;
-        int ans = 0;
-        int n = s.length();
-        for (int i = 0; i < n; i++) {
-            if (i > 0) {
-                set.remove(s.charAt(i - 1));
-            }
-            while (r + 1 < n && !set.contains(s.charAt(r + 1))) {
-                set.add(s.charAt(r + 1));
-                r++;
-            }
-            ans = Math.max(ans, r - i + 1);
-        }
-        return ans;
+        return 0;
     }
 
     public static int lengthOfLongestSubstring2(String s) {
-        if (s == null || s.isEmpty()) return 0;
-        Set<Character> set = new HashSet<>();
-        int length = s.length();
-        int ans = 1;
-        for (int left = 0, right = 0; right < length; right++) {
-            char currChar = s.charAt(right);
-            while (set.contains(currChar)) {
-                set.remove(s.charAt(left));
-                left++;
-            }
-            set.add(currChar);
-            ans = Math.max(ans, right - left + 1);
-        }
-        return ans;
+        return 0;
     }
 
     /**
@@ -553,52 +217,12 @@ public class StringDemo {
      */
     // 方法一：动态规划
     public static boolean isInterleave1(String s1, String s2, String s3) {
-        if (s1 == null || s2 == null || s3 == null) return false;
-        int n = s1.length();
-        int m = s2.length();
-        int t = s3.length();
-        if (n + m != t) {
-            return false;
-        }
-        boolean[][] f = new boolean[n + 1][m + 1];
-        f[0][0] = true;
-        for (int i = 0; i <= n; i++) {
-            for (int j = 0; j <= m; j++) {
-                int p = i + j - 1;
-                if (i > 0) {
-                    f[i][j] = f[i][j] || (f[i - 1][j] && s1.charAt(i - 1) == s3.charAt(p));
-                }
-                if (j > 0) {
-                    f[i][j] = f[i][j] || (f[i][j - 1] && s2.charAt(j - 1) == s3.charAt(p));
-                }
-            }
-        }
-        return f[n][m];
+        return false;
     }
 
     // 动态规划 + 滚动数组
     public static boolean isInterleave2(String s1, String s2, String s3) {
-        if (s1 == null || s2 == null || s3 == null) return false;
-        int n = s1.length();
-        int m = s2.length();
-        int t = s3.length();
-        if (n + m != t) {
-            return false;
-        }
-        boolean[] f = new boolean[m + 1];
-        f[0] = true;
-        for (int i = 0; i <= n; i++) {
-            for (int j = 0; j <= m; j++) {
-                int p = i + j - 1;
-                if (i > 0) {
-                    f[j] = f[j] && s1.charAt(i - 1) == s3.charAt(p);
-                }
-                if (j > 0) {
-                    f[j] = f[j] || s2.charAt(j - 1) == s3.charAt(p);
-                }
-            }
-        }
-        return f[m];
+        return false;
     }
 
     /**
@@ -627,20 +251,7 @@ public class StringDemo {
      * 输出: false
      */
     public static boolean wordBreak(String s, List<String> wordDict) {
-        if (s == null || s.isEmpty() || wordDict == null || wordDict.isEmpty()) return false;
-        Set<String> wordDictSet = new HashSet<>(wordDict);
-        int n = s.length();
-        boolean[] dp = new boolean[n + 1];
-        dp[0] = true;
-        for (int i = 1; i <= n; i++) {
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && wordDictSet.contains(s.substring(j, i))) {
-                    dp[i] = true;
-                    break;
-                }
-            }
-        }
-        return dp[n];
+        return false;
     }
 
     /**
@@ -655,19 +266,7 @@ public class StringDemo {
      */
     // 哈希法
     public static List<String> findRepeatedDnaSequences(String s) {
-        final int L = 10;
-        if (s == null || s.length() < L) return Collections.emptyList();
-        List<String> res = new ArrayList<>();
-        Map<String, Integer> map = new HashMap<>();
-        int n = s.length();
-        for (int i = 0; i <= n - L; i++) {
-            String sub = s.substring(i, i + L);
-            map.put(sub, map.getOrDefault(sub, 0) + 1);
-            if (map.get(sub) == 2) {
-                res.add(sub);
-            }
-        }
-        return res;
+        return null;
     }
 
     /**
@@ -681,18 +280,7 @@ public class StringDemo {
      */
     // 方法一：双指针
     public static boolean isSubsequence(String s, String t) {
-        if (s == null || t == null || s.length() > t.length()) return false;
-        int n = s.length();
-        int m = t.length();
-        int i = 0;
-        int j = 0;
-        while (i < n && j < m) {
-            if (s.charAt(i) == t.charAt(j)) {
-                i++;
-            }
-            j++;
-        }
-        return i == n;
+        return false;
     }
 
     /**
@@ -709,22 +297,7 @@ public class StringDemo {
      * 输出：0
      */
     public static int longestCommonSubsequence(String text1, String text2) {
-        if (text1 == null || text2 == null || text1.isEmpty() || text2.isEmpty()) return 0;
-        int m = text1.length();
-        int n = text2.length();
-        int[][] dp = new int[m + 1][n + 1];
-        for (int i = 1; i <= m; i++) {
-            char c1 = text1.charAt(i - 1);
-            for (int j = 1; j <= n; j++) {
-                char c2 = text2.charAt(j - 1);
-                if (c1 == c2) {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
-                } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-                }
-            }
-        }
-        return dp[m][n];
+        return 0;
     }
 
     /**
@@ -741,23 +314,7 @@ public class StringDemo {
      */
     // 方法一：最长公共子序列
     public static int minDistance1(String word1, String word2) {
-        if (word1 == null || word2 == null || word1.isEmpty() || word2.isEmpty()) return 0;
-        int m = word1.length();
-        int n = word2.length();
-        int[][] dp = new int[m + 1][n + 1];
-        for (int i = 1; i <= m; i++) {
-            char c1 = word1.charAt(i - 1);
-            for (int j = 1; j <= n; j++) {
-                char c2 = word2.charAt(j - 1);
-                if (c1 == c2) {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
-                } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-                }
-            }
-        }
-        int lcs = dp[m][n];
-        return m - lcs + n - lcs;
+        return 0;
     }
 
     // 方法二：动态规划
@@ -767,28 +324,7 @@ public class StringDemo {
     // 只有将另一个字符串的字符全部删除，因此对任意 0≤j≤n，有 dp[0][j]=j；
     // 当 j=0 时，word2[0:j] 为空，同理可得，对任意 0≤i≤m，有 dp[i][0]=i。
     public static int minDistance2(String word1, String word2) {
-        if (word1 == null || word2 == null || word1.isEmpty() || word2.isEmpty()) return 0;
-        int m = word1.length();
-        int n = word2.length();
-        int[][] dp = new int[m + 1][n + 1];
-        for (int i = 0; i <= m; i++) {
-            dp[i][0] = i;
-        }
-        for (int j = 0; j <= n; j++) {
-            dp[0][j] = j;
-        }
-        for (int i = 1; i <= m; i++) {
-            char c1 = word1.charAt(i - 1);
-            for (int j = 1; j <= n; j++) {
-                char c2 = word2.charAt(j - 1);
-                if (c1 == c2) {
-                    dp[i][j] = dp[i - 1][j - 1];
-                } else {
-                    dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + 1;
-                }
-            }
-        }
-        return dp[m][n];
+        return 0;
     }
 
     /**
@@ -808,28 +344,7 @@ public class StringDemo {
      */
     // 方法一：贪心 + 单调栈
     public static String removeKdigits(String num, int k) {
-        if (num == null || k < 1 || num.length() <= k) return "0";
-        int length = num.length();
-        Deque<Character> deque = new LinkedList<>();
-        for (int i = 0; i < length; i++) {
-            char digit = num.charAt(i);
-            while (!deque.isEmpty() && k > 0 && deque.peekLast() > digit) {
-                deque.pollLast();
-                k--;
-            }
-            deque.offerLast(digit);
-        }
-        for (int i = 0; i < k; i++) {
-            deque.pollLast();
-        }
-        while (deque.peekFirst() == '0') {
-            deque.pollFirst();
-        }
-        StringBuilder builder = new StringBuilder();
-        while (!deque.isEmpty()) {
-            builder.append(deque.pollFirst());
-        }
-        return builder.isEmpty() ? "0" : builder.toString();
+        return null;
     }
 
 }
