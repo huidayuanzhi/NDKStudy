@@ -239,4 +239,15 @@ public class StringTest {
         Logger.log("isSubsequence result = " + result); // false
     }
 
+    @Test
+    public void testLongestCommonSubsequence() {
+        Logger.log("longestCommonSubsequence");
+        int result = StringDemo.longestCommonSubsequence("abcde", "ace");
+        Logger.log("longestCommonSubsequence result = " + result); // 3
+        result = StringDemo.longestCommonSubsequence("abc", "abc");
+        Logger.log("longestCommonSubsequence result = " + result); // 3
+        result = StringDemo.longestCommonSubsequence("abc", "def");
+        Logger.log("longestCommonSubsequence result = " + result); // 0
+    }
+
 }
