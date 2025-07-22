@@ -250,4 +250,22 @@ public class StringTest {
         Logger.log("longestCommonSubsequence result = " + result); // 0
     }
 
+    @Test
+    public void testMinDistance1() {
+        Logger.log("minDistance1");
+        int result = StringDemo.minDistance1("sea", "eat");
+        Logger.log("minDistance1 result = " + result); // 2
+        result = StringDemo.minDistance1("leetcode", "etco");
+        Logger.log("minDistance1 result = " + result); // 4
+    }
+
+    @Test
+    public void testMinDistance2() {
+        Logger.log("minDistance2");
+        int result = StringDemo.minDistance2("sea", "eat");
+        Logger.log("minDistance2 result = " + result); // 2
+        result = StringDemo.minDistance2("leetcode", "etco");
+        Logger.log("minDistance2 result = " + result); // 4
+    }
+
 }

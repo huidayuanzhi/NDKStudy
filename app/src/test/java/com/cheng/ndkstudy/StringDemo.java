@@ -725,4 +725,68 @@ public class StringDemo {
         return dp[m][n];
     }
 
+    /**
+     * 583.两个字符串的删除操作
+     * 给定两个单词word1和word2，返回使得word1和word2相同所需的最小步数。
+     * 每步可以删除任意一个字符串中的一个字符。
+     * 示例 1：
+     * 输入: word1 = "sea", word2 = "eat"
+     * 输出: 2
+     * 解释: 第一步将 "sea" 变为 "ea" ，第二步将 "eat "变为 "ea"
+     * 示例  2:
+     * 输入：word1 = "leetcode", word2 = "etco"
+     * 输出：4
+     */
+    // 方法一：最长公共子序列
+    public static int minDistance1(String word1, String word2) {
+        if (word1 == null || word2 == null || word1.isEmpty() || word2.isEmpty()) return 0;
+        int m = word1.length();
+        int n = word2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            char c1 = word1.charAt(i - 1);
+            for (int j = 1; j <= n; j++) {
+                char c2 = word2.charAt(j - 1);
+                if (c1 == c2) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        int lcs = dp[m][n];
+        return m - lcs + n - lcs;
+    }
+
+    // 方法二：动态规划
+    // dp[i][j] 表示使 word1[0:i] 和 word2[0:j] 相同的最少删除操作次数
+    // 动态规划的边界情况如下：
+    // 当 i=0 时，word1[0:i] 为空，空字符串和任何字符串要变成相同，
+    // 只有将另一个字符串的字符全部删除，因此对任意 0≤j≤n，有 dp[0][j]=j；
+    // 当 j=0 时，word2[0:j] 为空，同理可得，对任意 0≤i≤m，有 dp[i][0]=i。
+    public static int minDistance2(String word1, String word2) {
+        if (word1 == null || word2 == null || word1.isEmpty() || word2.isEmpty()) return 0;
+        int m = word1.length();
+        int n = word2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 0; i <= m; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= n; j++) {
+            dp[0][j] = j;
+        }
+        for (int i = 1; i <= m; i++) {
+            char c1 = word1.charAt(i - 1);
+            for (int j = 1; j <= n; j++) {
+                char c2 = word2.charAt(j - 1);
+                if (c1 == c2) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + 1;
+                }
+            }
+        }
+        return dp[m][n];
+    }
+
 }
