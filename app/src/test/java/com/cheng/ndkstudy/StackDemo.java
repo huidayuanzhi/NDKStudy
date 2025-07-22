@@ -1,5 +1,6 @@
 package com.cheng.ndkstudy;
 
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -58,5 +59,34 @@ public class StackDemo {
         }
         return res;
     }
+
+    /**
+     * 503. 下一个更大元素 II
+     * 给定一个循环数组 nums，返回 nums 中每个元素的下一个更大元素。
+     * 示例 1:
+     * 输入: nums = [1,2,1]
+     * 输出: [2,-1,2]
+     * 示例 2:
+     * 输入: nums = [1,2,3,4,3]
+     * 输出: [2,3,4,-1,4]
+     */
+    // 方法一：单调栈 + 循环数组
+    // 可以把这个循环数组「拉直」，即复制该序列的前 n−1 个元素拼接在原序列的后面。
+    // 这样就可以将这个新序列当作普通序列。在这里只需要在处理时对下标取模即可。
+    public static int[] nextGreaterElementsII(int[] nums) {
+        if (nums == null || nums.length <= 0) return new int[0];
+        int n = nums.length;
+        Deque<Integer> stack = new LinkedList<>();
+        int[] res = new int[n];
+        Arrays.fill(res, -1);
+        for (int i = 0; i < 2 * n - 1; i++) {
+            while (!stack.isEmpty() && nums[stack.peek()] < nums[i % n]) {
+                res[stack.pop()] = nums[i % n];
+            }
+            stack.push(i % n);
+        }
+        return res;
+    }
+
 
 }
