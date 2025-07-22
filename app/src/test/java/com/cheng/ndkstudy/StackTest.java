@@ -49,4 +49,15 @@ public class StackTest {
         Logger.log(result2); // 2,3,4,-1,4
     }
 
+    @Test
+    public void testIsValid() {
+        Logger.log("isValid");
+        boolean result = StackDemo.isValid("()[]{}");
+        Logger.log("isValid result = " + result); // true
+        result = StackDemo.isValid("([])");
+        Logger.log("isValid result = " + result); // true
+        result = StackDemo.isValid("([)]");
+        Logger.log("isValid result = " + result); // false
+    }
+
 }
