@@ -3,8 +3,10 @@ package com.cheng.ndkstudy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class StringDemo {
@@ -639,5 +641,32 @@ public class StringDemo {
         return dp[n];
     }
 
+    /**
+     * 187. 重复的DNA序列
+     * 给定一个表示DNA序列的字符串 s，返回所有在 DNA 分子中出现不止一次的长度为 10 的序列(子字符串)。
+     * 示例 1：
+     * 输入：s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
+     * 输出：["AAAAACCCCC","CCCCCAAAAA"]
+     * 示例 2：
+     * 输入：s = "AAAAAAAAAAAAA"
+     * 输出：["AAAAAAAAAA"]
+     */
+    // 哈希法
+    public static List<String> findRepeatedDnaSequences(String s) {
+        final int L = 10;
+        if (s == null || s.length() < L) return Collections.emptyList();
+        List<String> res = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
+        int n = s.length();
+        for (int i = 0; i <= n - L; i++) {
+            String sub = s.substring(i, i + L);
+            map.put(sub, map.getOrDefault(sub, 0) + 1);
+            if (map.get(sub) == 2) {
+                res.add(sub);
+            }
+        }
+        return res;
+
+    }
 
 }

@@ -216,6 +216,18 @@ public class StringTest {
         Logger.log("wordBreak result = " + result); // true
         result = StringDemo.wordBreak("catsandog", List.of("cats", "dog", "sand", "and", "cat"));
         Logger.log("wordBreak result = " + result); // false
+    }
+
+    @Test
+    public void testFindRepeatedDnaSequences() {
+        Logger.log("findRepeatedDnaSequences");
+        List<String> result = StringDemo.findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT");
+        Logger.log("findRepeatedDnaSequences result -");
+        Logger.log(result);
+        Logger.log("findRepeatedDnaSequences");
+        List<String> result2 = StringDemo.findRepeatedDnaSequences("AAAAAAAAAAAAA");
+        Logger.log("findRepeatedDnaSequences result -");
+        Logger.log(result2);
 
     }
 
