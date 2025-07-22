@@ -88,5 +88,40 @@ public class StackDemo {
         return res;
     }
 
+    /**
+     * 20. 有效的括号
+     * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s，判断字符串是否有效。
+     * 示例 1：
+     * 输入：s = "()[]{}"
+     * 输出：true
+     * 示例 2：
+     * 输入：s = "([])"
+     * 输出：true
+     * 示例 3：
+     * 输入：s = "([)]"
+     * 输出：false
+     */
+    public static boolean isValid(String s) {
+        if (s == null || s.isEmpty() || s.length() % 2 != 0) return false;
+        int n = s.length();
+        Map<Character, Character> pairs = new HashMap<>();
+        pairs.put(')', '(');
+        pairs.put('}', '{');
+        pairs.put(']', '[');
+        Deque<Character> stack = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
+            // 当前字符为有括号
+            if (pairs.containsKey(ch)) {
+                if (stack.isEmpty() || stack.peek() != pairs.get(ch)) {
+                    return false;
+                }
+                stack.pop();
+            } else {
+                stack.push(ch);
+            }
+        }
+        return stack.isEmpty();
+    }
 
 }
