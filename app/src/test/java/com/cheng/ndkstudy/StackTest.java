@@ -60,4 +60,19 @@ public class StackTest {
         Logger.log("isValid result = " + result); // false
     }
 
+    @Test
+    public void testSimplifyPath() {
+        Logger.log("simplifyPath");
+        String result = StackDemo.simplifyPath("/home/");
+        Logger.log("simplifyPath result = " + result); // /home
+        result = StackDemo.simplifyPath("/home//foo/");
+        Logger.log("simplifyPath result = " + result); // /home/foo
+        result = StackDemo.simplifyPath("/home/user/Documents/../Pictures");
+        Logger.log("simplifyPath result = " + result); // /home/user/Pictures
+        result = StackDemo.simplifyPath("/../");
+        Logger.log("simplifyPath result = " + result); // /
+        result = StackDemo.simplifyPath("/.../a/../b/c/../d/./");
+        Logger.log("simplifyPath result = " + result); // /.../b/d
+    }
+
 }

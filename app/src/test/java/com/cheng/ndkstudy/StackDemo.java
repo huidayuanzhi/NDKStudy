@@ -124,4 +124,47 @@ public class StackDemo {
         return stack.isEmpty();
     }
 
+    /**
+     * 71. 简化路径
+     * 给你一个字符串 path，表示指向某一文件或目录的 Unix 风格绝对路径，将其转化为更加简洁的规范路径。
+     * 示例 1：
+     * 输入：path = "/home/"
+     * 输出："/home"
+     * 示例 2：
+     * 输入：path = "/home//foo/"
+     * 输出："/home/foo"
+     * 示例 3：
+     * 输入：path = "/home/user/Documents/../Pictures"
+     * 输出："/home/user/Pictures"
+     * 示例 4：
+     * 输入：path = "/../"
+     * 输出："/"
+     * 示例 5：
+     * 输入：path = "/.../a/../b/c/../d/./"
+     * 输出："/.../b/d"
+     */
+    public static String simplifyPath(String path) {
+        if (path == null || path.isEmpty()) return "/";
+        String[] names = path.split("/");
+        Deque<String> stack = new LinkedList<>();
+        for (String name : names) {
+            if ("..".equals(name)) {
+                if (!stack.isEmpty()) {
+                    stack.pollLast();
+                }
+            } else if (name.length() > 0 && !".".equals(name)) {
+                stack.offerLast(name);
+            }
+        }
+        StringBuilder builder = new StringBuilder();
+        if (stack.isEmpty()) {
+            return "/";
+        }
+        while (!stack.isEmpty()) {
+            builder.append("/");
+            builder.append(stack.pollFirst());
+        }
+        return builder.toString();
+    }
+
 }
