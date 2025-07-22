@@ -38,4 +38,15 @@ public class StackTest {
         Logger.log(result2);
     }
 
+    @Test
+    public void testNextGreaterElementsII() {
+        Logger.log("nextGreaterElementsII");
+        int[] result = StackDemo.nextGreaterElementsII(new int[]{1,2,1});
+        Logger.log("nextGreaterElementsII result -");
+        Logger.log(result); // 2,-1,2
+        int[] result2 = StackDemo.nextGreaterElementsII(new int[]{1,2,3,4,3});
+        Logger.log("nextGreaterElementsII result -");
+        Logger.log(result2); // 2,3,4,-1,4
+    }
+
 }
