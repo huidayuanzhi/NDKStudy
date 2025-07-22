@@ -228,7 +228,15 @@ public class StringTest {
         List<String> result2 = StringDemo.findRepeatedDnaSequences("AAAAAAAAAAAAA");
         Logger.log("findRepeatedDnaSequences result -");
         Logger.log(result2);
+    }
 
+    @Test
+    public void testIsSubsequence() {
+        Logger.log("isSubsequence");
+        boolean result = StringDemo.isSubsequence("abc", "ahbgdc");
+        Logger.log("isSubsequence result = " + result); // true
+        result = StringDemo.isSubsequence("axc", "ahbgdc");
+        Logger.log("isSubsequence result = " + result); // false
     }
 
 }

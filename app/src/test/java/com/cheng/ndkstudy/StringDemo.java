@@ -666,7 +666,31 @@ public class StringDemo {
             }
         }
         return res;
+    }
 
+    /**
+     * 392. 判断子序列
+     * 示例 1：
+     * 输入：s = "abc", t = "ahbgdc"
+     * 输出：true
+     * 示例 2：
+     * 输入：s = "axc", t = "ahbgdc"
+     * 输出：false
+     */
+    // 方法一：双指针
+    public static boolean isSubsequence(String s, String t) {
+        if (s == null || t == null || s.length() > t.length()) return false;
+        int n = s.length();
+        int m = t.length();
+        int i = 0;
+        int j = 0;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == n;
     }
 
 }
