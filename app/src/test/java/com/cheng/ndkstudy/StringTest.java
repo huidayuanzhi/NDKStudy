@@ -1,5 +1,7 @@
 package com.cheng.ndkstudy;
 
+import android.util.Log;
+
 import org.junit.Test;
 
 import java.util.List;
@@ -266,6 +268,17 @@ public class StringTest {
         Logger.log("minDistance2 result = " + result); // 2
         result = StringDemo.minDistance2("leetcode", "etco");
         Logger.log("minDistance2 result = " + result); // 4
+    }
+
+    @Test
+    public void testRemoveKdigits() {
+        Logger.log("removeKdigits");
+        String result = StringDemo.removeKdigits("1432219", 3);
+        Logger.log("removeKdigits 1432219 result = " + result); // 1219
+        result = StringDemo.removeKdigits("10200", 1);
+        Logger.log("removeKdigits 10200 result = " + result); // 200
+        result = StringDemo.removeKdigits("10", 2);
+        Logger.log("removeKdigits 10 result = " + result); // 0
     }
 
 }
