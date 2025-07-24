@@ -223,5 +223,16 @@ public class BinaryTreeDemo {
         return isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left);
     }
 
+    /**
+     * 镜像二叉树
+     */
+    public static TreeNode mirrorTree(TreeNode root) {
+        if (root == null) return root;
+        TreeNode left = root.left;
+        root.left = mirrorTree(root.right);
+        root.right = mirrorTree(left);
+        return root;
+    }
+
 
 }

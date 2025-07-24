@@ -152,4 +152,13 @@ public class BinaryTreeTest {
         Logger.log("isMirror result = " + result);
     }
 
+    @Test
+    public void testMirrorTree() {
+        Logger.log("mirrorTree");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{5,7,9,8,3,2,4});
+        BinaryTreeDemo.TreeNode mirror = BinaryTreeDemo.mirrorTree(root);
+        boolean result = BinaryTreeDemo.isMirror(root, mirror);
+        Logger.log("mirrorTree result = " + result);
+    }
+
 }
