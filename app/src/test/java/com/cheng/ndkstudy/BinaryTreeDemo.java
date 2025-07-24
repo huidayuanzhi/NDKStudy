@@ -455,4 +455,45 @@ public class BinaryTreeDemo {
         return res;
     }
 
+    /**
+     * 94.二叉树的中序遍历
+     * 示例 1：
+     * 输入：root = [1,null,2,3]
+     * 输出：[1,3,2]
+     */
+    // 方法一：递归
+    public static List<Integer> inorderTraversal1(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        List<Integer> result = new ArrayList<>();
+        inorder(root, result);
+        return result;
+    }
+
+    private static void inorder(TreeNode root, List<Integer> result) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, result);
+        result.add(root.val);
+        inorder(root.right, result);
+    }
+
+    // 方法二：迭代
+    public static List<Integer> inorderTraversal2(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        List<Integer> result = new ArrayList<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+        TreeNode curr = root;
+        while (curr != null || !stack.isEmpty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            result.add(curr.val);
+            curr = curr.right;
+        }
+        return result;
+    }
+
 }
