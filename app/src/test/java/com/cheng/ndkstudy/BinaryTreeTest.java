@@ -76,4 +76,12 @@ public class BinaryTreeTest {
         Logger.log("minDepth2 result = " + result); //5
     }
 
+    @Test
+    public void testNumOfTreeNode() {
+        Logger.log("numOfTreeNode");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{3,9,20,null,null,15,7});
+        int result = BinaryTreeDemo.numOfTreeNode(root);
+        Logger.log("numOfTreeNode result = " + result);
+    }
+
 }

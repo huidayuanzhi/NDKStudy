@@ -86,4 +86,14 @@ public class BinaryTreeDemo {
         return minDepth;
     }
 
+    /**
+     * 二叉树中节点的个数
+     */
+    public static int numOfTreeNode(TreeNode root) {
+        if (root == null) return 0;
+        int left = numOfTreeNode(root.left);
+        int right = numOfTreeNode(root.right);
+        return left + right + 1;
+    }
+
 }
