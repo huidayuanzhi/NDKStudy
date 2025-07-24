@@ -140,4 +140,16 @@ public class BinaryTreeTest {
         Logger.log("isSameTree result = " + result);
     }
 
+    @Test
+    public void testIsMirror() {
+        Logger.log("isMirror");
+        BinaryTreeDemo.TreeNode t1 = create(new Integer[]{1,2,2,3,4,4,3});
+        BinaryTreeDemo.TreeNode t2 = create(new Integer[]{1,2,2,3,4,4,3});
+        BinaryTreeDemo.TreeNode t3 = create(new Integer[]{1,3,2,5,4,6});
+        boolean result = BinaryTreeDemo.isMirror(t1, t2);
+        Logger.log("isMirror result = " + result);
+        result = BinaryTreeDemo.isMirror(t1, t3);
+        Logger.log("isMirror result = " + result);
+    }
+
 }
