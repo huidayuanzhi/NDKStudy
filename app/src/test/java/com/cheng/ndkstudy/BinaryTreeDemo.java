@@ -1,7 +1,10 @@
 package com.cheng.ndkstudy;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
 
@@ -232,6 +235,31 @@ public class BinaryTreeDemo {
         root.left = mirrorTree(root.right);
         root.right = mirrorTree(left);
         return root;
+    }
+
+    /**
+     * 二叉树的搜索区间
+     */
+    public static List<Integer> searchRange(TreeNode root, int k1, int k2) {
+        if (root == null) return Collections.emptyList();
+        List<Integer> result = new ArrayList<>();
+        searchHelper(root, k1, k2, result);
+        return result;
+    }
+
+    private static void searchHelper(TreeNode root, int k1, int k2, List<Integer> result) {
+        if (root == null) {
+            return;
+        }
+        if (root.val > k1) {
+            searchHelper(root.left, k1, k2, result);
+        }
+        if (root.val >= k1 && root.val <= k2) {
+            result.add(root.val);
+        }
+        if (root.val < k2) {
+            searchHelper(root.right, k1, k2, result);
+        }
     }
 
 

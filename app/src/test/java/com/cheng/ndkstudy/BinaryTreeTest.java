@@ -3,6 +3,7 @@ package com.cheng.ndkstudy;
 import org.junit.Test;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BinaryTreeTest {
@@ -159,6 +160,15 @@ public class BinaryTreeTest {
         BinaryTreeDemo.TreeNode mirror = BinaryTreeDemo.mirrorTree(root);
         boolean result = BinaryTreeDemo.isMirror(root, mirror);
         Logger.log("mirrorTree result = " + result);
+    }
+
+    @Test
+    public void testSearchRange() {
+        Logger.log("searchRange");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{4,2,7,1,3});
+        List<Integer> result = BinaryTreeDemo.searchRange(root, 3, 7);
+        Logger.log("searchRange result -");
+        Logger.log(result);
     }
 
 }
