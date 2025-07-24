@@ -182,4 +182,11 @@ public class BinaryTreeTest {
         Logger.log("minDiffInBST result = " + result);
     }
 
+    @Test
+    public void testNumTrees() {
+        Logger.log("numTrees");
+        int result = BinaryTreeDemo.numTrees(3);
+        Logger.log("numTrees result = " + result); // 5
+    }
+
 }
