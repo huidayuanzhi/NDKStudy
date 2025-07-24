@@ -14,7 +14,7 @@ import java.util.Set;
 public class StringDemo {
 
     /**
-     * 5. 最长回文子串
+     * 5. 最长回文子串 - 动态规划/中心扩展
      * 给你一个字符串 s，找到 s 中最长的回文子串。
      * 示例 1：
      * 输入：s = "babad"
@@ -26,12 +26,63 @@ public class StringDemo {
      */
     // 方法一：动态规划
     public static String longestPalindrome1(String s) {
-        return null;
+        if (s == null || s.isEmpty()) return "";
+        int n = s.length();
+        boolean[][] dp = new boolean[n][n];
+        int start = 0;
+        int maxLen = 1;
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = true;
+        }
+        for (int L = 2; L <= n; L++) {
+            for (int i = 0; i < n; i++) {
+                int j = L + i - 1;
+                if (j >= n) {
+                    break;
+                }
+                if (s.charAt(i) != s.charAt(j)) {
+                    dp[i][j] = false;
+                } else {
+                    if (j - i < 3) {
+                        dp[i][j] = true;
+                    } else {
+                        dp[i][j] = dp[i + 1][j - 1];
+                    }
+                }
+                if (dp[i][j] && L > maxLen) {
+                    maxLen = L;
+                    start = i;
+                }
+            }
+        }
+        return s.substring(start, start + maxLen);
     }
 
     // 方法二：中心扩展算法
     public static String longestPalindrome2(String s) {
-        return "";
+        if (s == null || s.isEmpty()) return "";
+        int n = s.length();
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i < n; i++) {
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > right - left) {
+                left = i - (len - 1) / 2;
+                right = i + len / 2;
+            }
+        }
+        return s.substring(left, right + 1);
+    }
+
+    private static int expandAroundCenter(String s, int l, int r) {
+        int n = s.length();
+        while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
+            l--;
+            r++;
+        }
+        return r - l - 1;
     }
 
     /**
@@ -48,11 +99,42 @@ public class StringDemo {
      * 解释：最长子串为 "ababb" ，其中 'a' 重复了 2 次， 'b' 重复了 3 次。
      */
     public static int longestSubstring(String s, int k) {
-        return 0;
+        if (s == null || k < 2 || s.length() < k) return 0;
+        return dfs(s, 0, s.length() - 1, k);
+    }
+
+    private static int dfs(String s, int left, int right, int k) {
+        int[] cnt = new int[26];
+        for (int i = left; i <= right; i++) {
+            cnt[s.charAt(i) - 'a']++;
+        }
+        char split = 0;
+        for (int i = 0; i < 26; i++) {
+            if (cnt[i] > 0 && cnt[i] < k) {
+                split = (char)(i + 'a');
+            }
+        }
+        if (split == 0) {
+            return right - left + 1;
+        }
+        int i = left;
+        int ans = 0;
+        while (i <= right) {
+            while (i <= right && s.charAt(i) == split) {
+                i++;
+            }
+            int start = i;
+            while (i <= right && s.charAt(i) != split) {
+                i++;
+            }
+            int length = dfs(s, start, i - 1, k);
+            ans = Math.max(ans, length);
+        }
+        return ans;
     }
 
     /**
-     * 516. 最长回文子序列
+     * 516. 最长回文子序列 - 动态规划
      * 子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。
      * 示例 1：
      * 输入：s = "bbbab"
@@ -66,11 +148,24 @@ public class StringDemo {
     // 动态规划
     // 用 dp[i][j] 表示字符串s的下标范围 [i,j] 内的最长回文子序列的长度
     public static int longestPalindromeSubseq(String s) {
-        return 0;
+        if (s == null || s.length() <= 0) return 0;
+        int n = s.length();
+        int[][] dp = new int[n][n];
+        for (int i = n - 1; i >= 0; i--) {
+            dp[i][i] = 1;
+            for (int j = i + 1; j < n; j++) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
+                } else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[0][n - 1];
     }
 
     /**
-     * 424. 替换后的最长重复字符
+     * 424. 替换后的最长重复字符 - 双指针（滑动窗口）
      * 给你一个字符串 s 和一个整数 k。可以选择字符串中的任一字符，
      * 并将其更改为任何其他大写英文字符。该操作最多可执行 k 次。
      * 在执行上述操作后，返回包含相同字母的最长子字符串的长度。
@@ -91,11 +186,26 @@ public class StringDemo {
      */
     // 双指针（滑动窗口）
     public static int characterReplacement(String s, int k) {
-        return 0;
+        if (s == null || s.length() < 2 || k < 1) return 0;
+        int n = s.length();
+        int maxCount = 1;
+        int[] cnt = new int[26];
+        int left = 0;
+        int right = 0;
+        while (right < n) {
+            cnt[s.charAt(right) - 'A']++;
+            maxCount = Math.max(maxCount, cnt[s.charAt(right) - 'A']);
+            while (right - left + 1 - maxCount > k) {
+                cnt[s.charAt(left) - 'A']--;
+                left++;
+            }
+            right++;
+        }
+        return right - left;
     }
 
     /**
-     * 438. 找到字符串中所有字母异位词
+     * 438. 找到字符串中所有字母异位词 - 滑动窗口
      * 给定两个字符串 s 和 p，找到 s 中所有 p 的异位词的子串，返回这些子串的起始索引。
      * 示例 1:
      * 输入: s = "cbaebabacd", p = "abc"
@@ -113,16 +223,71 @@ public class StringDemo {
      */
     // 方法一：滑动窗口
     public static List<Integer> findAnagrams1(String s, String p) {
-        return null;
+        if (s == null || s.isEmpty() || p == null || s.length() < p.length()) return Collections.emptyList();
+        int sLen = s.length();
+        int pLen = p.length();
+        int[] sCount = new int[26];
+        int[] pCount = new int[26];
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < pLen; i++) {
+            sCount[s.charAt(i) - 'a']++;
+            pCount[p.charAt(i) - 'a']++;
+        }
+        if (Arrays.equals(sCount, pCount)) {
+            res.add(0);
+        }
+        for (int i = 0; i < sLen - pLen; i++) {
+            --sCount[s.charAt(i) - 'a'];
+            ++sCount[s.charAt(i + pLen) - 'a'];
+            if (Arrays.equals(sCount, pCount)) {
+                res.add(i + 1);
+            }
+        }
+        return res;
     }
 
     // 方法二：优化的滑动窗口
     public static List<Integer> findAnagrams2(String s, String p) {
-        return null;
+        if (s == null || s.isEmpty() || p == null || s.length() < p.length()) return Collections.emptyList();
+        int sLen = s.length();
+        int pLen = p.length();
+        int[] count = new int[26];
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < pLen; i++) {
+            --count[s.charAt(i) - 'a'];
+            ++count[p.charAt(i) - 'a'];
+        }
+        int diff = 0;
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0) {
+                diff++;
+            }
+        }
+        if (diff == 0) {
+            res.add(0);
+        }
+        for (int i = 0; i < sLen - pLen; i++) {
+            if (count[s.charAt(i) - 'a'] == 1) {
+                diff--;
+            } else if (count[s.charAt(i) - 'a'] == 0) {
+                diff++;
+            }
+            --count[s.charAt(i) - 'a'];
+            if (count[s.charAt(i + pLen) - 'a'] == -1) {
+                diff--;
+            } else if (count[s.charAt(i + pLen) - 'a'] == 0) {
+                diff++;
+            }
+            ++count[s.charAt(i + pLen) - 'a'];
+            if (diff == 0) {
+                res.add(i + 1);
+            }
+        }
+        return res;
     }
 
     /**
-     * 567.字符串的排列
+     * 567.字符串的排列 - 滑动窗口
      * 给你两个字符串s1和s2，写一个函数来判断s2是否包含s1的排列。换句话说，s1的排列之一是s2的子串。
      * 示例 1：
      * 输入：s1 = "ab" s2 = "eidbaooo"
@@ -134,21 +299,93 @@ public class StringDemo {
      */
     // 方法一：滑动窗口
     public static boolean checkInclusion1(String s1, String s2) {
+        if (s1 == null || s1.isEmpty() || s2 == null || s2.length() < s1.length()) return false;
+        int m = s1.length();
+        int n = s2.length();
+        int[] count1 = new int[26];
+        int[] count2 = new int[26];
+        for (int i = 0; i < m; i++) {
+            count1[s1.charAt(i) - 'a']++;
+            count2[s2.charAt(i) - 'a']++;
+        }
+        if (Arrays.equals(count1, count2)) {
+            return true;
+        }
+        for (int i = 0; i < n - m; i++) {
+            ++count2[s2.charAt(i + m) - 'a'];
+            --count2[s2.charAt(i) - 'a'];
+            if (Arrays.equals(count1, count2)) {
+                return true;
+            }
+        }
         return false;
     }
 
     // 优化
     public static boolean checkInclusion2(String s1, String s2) {
+        if (s1 == null || s1.isEmpty() || s2 == null || s2.length() < s1.length()) return false;
+        int m = s1.length();
+        int n = s2.length();
+        int[] count = new int[26];
+        for (int i = 0; i < m; i++) {
+            --count[s1.charAt(i) - 'a'];
+            ++count[s2.charAt(i) - 'a'];
+        }
+        int diff = 0;
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0) {
+                diff++;
+            }
+        }
+        if (diff == 0) {
+            return true;
+        }
+        for (int i = 0; i < n - m; i++) {
+            if (count[s2.charAt(i) - 'a'] == 1) {
+                diff--;
+            } else if (count[s2.charAt(i) - 'a'] == 0) {
+                diff++;
+            }
+            --count[s2.charAt(i) - 'a'];
+            if (count[s2.charAt(i + m) - 'a'] == -1) {
+                diff--;
+            } else if (count[s2.charAt(i + m) - 'a'] == 0) {
+                diff++;
+            }
+            ++count[s2.charAt(i + m) - 'a'];
+            if (diff == 0) {
+                return true;
+            }
+        }
         return false;
     }
 
     // 方法二：双指针
     public static boolean checkInclusion3(String s1, String s2) {
+        if (s1 == null || s1.isEmpty() || s2 == null || s2.length() < s1.length()) return false;
+        int m = s1.length();
+        int n = s2.length();
+        int[] count = new int[26];
+        for (int i = 0; i < m; i++) {
+            count[s1.charAt(i) - 'a']--;
+        }
+        int left = 0;
+        for (int right = 0; right < n; right++) {
+            int x = s2.charAt(right) - 'a';
+            count[x]++;
+            while (count[x] > 0) {
+                count[s2.charAt(left) - 'a']--;
+                left++;
+            }
+            if (right - left + 1 == m) {
+                return true;
+            }
+        }
         return false;
     }
 
     /**
-     * 647. 回文子串
+     * 647. 回文子串 - 中心拓展/动态规划
      * 示例 1：
      * 输入：s = "abc"
      * 输出：3
@@ -160,12 +397,36 @@ public class StringDemo {
      */
     // 方法一：中心拓展
     public static int countSubstrings1(String s) {
-        return 0;
+        if (s == null || s.isEmpty()) return 0;
+        int n = s.length();
+        int ans = 0;
+        for (int i = 0; i < 2 * n - 1; i++) {
+            int left = i / 2;;
+            int right = i / 2 + i % 2;
+            while (left >= 0 && right < n && s.charAt(left) == s.charAt(right)) {
+                left--;
+                right++;
+                ans++;
+            }
+        }
+        return ans;
     }
 
     // 方法二：动态规划
     public static int countSubstrings2(String s) {
-        return 0;
+        if (s == null || s.isEmpty()) return 0;
+        int n = s.length();
+        boolean[][] dp = new boolean[n][n];
+        int ans = 0;
+        for (int j = 0; j < n; j++) {
+            for (int i = 0; i <= j; i++) {
+                if (s.charAt(i) == s.charAt(j) && (j - i < 2 || dp[i + 1][j - 1])) {
+                    dp[i][j] = true;
+                    ans++;
+                }
+            }
+        }
+        return ans;
     }
 
     /**
@@ -188,7 +449,7 @@ public class StringDemo {
     }
 
     /**
-     * 3. 无重复字符的最长子串
+     * 3. 无重复字符的最长子串 - 滑动窗口
      * 示例 1:
      * 输入: s = "abcabcbb"
      * 输出: 3
@@ -199,15 +460,42 @@ public class StringDemo {
      * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
      */
     public static int lengthOfLongestSubstring1(String s) {
-        return 0;
+        if (s == null || s.isEmpty()) return 0;
+        int n = s.length();
+        int r = -1;
+        int ans = 1;
+        Set<Character> set = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            if (i > 0) {
+                set.remove(s.charAt(i));
+            }
+            while (r + 1 < n && !set.contains(s.charAt(r + 1))) {
+                set.add(s.charAt(r + 1));
+                r++;
+            }
+            ans = Math.max(ans, r - i + 1);
+        }
+        return ans;
     }
 
     public static int lengthOfLongestSubstring2(String s) {
-        return 0;
+        if (s == null || s.isEmpty()) return 0;
+        int n = s.length();
+        int ans = 0;
+        Set<Character> set = new HashSet<>();
+        for (int left = 0, right = 0; right < n; right++) {
+            char currChar = s.charAt(right);
+            while (set.contains(currChar)) {
+                set.remove(s.charAt(left++));
+            }
+            set.add(currChar);
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
     }
 
     /**
-     * 97. 交错字符串
+     * 97. 交错字符串 - 动态规划
      * 示例 1：
      * 输入：s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"
      * 输出：true
@@ -217,12 +505,44 @@ public class StringDemo {
      */
     // 方法一：动态规划
     public static boolean isInterleave1(String s1, String s2, String s3) {
-        return false;
+        if (s1 == null || s2 == null || s3 == null || s3.isEmpty() || s3.length() != s1.length() + s2.length()) return false;
+        int m = s1.length();
+        int n = s2.length();
+        boolean[][] dp = new boolean[m + 1][n + 1];
+        dp[0][0] = true;
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                int k = i + j - 1;
+                if (i > 0) {
+                    dp[i][j] = dp[i][j] || (dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(k));
+                }
+                if (j > 0) {
+                    dp[i][j] = dp[i][j] || (dp[i][j - 1] && s2.charAt(j - 1) == s3.charAt(k));
+                }
+            }
+        }
+        return dp[m][n];
     }
 
     // 动态规划 + 滚动数组
     public static boolean isInterleave2(String s1, String s2, String s3) {
-        return false;
+        if (s1 == null || s2 == null || s3 == null || s3.isEmpty() || s3.length() != s1.length() + s2.length()) return false;
+        int m = s1.length();
+        int n = s2.length();
+        boolean[] dp = new boolean[n + 1];
+        dp[0] = true;
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                int k = i + j - 1;
+                if (i > 0) {
+                    dp[j] = dp[j] && s1.charAt(i - 1) == s3.charAt(k);
+                }
+                if (j > 0) {
+                    dp[j] = dp[j] || (dp[j - 1] && s2.charAt(j - 1) == s3.charAt(k));
+                }
+            }
+        }
+        return dp[n];
     }
 
     /**
@@ -237,7 +557,7 @@ public class StringDemo {
      */
 
     /**
-     * 139. 单词拆分
+     * 139. 单词拆分 - 动态规划 + 哈希
      * 给你一个字符串 s 和一个字符串列表 wordDict 作为字典。
      * 如果可以利用字典中出现的一个或多个单词拼接出 s 则返回 true。
      * 示例 1：
@@ -251,11 +571,24 @@ public class StringDemo {
      * 输出: false
      */
     public static boolean wordBreak(String s, List<String> wordDict) {
-        return false;
+        if (s == null || s.isEmpty() || wordDict == null || wordDict.isEmpty()) return false;
+        Set<String> set = new HashSet<>(wordDict);
+        int n = s.length();
+        boolean[] dp = new boolean[n + 1];
+        dp[0] = true;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && set.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[n];
     }
 
     /**
-     * 187. 重复的DNA序列
+     * 187. 重复的DNA序列 - 哈希法
      * 给定一个表示DNA序列的字符串 s，返回所有在 DNA 分子中出现不止一次的长度为 10 的序列(子字符串)。
      * 示例 1：
      * 输入：s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
@@ -266,11 +599,23 @@ public class StringDemo {
      */
     // 哈希法
     public static List<String> findRepeatedDnaSequences(String s) {
-        return null;
+        if (s == null || s.length() < 10) return Collections.emptyList();
+        final int L = 10;
+        List<String> res = new ArrayList<>();
+        int n = s.length();
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < n - L; i++) {
+            String sub = s.substring(i, i + L);
+            map.put(sub, map.getOrDefault(sub, 0) + 1);
+            if (map.get(sub) == 2) {
+                res.add(sub);
+            }
+        }
+        return res;
     }
 
     /**
-     * 392. 判断子序列
+     * 392. 判断子序列 - 双指针
      * 示例 1：
      * 输入：s = "abc", t = "ahbgdc"
      * 输出：true
@@ -280,11 +625,22 @@ public class StringDemo {
      */
     // 方法一：双指针
     public static boolean isSubsequence(String s, String t) {
-        return false;
+        if (s == null || s.isEmpty() || t == null || s.length() > t.length()) return false;
+        int m = s.length();
+        int n = t.length();
+        int i = 0;
+        int j = 0;
+        while (i < m && j < n) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == m;
     }
 
     /**
-     * 1143. 最长公共子序列
+     * 1143. 最长公共子序列 - 动态规划
      * 例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。
      * 示例 1：
      * 输入：text1 = "abcde", text2 = "ace"
@@ -297,11 +653,24 @@ public class StringDemo {
      * 输出：0
      */
     public static int longestCommonSubsequence(String text1, String text2) {
-        return 0;
+        if (text1 == null || text1.isEmpty() || text2 == null || text2.isEmpty()) return 0;
+        int m = text1.length();
+        int n = text2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (text1.charAt(i - 1) == text2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
+                }
+            }
+        }
+        return dp[m][n];
     }
 
     /**
-     * 583.两个字符串的删除操作
+     * 583.两个字符串的删除操作 - 动态规划
      * 给定两个单词word1和word2，返回使得word1和word2相同所需的最小步数。
      * 每步可以删除任意一个字符串中的一个字符。
      * 示例 1：
@@ -314,7 +683,21 @@ public class StringDemo {
      */
     // 方法一：最长公共子序列
     public static int minDistance1(String word1, String word2) {
-        return 0;
+        if (word1 == null || word1.isEmpty() || word2 == null || word2.isEmpty()) return 0;
+        int m = word1.length();
+        int n = word2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
+                }
+            }
+        }
+        int lcs = dp[m][n];
+        return m + n - lcs - lcs;
     }
 
     // 方法二：动态规划
@@ -324,11 +707,30 @@ public class StringDemo {
     // 只有将另一个字符串的字符全部删除，因此对任意 0≤j≤n，有 dp[0][j]=j；
     // 当 j=0 时，word2[0:j] 为空，同理可得，对任意 0≤i≤m，有 dp[i][0]=i。
     public static int minDistance2(String word1, String word2) {
-        return 0;
+        if (word1 == null || word1.isEmpty() || word2 == null || word2.isEmpty()) return 0;
+        int m = word1.length();
+        int n = word2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 0; i <= m; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= n; j++) {
+            dp[0][j] = j;
+        }
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1;j <= n; j++) {
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = Math.min(dp[i][j - 1], dp[i - 1][j]) + 1;
+                }
+            }
+        }
+        return dp[m][n];
     }
 
     /**
-     * 402. 移掉 K 位数字
+     * 402. 移掉 K 位数字 - 贪心 + 单调栈
      * 给你一个以字符串表示的非负整数 num 和一个整数 k ，移除这个数中的 k 位数字，使得剩下的数字最小。请你以字符串形式返回这个最小的数字。
      * 示例 1 ：
      * 输入：num = "1432219", k = 3
@@ -343,8 +745,30 @@ public class StringDemo {
      * 输出："0"
      */
     // 方法一：贪心 + 单调栈
-    public static String removeKdigits(String num, int k) {
-        return null;
+    public static String removeKdigits(String nums, int k) {
+        if (nums == null || k < 1 || nums.length() < k) return "0";
+        int n = nums.length();
+        Deque<Character> stack = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            char digit = nums.charAt(i);
+            while(!stack.isEmpty() && k > 0 && stack.peekLast() > digit) {
+                stack.pollLast();
+                k--;
+            }
+            stack.offerLast(digit);
+        }
+        for (int i = 0; i < k; i++) {
+            stack.pollLast();
+        }
+        if (stack.isEmpty()) return "0";
+        while (stack.peekFirst() == '0') {
+            stack.pollFirst();
+        }
+        StringBuilder builder = new StringBuilder();
+        while(!stack.isEmpty()) {
+            builder.append(stack.pollFirst());
+        }
+        return builder.isEmpty() ? "0" : builder.toString();
     }
 
 }

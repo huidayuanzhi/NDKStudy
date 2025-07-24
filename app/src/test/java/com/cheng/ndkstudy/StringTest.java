@@ -94,27 +94,27 @@ public class StringTest {
     public void testCheckInclusion1() {
         Logger.log("checkInclusion1");
         boolean result = StringDemo.checkInclusion1("ab", "eidbaooo");
-        Logger.log("checkInclusion1 ab, eidbaooo -> result = " + result);
+        Logger.log("checkInclusion1 ab, eidbaooo -> result = " + result); // true
         boolean result2 = StringDemo.checkInclusion1("ab", "eidboaoo");
-        Logger.log("checkInclusion1 ab, eidboaoo -> result = " + result2);
+        Logger.log("checkInclusion1 ab, eidboaoo -> result = " + result2); // false
     }
 
     @Test
     public void testCheckInclusion2() {
         Logger.log("checkInclusion2");
         boolean result = StringDemo.checkInclusion2("ab", "eidbaooo");
-        Logger.log("checkInclusion2 ab, eidbaooo -> result = " + result);
+        Logger.log("checkInclusion2 ab, eidbaooo -> result = " + result); // true
         boolean result2 = StringDemo.checkInclusion2("ab", "eidboaoo");
-        Logger.log("checkInclusion2 ab, eidboaoo -> result = " + result2);
+        Logger.log("checkInclusion2 ab, eidboaoo -> result = " + result2); // false
     }
 
     @Test
     public void testCheckInclusion3() {
         Logger.log("checkInclusion3");
         boolean result = StringDemo.checkInclusion3("ab", "eidbaooo");
-        Logger.log("checkInclusion3 ab, eidbaooo -> result = " + result);
+        Logger.log("checkInclusion3 ab, eidbaooo -> result = " + result); // true
         boolean result2 = StringDemo.checkInclusion3("ab", "eidboaoo");
-        Logger.log("checkInclusion3 ab, eidboaoo -> result = " + result2);
+        Logger.log("checkInclusion3 ab, eidboaoo -> result = " + result2); // false
     }
 
     @Test
@@ -172,10 +172,10 @@ public class StringTest {
         // abcabcbb -> 3
         Logger.log("lengthOfLongestSubstring1");
         int result = StringDemo.lengthOfLongestSubstring1("abcabcbb");
-        Logger.log("lengthOfLongestSubstring1 abcabcbb, result = " + result);
+        Logger.log("lengthOfLongestSubstring1 abcabcbb, result = " + result); // 3
         // bbbbb -> 1
         int result2 = StringDemo.lengthOfLongestSubstring1("bbbbb");
-        Logger.log("lengthOfLongestSubstring1 bbbbb, result = " + result2);
+        Logger.log("lengthOfLongestSubstring1 bbbbb, result = " + result2); // 1
     }
 
     @Test
@@ -183,30 +183,30 @@ public class StringTest {
         // abcabcbb -> 3
         Logger.log("lengthOfLongestSubstring2");
         int result = StringDemo.lengthOfLongestSubstring2("abcabcbb");
-        Logger.log("lengthOfLongestSubstring2 abcabcbb, result = " + result);
+        Logger.log("lengthOfLongestSubstring2 abcabcbb, result = " + result); // 3
         // bbbbb -> 1
         int result2 = StringDemo.lengthOfLongestSubstring2("bbbbb");
-        Logger.log("lengthOfLongestSubstring2 bbbbb, result = " + result2);
+        Logger.log("lengthOfLongestSubstring2 bbbbb, result = " + result2); // 1
     }
 
     @Test
     public void testIsInterleave1() {
         Logger.log("isInterleave1");
-        boolean result = StringDemo.isInterleave1("aabcc", "dbbca", "aadbbcbcac"); // true
-        Logger.log("isInterleave1 result = " + result);
+        boolean result = StringDemo.isInterleave1("aabcc", "dbbca", "aadbbcbcac");
+        Logger.log("isInterleave1 result = " + result); // true
         Logger.log("isInterleave1");
-        boolean result2 = StringDemo.isInterleave1("aabcc", "dbbca", "aadbbbaccc"); // true
-        Logger.log("isInterleave1 result = " + result2);
+        boolean result2 = StringDemo.isInterleave1("aabcc", "dbbca", "aadbbbaccc");
+        Logger.log("isInterleave1 result = " + result2); // false
     }
 
     @Test
     public void testIsInterleave2() {
         Logger.log("isInterleave2");
-        boolean result = StringDemo.isInterleave2("aabcc", "dbbca", "aadbbcbcac"); // true
-        Logger.log("isInterleave2 result = " + result);
+        boolean result = StringDemo.isInterleave2("aabcc", "dbbca", "aadbbcbcac");
+        Logger.log("isInterleave2 result = " + result); // true
         Logger.log("isInterleave2");
-        boolean result2 = StringDemo.isInterleave2("aabcc", "dbbca", "aadbbbaccc"); // true
-        Logger.log("isInterleave2 result = " + result2);
+        boolean result2 = StringDemo.isInterleave2("aabcc", "dbbca", "aadbbbaccc");
+        Logger.log("isInterleave2 result = " + result2); // false
     }
 
     @Test

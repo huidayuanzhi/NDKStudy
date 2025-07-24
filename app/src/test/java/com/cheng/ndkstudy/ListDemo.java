@@ -28,7 +28,14 @@ public class ListDemo {
      * 如果有两个中间结点，则返回第二个中间结点。
      */
     public static ListNode middleNode(ListNode head) {
-        return null;
+        if (head == null || head.next == null) return head;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
     }
 
     /**
@@ -41,7 +48,38 @@ public class ListDemo {
      * 输出：false
      */
     public static boolean isPalindrome(ListNode head) {
-        return false;
+        if (head == null || head.next == null) return true;
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slow = rotate(slow.next);
+        ListNode pre = slow;
+        boolean result = true;
+        while (slow != null) {
+            if (head.val != slow.val) {
+                result = false;
+                break;
+            }
+            slow = slow.next;
+            head = head.next;
+        }
+        rotate(pre);
+        return result;
+    }
+
+    private static ListNode rotate(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
     }
 
     /**
@@ -55,16 +93,37 @@ public class ListDemo {
      */
     // 方法一：迭代
     public static ListNode reverseList1(ListNode head) {
-        return null;
+        if (head == null || head.next == null) return head;
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
     }
 
     public static ListNode reverseList2(ListNode head) {
-        return null;
+        if (head == null || head.next == null) return head;
+        ListNode pre = head;
+        while (head != null && head.next != null) {
+            ListNode next = head.next;
+            head.next = next.next;
+            next.next = pre;
+            pre = next;
+        }
+        return pre;
     }
 
     // 方法二：递归
     public static ListNode reverseList3(ListNode head) {
-        return null;
+        if (head == null || head.next == null) return head;
+        ListNode newHead = reverseList3(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
     }
 
     /**
@@ -82,7 +141,22 @@ public class ListDemo {
      * 1->1->2->3->4->4->5->6
      */
     public static ListNode mergeKLists(ListNode[] lists) {
-        return null;
+        if (lists == null || lists.length <= 0) return null;
+        PriorityQueue<ListNode> queue = new PriorityQueue<>((o1, o2) -> o1.val - o2.val);
+        ListNode head = new ListNode(-1);
+        ListNode tail = head;
+        for (ListNode node : lists) {
+            queue.offer(node);
+        }
+        while (!queue.isEmpty()) {
+            ListNode temp = queue.poll();
+            tail.next = temp;
+            tail = tail.next;
+            if (temp.next != null) {
+                queue.offer(temp.next);
+            }
+        }
+        return head.next;
     }
 
     /**
@@ -95,13 +169,55 @@ public class ListDemo {
      */
     // 方法一：穿针引线
     public static ListNode reverseBetween1(ListNode head, int left, int right) {
-        return null;
+        if (head == null || head.next == null || left < 0 || right <= left) return head;
+        ListNode dummyHead = new ListNode(-1, head);
+        ListNode pre = dummyHead;
+        for (int i = 0; i < left - 1; i++) {
+            pre = pre.next;
+        }
+        ListNode leftNode = pre.next;
+        ListNode rightNode = pre;
+        for (int i = 0; i < right - left + 1; i++) {
+            rightNode = rightNode.next;
+        }
+        ListNode curr = rightNode.next;
+        pre.next = null;
+        rightNode.next = null;
+        reverseLinkedList(leftNode);
+        pre.next = rightNode;
+        leftNode.next = curr;
+        return dummyHead.next;
+    }
+
+    private static void reverseLinkedList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
     }
 
     // 方法二：一次遍历「穿针引线」反转链表（头插法）
     // 在需要反转的区间里，每遍历到一个节点，让这个新节点来到反转部分的起始位置
     public static ListNode reverseBetween2(ListNode head, int left, int right) {
-        return null;
+        if (head == null || head.next == null || left < 0 || right <= left) return head;
+        ListNode dummyHead = new ListNode(-1, head);
+        ListNode pre = dummyHead;
+        for (int i = 0; i < left - 1; i++) {
+            pre = pre.next;
+        }
+        ListNode curr = pre.next;
+        ListNode next = null;
+        for (int i = 0; i < right - left; i++) {
+            next = curr.next;
+            curr.next = next.next;
+            next.next = pre.next;
+            pre.next = next;
+        }
+        return dummyHead.next;
     }
 
     /**
@@ -110,12 +226,40 @@ public class ListDemo {
      */
     // 方法一：递归
     public static ListNode mergeTwoLists1(ListNode list1, ListNode list2) {
-        return null;
+        if (list1 == null) return list2;
+        if (list2 == null) return list1;
+        if (list1.val < list2.val) {
+            list1.next = mergeTwoLists1(list1.next, list2);
+            return list1;
+        } else {
+            list2.next = mergeTwoLists1(list1, list2.next);
+            return list2;
+        }
     }
 
     // 方法二：迭代
     public static ListNode mergeTwoLists2(ListNode list1, ListNode list2) {
-        return null;
+        if (list1 == null) return list2;
+        if (list2 == null) return list1;
+        ListNode dummyHead = new ListNode(-1);
+        ListNode curr = dummyHead;
+        while (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                curr.next = list1;
+                list1 = list1.next;
+            } else {
+                curr.next = list2;
+                list2 = list2.next;
+            }
+            curr = curr.next;
+        }
+        if (list1 != null) {
+            curr.next = list1;
+        }
+        if (list2 != null) {
+            curr.next = list2;
+        }
+        return dummyHead.next;
     }
 
     /**
@@ -129,7 +273,37 @@ public class ListDemo {
      * 输出：[3,2,1,4,5]
      */
     public static ListNode reverseKGroup(ListNode head, int k) {
-        return null;
+        if (head == null || head.next == null || k <= 1) return head;
+        ListNode dummyHead = new ListNode(-1, head);
+        ListNode pre = dummyHead;
+        while (head != null) {
+            ListNode tail = pre;
+            for (int i = 0; i < k; i++) {
+                tail = tail.next;
+                if (tail == null) {
+                    return dummyHead.next;
+                }
+            }
+            ListNode[] reverse = reverse(head, tail);
+            head = reverse[0];
+            tail = reverse[1];
+            pre.next = head;
+            pre = tail;
+            head = tail.next;
+        }
+        return dummyHead.next;
+    }
+
+    private static ListNode[] reverse(ListNode head, ListNode tail) {
+        ListNode prev = tail.next;
+        ListNode curr = head;
+        while (prev != tail) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return new ListNode[]{tail, head};
     }
 
     /**
@@ -137,6 +311,16 @@ public class ListDemo {
      * 给你一个链表的头节点 head ，判断链表中是否有环。
      */
     public static boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) return false;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -146,6 +330,17 @@ public class ListDemo {
      */
     // 方法一：哈希表
     public static ListNode detectCycle1(ListNode head) {
+        if (head == null || head.next == null) return null;
+        Set<ListNode> set = new HashSet<>();
+        set.add(head);
+        ListNode pos = head.next;
+        while (pos != null) {
+            if (set.contains(pos)) {
+                return pos;
+            }
+            set.add(pos);
+            pos = pos.next;
+        }
         return null;
     }
 
@@ -153,6 +348,20 @@ public class ListDemo {
     // 当发现 slow 与 fast 相遇时，再额外使用一个指针 ptr。起始，它指向链表头部；
     // 随后，它和 slow 每次向后移动一个位置。最终，它们会在入环点相遇。
     public static ListNode detectCycle2(ListNode head) {
+        if (head == null || head.next == null) return null;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                while (slow != head) {
+                    slow = slow.next;
+                    head = head.next;
+                }
+                return head;
+            }
+        }
         return null;
     }
 
@@ -162,7 +371,25 @@ public class ListDemo {
      */
     // 方法一：从前往后找插入点
     public static ListNode insertionSortList(ListNode head) {
-        return null;
+        if (head == null || head.next == null) return head;
+        ListNode dummyHead = new ListNode(-1, head);
+        ListNode lastSorted = head;
+        ListNode curr = head.next;
+        while (curr != null) {
+            if (lastSorted.val < curr.val) {
+                lastSorted = lastSorted.next;
+            } else {
+                ListNode pre = dummyHead;
+                while (pre.next.val < curr.val) {
+                    pre = pre.next;
+                }
+                lastSorted.next = curr.next;
+                curr.next = pre.next;
+                pre.next = curr;
+            }
+            curr = lastSorted.next;
+        }
+        return dummyHead.next;
     }
 
     /**
@@ -172,7 +399,49 @@ public class ListDemo {
      */
     // 方法一：自顶向下归并排序
     public static ListNode sortList(ListNode head) {
-        return null;
+        if (head == null || head.next == null) return head;
+        return sortList(head, null);
+    }
+
+    private static ListNode sortList(ListNode head, ListNode tail) {
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != tail) {
+            slow = slow.next;
+            fast = fast.next;
+            if (fast != tail) {
+                fast = fast.next;
+            }
+        }
+        ListNode mid = slow;
+        ListNode list1 = sortList(head, mid);
+        ListNode list2 = sortList(mid, tail);
+        return merge(list1, list2);
+    }
+
+    private static ListNode merge(ListNode list1, ListNode list2) {
+        ListNode dummyHead = new ListNode(-1);
+        ListNode curr = dummyHead;
+        while (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                curr.next = list1;
+                list1 = list1.next;
+            } else {
+                curr.next = list2;
+                list2 = list2.next;
+            }
+            curr = curr.next;
+        }
+        if (list1 != null) {
+            curr.next = list1;
+        } else {
+            curr.next = list2;
+        }
+        return dummyHead.next;
     }
 
     /**
@@ -182,12 +451,33 @@ public class ListDemo {
      */
     // 方法一：哈希集合
     public static ListNode getIntersectionNode1(ListNode headA, ListNode headB) {
+        if (headA == null || headA.next == null || headB == null || headB.next == null) return null;
+        Set<ListNode> set = new HashSet<>();
+        ListNode pA = headA;
+        ListNode pB = headB;
+        while (pA != null) {
+            set.add(pA);
+            pA = pA.next;
+        }
+        while (pB != null) {
+            if (set.contains(pB)) {
+                return pB;
+            }
+            pB = pB.next;
+        }
         return null;
     }
 
     // 方法二：双指针
     public static ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
-        return null;
+        if (headA == null || headA.next == null || headB == null || headB.next == null) return null;
+        ListNode pA = headA;
+        ListNode pB = headB;
+        while (pA != pB) {
+            pA = pA == null ? headB : pA.next;
+            pB = pB == null ? headA : pB.next;
+        }
+        return pA;
     }
 
 }
