@@ -171,4 +171,15 @@ public class BinaryTreeTest {
         Logger.log(result);
     }
 
+    @Test
+    public void testMinDiffInBST() {
+        Logger.log("minDiffInBST");
+        BinaryTreeDemo.TreeNode root1 = create(new Integer[]{4,2,6,1,3});
+        int result = BinaryTreeDemo.minDiffInBST(root1);
+        Logger.log("minDiffInBST result = " + result);
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{1,0,48,null,null,12,49});
+        result = BinaryTreeDemo.minDiffInBST(root2);
+        Logger.log("minDiffInBST result = " + result);
+    }
+
 }
