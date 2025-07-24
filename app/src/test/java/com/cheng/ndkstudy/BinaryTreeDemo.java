@@ -118,5 +118,31 @@ public class BinaryTreeDemo {
         return left + right;
     }
 
+    /**
+     * 110. 平衡二叉树
+     * 示例 1：
+     * 输入：root = [3,9,20,null,null,15,7]
+     * 输出：true
+     * 示例 2：
+     * 输入：root = [1,2,2,3,3,null,null,4,4]
+     * 输出：false
+     */
+    public static boolean isBalanced(TreeNode root) {
+        if (root == null) return true;
+        return height(root) >= 0;
+    }
+
+    private static int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left = height(root.left);
+        int right = height(root.right);
+        if (left == -1 || right == -1 || Math.abs(left - right) > 1) {
+            return -1;
+        }
+        return Math.max(left, right) + 1;
+    }
+
 
 }

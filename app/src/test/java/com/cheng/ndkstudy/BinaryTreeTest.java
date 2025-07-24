@@ -104,4 +104,15 @@ public class BinaryTreeTest {
         Logger.log("numOfkLevelTreeNode 3 result = " + result);
     }
 
+    @Test
+    public void testIsBalanced() {
+        Logger.log("isBalanced");
+        BinaryTreeDemo.TreeNode root1 = create(new Integer[]{3,9,20,null,null,15,7});
+        boolean result = BinaryTreeDemo.isBalanced(root1);
+        Logger.log("isBalanced result = " + result); // true
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{1,2,2,3,3,null,null,4,4});
+        result = BinaryTreeDemo.isBalanced(root2);
+        Logger.log("isBalanced result = " + result); // false
+    }
+
 }
