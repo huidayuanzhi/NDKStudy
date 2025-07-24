@@ -2,6 +2,7 @@ package com.cheng.ndkstudy;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
 public class BinaryTreeDemo {
@@ -188,5 +189,22 @@ public class BinaryTreeDemo {
         return result;
     }
 
+    /**
+     * 两个二叉树是否完全相同
+     */
+    public static boolean isSameTree(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null) {
+            return true;
+        }
+        if (t1 == null || t2 == null) {
+            return false;
+        }
+        if (!Objects.equals(t1.val, t2.val)) {
+            return false;
+        }
+        boolean left = isSameTree(t1.left, t2.left);
+        boolean right = isSameTree(t1.right, t2.right);
+        return left && right;
+    }
 
 }

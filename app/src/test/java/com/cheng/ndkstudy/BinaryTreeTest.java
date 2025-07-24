@@ -126,4 +126,18 @@ public class BinaryTreeTest {
         Logger.log("isCompleteTree result = " + result); // false
     }
 
+    @Test
+    public void testIsSameTree() {
+        Logger.log("isSameTree");
+        BinaryTreeDemo.TreeNode tree1 = create(new Integer[]{1,2,3,4,5,null,7});
+        BinaryTreeDemo.TreeNode tree2 = create(new Integer[]{1,2,3,4,5,null,7});
+        BinaryTreeDemo.TreeNode tree3 = create(new Integer[]{1,2,3,4,5,6,7});
+        boolean result = BinaryTreeDemo.isSameTree(tree1, tree2);
+        Logger.log("isSameTree result = " + result);
+        result = BinaryTreeDemo.isSameTree(tree2, tree3);
+        Logger.log("isSameTree result = " + result);
+        result = BinaryTreeDemo.isSameTree(tree1, tree3);
+        Logger.log("isSameTree result = " + result);
+    }
+
 }
