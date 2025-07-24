@@ -2,6 +2,7 @@ package com.cheng.ndkstudy;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinaryTreeDemo {
 
@@ -142,6 +143,49 @@ public class BinaryTreeDemo {
             return -1;
         }
         return Math.max(left, right) + 1;
+    }
+
+    /**
+     * 958. 二叉树的完全性检验
+     * 在一棵完全二叉树中，除了最后一层外，所有层都被完全填满，
+     * 并且最后一层中的所有节点都尽可能靠左。
+     * 最后一层（第 h 层）中可以包含 1 到 2h 个节点。
+     * 示例 1：
+     * 输入：root = [1,2,3,4,5,6]
+     * 输出：true
+     * 示例 2：
+     * 输入：root = [1,2,3,4,5,null,7]
+     * 输出：false
+     */
+    public static boolean isCompleteTree(TreeNode root) {
+        if (root == null) return true;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        boolean result = true;
+        boolean hasNoChild = false;
+        while (!queue.isEmpty()) {
+            TreeNode currNode = queue.poll();
+            if (hasNoChild) {
+                if (currNode.left != null || currNode.right != null) {
+                    result = false;
+                    break;
+                }
+            } else {
+                if (currNode.left != null && currNode.right != null) {
+                    queue.offer(currNode.left);
+                    queue.offer(currNode.right);
+                } else if (currNode.left != null && currNode.right == null) {
+                    queue.offer(currNode.left);
+                    hasNoChild = true;
+                } else if (currNode.left == null && currNode.right != null) {
+                    result = false;
+                    break;
+                } else {
+                    hasNoChild = true;
+                }
+            }
+        }
+        return result;
     }
 
 

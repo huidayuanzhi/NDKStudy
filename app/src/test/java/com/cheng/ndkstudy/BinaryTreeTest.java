@@ -115,4 +115,15 @@ public class BinaryTreeTest {
         Logger.log("isBalanced result = " + result); // false
     }
 
+    @Test
+    public void testIsCompleteTree() {
+        Logger.log("isCompleteTree");
+        BinaryTreeDemo.TreeNode root1 = create(new Integer[]{1,2,3,4,5,6});
+        boolean result = BinaryTreeDemo.isCompleteTree(root1);
+        Logger.log("isCompleteTree result = " + result); // true
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{1,2,3,4,5,null,7});
+        result = BinaryTreeDemo.isCompleteTree(root2);
+        Logger.log("isCompleteTree result = " + result); // false
+    }
+
 }
