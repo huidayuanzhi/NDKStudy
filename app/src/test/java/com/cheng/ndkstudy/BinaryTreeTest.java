@@ -211,4 +211,13 @@ public class BinaryTreeTest {
         Logger.log(result);
     }
 
+    @Test
+    public void testDepthOrderTree() {
+        Logger.log("depthOrderTree");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{1,2,3,4,5,6,7,8,9});
+        List<Integer> result = BinaryTreeDemo.depthOrderTree(root);
+        Logger.log("depthOrderTree result - "); // 1,2,4,8,9,5,3,6,7
+        Logger.log(result);
+    }
+
 }

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTreeDemo {
 
@@ -362,6 +363,27 @@ public class BinaryTreeDemo {
             }
             if (currNode.right != null) {
                 queue.offer(currNode.right);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 二叉树的深度优先遍历
+     */
+    public static List<Integer> depthOrderTree(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        Deque<TreeNode> stack = new LinkedList<>();
+        stack.push(root);
+        List<Integer> result = new ArrayList<>();
+        while (!stack.isEmpty()) {
+            TreeNode currNode = stack.pop();
+            result.add(currNode.val);
+            if (currNode.right != null) {
+                stack.push(currNode.right);
+            }
+            if (currNode.left != null) {
+                stack.push(currNode.left);
             }
         }
         return result;
