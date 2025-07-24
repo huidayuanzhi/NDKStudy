@@ -84,4 +84,12 @@ public class BinaryTreeTest {
         Logger.log("numOfTreeNode result = " + result);
     }
 
+    @Test
+    public void testNumOfNoChildNode() {
+        Logger.log("numOfNoChildNode");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{3,9,20,null,null,15,7});
+        int result = BinaryTreeDemo.numOfNoChildNode(root);
+        Logger.log("numOfNoChildNode result = " + result);
+    }
+
 }

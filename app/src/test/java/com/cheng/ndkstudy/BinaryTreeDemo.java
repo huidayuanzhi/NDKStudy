@@ -96,4 +96,15 @@ public class BinaryTreeDemo {
         return left + right + 1;
     }
 
+    /**
+     * 二叉树中叶子节点的个数
+     */
+    public static int numOfNoChildNode(TreeNode root) {
+        if (root == null) return 0;
+        if (root.left == null && root.right == null) return 1;
+        int left = numOfNoChildNode(root.left);
+        int right = numOfNoChildNode(root.right);
+        return left + right;
+    }
+
 }
