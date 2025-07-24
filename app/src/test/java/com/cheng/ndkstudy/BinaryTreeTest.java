@@ -202,4 +202,13 @@ public class BinaryTreeTest {
         Logger.log("isValidBST result = " + result); // true
     }
 
+    @Test
+    public void testLevelOrderTree() {
+        Logger.log("levelOrderTree");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{1,2,3,4,5,6,7,8,9});
+        List<Integer> result = BinaryTreeDemo.levelOrderTree(root);
+        Logger.log("levelOrderTree result - ");
+        Logger.log(result);
+    }
+
 }
