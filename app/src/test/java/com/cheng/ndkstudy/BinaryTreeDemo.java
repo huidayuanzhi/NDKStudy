@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
-import java.util.Stack;
 
 public class BinaryTreeDemo {
 
@@ -387,6 +386,73 @@ public class BinaryTreeDemo {
             }
         }
         return result;
+    }
+
+    /**
+     * 144.二叉树的前序遍历
+     * 示例 1：
+     * 输入：root = [1,null,2,3]
+     * 输出：[1,2,3]
+     * 示例 2：
+     * 输入：root = [1,2,3,4,5,null,8,null,null,6,7,9]
+     * 输出：[1,2,4,5,6,7,3,8,9]
+     */
+    // 方法一：递归
+    public static List<Integer> preorderTraversal1(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        List<Integer> result = new ArrayList<>();
+        preOrder(root, result);
+        return result;
+    }
+
+    private static void preOrder(TreeNode root, List<Integer> result) {
+        if (root == null) {
+            return;
+        }
+        result.add(root.val);
+        preOrder(root.left, result);
+        preOrder(root.right, result);
+    }
+
+    // 方法二：迭代
+    public static List<Integer> preorderTraversal2(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        List<Integer> result = new ArrayList<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode currNode = stack.pop();
+            result.add(currNode.val);
+            if (currNode.right != null) {
+                stack.push(currNode.right);
+            }
+            if (currNode.left != null) {
+                stack.push(currNode.left);
+            }
+        }
+        return result;
+    }
+
+    public static List<Integer> preorderTraversal3(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        Deque<TreeNode> stack = new LinkedList<>();
+        TreeNode node = root;
+        while (!stack.isEmpty() || node != null) {
+            // 一边向左遍历，一边将遍历到的节点入栈，节点值入数组
+            while (node != null) {
+                res.add(node.val);
+                stack.push(node);
+                node = node.left;
+            }
+            // 指针指向栈顶节点（即上一个节点），并将栈顶节点出栈
+            node = stack.pop();
+            // 指针指向该节点的右子树，开始下一轮的遍历
+            node = node.right;
+        }
+        return res;
     }
 
 }

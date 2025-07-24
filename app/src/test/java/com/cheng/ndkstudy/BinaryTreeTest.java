@@ -220,4 +220,43 @@ public class BinaryTreeTest {
         Logger.log(result);
     }
 
+    @Test
+    public void testPreorderTraversal1() {
+        Logger.log("preorderTraversal1");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{1,null,2,3});
+        List<Integer> result = BinaryTreeDemo.preorderTraversal1(root);
+        Logger.log("preorderTraversal1 result = "); // 1,2,3
+        Logger.log(result);
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{1,2,3,4,5,null,8,null,null,6,7,9});
+        List<Integer> result2 = BinaryTreeDemo.preorderTraversal1(root2);
+        Logger.log("preorderTraversal1 result = "); // 1,2,4,5,6,7,3,8,9
+        Logger.log(result2);
+    }
+
+    @Test
+    public void testPreorderTraversal2() {
+        Logger.log("preorderTraversal2");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{1,null,2,3});
+        List<Integer> result = BinaryTreeDemo.preorderTraversal2(root);
+        Logger.log("preorderTraversal2 result = "); // 1,2,3
+        Logger.log(result);
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{1,2,3,4,5,null,8,null,null,6,7,9});
+        List<Integer> result2 = BinaryTreeDemo.preorderTraversal2(root2);
+        Logger.log("preorderTraversal2 result = "); // 1,2,4,5,6,7,3,8,9
+        Logger.log(result2);
+    }
+
+    @Test
+    public void testPreorderTraversal3() {
+        Logger.log("preorderTraversal3");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{1,null,2,3});
+        List<Integer> result = BinaryTreeDemo.preorderTraversal3(root);
+        Logger.log("preorderTraversal3 result = "); // 1,2,3
+        Logger.log(result);
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{1,2,3,4,5,null,8,null,null,6,7,9});
+        List<Integer> result2 = BinaryTreeDemo.preorderTraversal3(root2);
+        Logger.log("preorderTraversal3 result = "); // 1,2,4,5,6,7,3,8,9
+        Logger.log(result2);
+    }
+
 }
