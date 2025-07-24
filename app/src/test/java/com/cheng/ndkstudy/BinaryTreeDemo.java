@@ -319,4 +319,31 @@ public class BinaryTreeDemo {
         return dp[n];
     }
 
+    /**
+     * 判断二叉树是否是合法的二叉查找树(BST)
+     */
+    private static int lastVal = Integer.MAX_VALUE;
+    private static boolean firstNode = true;
+
+    public static void resetIsValidBST() {
+        lastVal = Integer.MAX_VALUE;
+        firstNode = true;
+    }
+
+    public static boolean isValidBST(TreeNode root) {
+        if (root == null) return true;
+        if (!isValidBST(root.left)) {
+            return false;
+        }
+        if (!firstNode && lastVal >= root.val) {
+            return false;
+        }
+        firstNode = false;
+        lastVal = root.val;
+        if (!isValidBST(root.right)) {
+            return false;
+        }
+        return true;
+    }
+
 }

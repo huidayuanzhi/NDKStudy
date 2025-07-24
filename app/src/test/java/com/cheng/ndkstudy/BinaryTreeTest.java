@@ -189,4 +189,17 @@ public class BinaryTreeTest {
         Logger.log("numTrees result = " + result); // 5
     }
 
+    @Test
+    public void testIsValidBST() {
+        Logger.log("isValidBST");
+        BinaryTreeDemo.resetIsValidBST();
+        BinaryTreeDemo.TreeNode root1 = create(new Integer[]{1,2,3,4,5,6});
+        boolean result = BinaryTreeDemo.isValidBST(root1);
+        Logger.log("isValidBST result = " + result); // false
+        BinaryTreeDemo.resetIsValidBST();
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{4,2,6,1,3});
+        result = BinaryTreeDemo.isValidBST(root2);
+        Logger.log("isValidBST result = " + result); // true
+    }
+
 }
