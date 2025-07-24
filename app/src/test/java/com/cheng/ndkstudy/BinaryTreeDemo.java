@@ -107,4 +107,16 @@ public class BinaryTreeDemo {
         return left + right;
     }
 
+    /**
+     * 二叉树中第k层节点的个数
+     */
+    public static int numOfkLevelTreeNode(TreeNode root, int k) {
+        if (root == null || k < 1) return 0;
+        if (k == 1) return 1;
+        int left = numOfkLevelTreeNode(root.left, k - 1);
+        int right = numOfkLevelTreeNode(root.right, k - 1);
+        return left + right;
+    }
+
+
 }

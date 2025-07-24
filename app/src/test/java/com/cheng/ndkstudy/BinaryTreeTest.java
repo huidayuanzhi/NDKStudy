@@ -92,4 +92,16 @@ public class BinaryTreeTest {
         Logger.log("numOfNoChildNode result = " + result);
     }
 
+    @Test
+    public void testNumOfkLevelTreeNode() {
+        Logger.log("numOfkLevelTreeNode");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{3,9,20,null,null,15,7});
+        int result = BinaryTreeDemo.numOfkLevelTreeNode(root, 1);
+        Logger.log("numOfkLevelTreeNode 1 result = " + result);
+        result = BinaryTreeDemo.numOfkLevelTreeNode(root, 2);
+        Logger.log("numOfkLevelTreeNode 2 result = " + result);
+        result = BinaryTreeDemo.numOfkLevelTreeNode(root, 3);
+        Logger.log("numOfkLevelTreeNode 3 result = " + result);
+    }
+
 }
