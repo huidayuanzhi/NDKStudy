@@ -3,10 +3,12 @@ package com.cheng.ndkstudy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.Set;
 
 public class BinaryTreeDemo {
 
@@ -606,6 +608,80 @@ public class BinaryTreeDemo {
             result.add(0, level);
         }
         return result;
+    }
+
+    /**
+     * 606. 根据二叉树创建字符串
+     * 给你二叉树的根节点 root，请你采用前序遍历的方式，
+     * 将二叉树转化为一个由括号和整数组成的字符串，返回构造出的字符串。
+     * 空节点使用一对空括号对 "()" 表示，转化后需要
+     * 省略所有不影响字符串与原始二叉树之间的一对一映射关系的空括号对。
+     * 示例 1：
+     * 输入：root = [1,2,3,4]
+     * 输出："1(2(4))(3)"
+     * 解释：初步转化后得到 "1(2(4)())(3()())" ，但省略所有不必要的空括号对后，字符串应该是"1(2(4))(3)" 。
+     * 示例 2：
+     * 输入：root = [1,2,3,null,4]
+     * 输出："1(2()(4))(3)"
+     */
+    // 方法一：递归
+    public static String tree2str1(TreeNode root) {
+        if (root == null) return "";
+        if (root.left == null && root.right == null) {
+            return root.val + "";
+        }
+        if (root.right == null) {
+            return new StringBuilder()
+                    .append(root.val)
+                    .append("(")
+                    .append(tree2str1(root.left))
+                    .append(")")
+                    .toString();
+        }
+        return new StringBuilder()
+                .append(root.val)
+                .append("(")
+                .append(tree2str1(root.left))
+                .append(")")
+                .append("(")
+                .append(tree2str1(root.right))
+                .append(")")
+                .toString();
+    }
+
+    // 方法二：迭代
+    public static String tree2str2(TreeNode root) {
+        if (root == null) return "";
+        StringBuilder result = new StringBuilder();
+        Set<TreeNode> visited = new HashSet<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+        stack.offer(root);
+        while (!stack.isEmpty()) {
+            TreeNode curr = stack.peek();
+            if (!visited.add(curr)) {
+                // 当前节点已访问过且不是根节点，封闭括号
+                if (curr != root) {
+                    result.append(")");
+                }
+                stack.pop();
+            } else {
+                // 当前节点未访问过且不是根节点，准备访问该节点，添加左括号
+                if (curr != root) {
+                    result.append("(");
+                }
+                result.append(curr.val);
+                if (curr.left == null && curr.right != null) {
+                    result.append("()");
+                }
+                if (curr.right != null) {
+                    stack.push(curr.right);
+                }
+                if (curr.left != null) {
+                    stack.push(curr.left);
+                }
+            }
+        }
+        return result.toString();
     }
 
 

@@ -329,4 +329,26 @@ public class BinaryTreeTest {
         Logger.log(result);
     }
 
+    @Test
+    public void testTree2str1() {
+        Logger.log("tree2str1");
+        BinaryTreeDemo.TreeNode root1 = create(new Integer[]{1,2,3,4});
+        String result = BinaryTreeDemo.tree2str1(root1);
+        Logger.log("tree2str1 result = " + result); // 1(2(4))(3)
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{1,2,3,null,4});
+        String result2 = BinaryTreeDemo.tree2str1(root2);
+        Logger.log("tree2str1 result = " + result2); // 1(2()(4))(3)
+    }
+
+    @Test
+    public void testTree2str2() {
+        Logger.log("tree2str2");
+        BinaryTreeDemo.TreeNode root1 = create(new Integer[]{1,2,3,4});
+        String result = BinaryTreeDemo.tree2str2(root1);
+        Logger.log("tree2str2 result = " + result); // 1(2(4))(3)
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{1,2,3,null,4});
+        String result2 = BinaryTreeDemo.tree2str2(root2);
+        Logger.log("tree2str2 result = " + result2); // 1(2()(4))(3)
+    }
+
 }
