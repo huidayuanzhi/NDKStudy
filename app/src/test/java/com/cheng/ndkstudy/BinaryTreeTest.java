@@ -285,4 +285,30 @@ public class BinaryTreeTest {
         Logger.log(result2); // 8,4,9,2,5,1,6,3,7
     }
 
+    @Test
+    public void testPostorderTraversal1() {
+        Logger.log("postorderTraversal1");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{1,null,2,3});
+        List<Integer> result = BinaryTreeDemo.postorderTraversal1(root);
+        Logger.log("postorderTraversal1 result -");
+        Logger.log(result); // 3,2,1
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{1,2,3,4,5,null,8,null,null,6,7,9});
+        List<Integer> result2 = BinaryTreeDemo.postorderTraversal1(root2);
+        Logger.log("postorderTraversal1 result -");
+        Logger.log(result2); // 4,6,7,5,2,9,8,3,1
+    }
+
+    @Test
+    public void testPostorderTraversal2() {
+        Logger.log("postorderTraversal2");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{1,null,2,3});
+        List<Integer> result = BinaryTreeDemo.postorderTraversal2(root);
+        Logger.log("postorderTraversal2 result -");
+        Logger.log(result); // 3,2,1
+        BinaryTreeDemo.TreeNode root2 = create(new Integer[]{1,2,3,4,5,null,8,null,null,6,7,9});
+        List<Integer> result2 = BinaryTreeDemo.postorderTraversal2(root2);
+        Logger.log("postorderTraversal2 result -");
+        Logger.log(result2); // 4,6,7,5,2,9,8,3,1
+    }
+
 }

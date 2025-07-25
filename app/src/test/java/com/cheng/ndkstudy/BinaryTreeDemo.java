@@ -496,4 +496,55 @@ public class BinaryTreeDemo {
         return result;
     }
 
+    /**
+     * 145.二叉树的后序遍历
+     * 示例 1：
+     * 输入：root = [1,null,2,3]
+     * 输出：[3,2,1]
+     * 示例 2：
+     * 输入：root = [1,2,3,4,5,null,8,null,null,6,7,9]
+     * 输出：[4,6,7,5,2,9,8,3,1]
+     */
+    public static List<Integer> postorderTraversal1(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        List<Integer> result = new ArrayList<>();
+        postorder(root, result);
+        return result;
+    }
+
+    private static void postorder(TreeNode root, List<Integer> result) {
+        if (root == null) {
+            return;
+        }
+        postorder(root.left, result);
+        postorder(root.right, result);
+        result.add(root.val);
+    }
+
+    // 方法二：迭代
+    public static List<Integer> postorderTraversal2(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        List<Integer> result = new ArrayList<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+        // 关键在于定义一个cur的前驱节点
+        TreeNode prev = null;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            // 若该节点的右节点为空，或者右节点被遍历过，数组才能存储该节点的数值（也就是我们最后才遍历的根）
+            if (root.right == null || root.right == prev) {
+                result.add(root.val);
+                prev = root;
+                root = null;
+            } else { // 如果不满足，说明该节点的右节点还没有被遍历过，那么接着向右子节点遍历
+                stack.push(root);
+                root = root.right;
+            }
+        }
+        return result;
+    }
+
 }
