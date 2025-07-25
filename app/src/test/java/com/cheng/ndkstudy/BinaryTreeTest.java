@@ -351,4 +351,20 @@ public class BinaryTreeTest {
         Logger.log("tree2str2 result = " + result2); // 1(2()(4))(3)
     }
 
+    @Test
+    public void testTreeToDoublyList1() {
+        Logger.log("treeToDoublyList1");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{4,2,7,1,3});
+        BinaryTreeDemo.TreeNode result = BinaryTreeDemo.treeToDoublyList1(root);
+        Logger.log("treeToDoublyList1 result = " + result.val);
+    }
+
+    @Test
+    public void testTreeToDoublyList2() {
+        Logger.log("treeToDoublyList2");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{4,2,7,1,3});
+        BinaryTreeDemo.TreeNode result = BinaryTreeDemo.treeToDoublyList2(root);
+        Logger.log("treeToDoublyList2 result = " + result.val);
+    }
+
 }

@@ -684,5 +684,61 @@ public class BinaryTreeDemo {
         return result.toString();
     }
 
+    /**
+     * JZ36 二叉搜索树与双向链表
+     */
+    // 方法一：递归中序遍历
+    // 返回的第一个指针，即为最小值，先定为null
+    private static TreeNode headJZ36 = null;
+    // 中序遍历当前值的上一位，初值为最小值，先定为null
+    private static TreeNode preJZ36 = null;
+    public static TreeNode treeToDoublyList1(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        // 首先递归到最左最小值
+        treeToDoublyList1(root.left);
+        // 找到最小值，初始化head和pre
+        if (preJZ36 == null) {
+            headJZ36 = root;
+            preJZ36 = root;
+        } else {
+            // 当前节点与上一节点建立连接，将pre设置为当前值
+            preJZ36.right = root;
+            root.left = preJZ36;
+            preJZ36 = root;
+        }
+        treeToDoublyList1(root.right);
+        return headJZ36;
+    }
+
+    // 方法二：非递归中序遍历
+    public static TreeNode treeToDoublyList2(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        Deque<TreeNode> stack = new LinkedList<>();
+        TreeNode head = null;
+        TreeNode prev = null;
+        boolean isFirst = true;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (isFirst) {
+                head = root;
+                prev = root;
+                isFirst = false;
+            } else {
+                prev.right = root;
+                root.left = prev;
+                prev = root;
+            }
+            root = root.right;
+        }
+        return head;
+    }
 
 }
