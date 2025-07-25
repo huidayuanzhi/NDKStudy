@@ -320,4 +320,13 @@ public class BinaryTreeTest {
         Logger.log(result);
     }
 
+    @Test
+    public void testLevelOrderBottom() {
+        Logger.log("levelOrderBottom");
+        BinaryTreeDemo.TreeNode root = create(new Integer[]{3,9,20,null,null,15,7});
+        List<List<Integer>> result = BinaryTreeDemo.levelOrderBottom(root);
+        Logger.log("levelOrderBottom result -"); // [15,7],[9,20],[3]
+        Logger.log(result);
+    }
+
 }
